@@ -6,38 +6,28 @@ return {
     config = function()
         local lspconfig = require('lspconfig')
         local cmp_nvim_lsp = require('cmp_nvim_lsp')
+        local builtin = require('telescope.builtin')
 
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
         local on_attach = function(client, bufnr)
-            --    if client.server_capabilities.documentHighlightProvider then
-            --     vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-            --     vim.api.nvim_clear_autocmds { buffer = bufnr, group = "lsp_document_highlight" }
-            --     vim.api.nvim_create_autocmd("CursorHold", {
-            --         callback = vim.lsp.buf.document_highlight,
-            --         buffer = bufnr,
-            --         group = "lsp_document_highlight",
-            --         desc = "Document Highlight",
-            --     })
-            --     vim.api.nvim_create_autocmd("CursorMoved", {
-            --         callback = vim.lsp.buf.clear_references,
-            --         buffer = bufnr,
-            --         group = "lsp_document_highlight",
-            --         desc = "Clear All the References",
-            --     })
-            -- end
+            local map = function(keys, func, desc)
+                vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+            end
 
-            local bufopts = { noremap = true, silent = true, buffer = bufnr }
-            vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-            vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-            vim.keymap.set('n', '<C-h>', vim.lsp.buf.signature_help, bufopts)
-            vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, bufopts)
-            vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-            vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-            -- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, bufopts)
-            vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
-            vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
+            map('gd', builtin.lsp_definitions, '[G]o to [D]efintion')
+            map('gr', builtin.lsp_references, '[G]o to [R]eferences')
+            map('gI', builtin.lsp_implementations, '[G]o to, [I]mplementation')
+            map('<leader>D', builtin.lsp_type_definitions, 'Type [D]efinitions')
+            map('<leader>ds', builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
+            map('<leader>ws', builtin.lsp_dynamic_workspace_symbols, '[D]ocument [S]ymbols')
+            map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+            map('K', vim.lsp.buf.hover, 'Hover Documentation')
+            map('[d', vim.diagnostic.goto_prev, 'Go to previous diagnostics')
+            map(']d', vim.diagnostic.goto_prev, 'Go to next diagnostics')
+            map('gD', vim.lsp.buf.declaration, '[G]o to [D]eclaration')
+            map('<C-h>', vim.lsp.buf.signature_help, 'Get signature help')
         end
 
         vim.api.nvim_create_autocmd('CursorHold', {
