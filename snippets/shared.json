@@ -1,0 +1,47 @@
+{
+  "Console Log": {
+    "prefix": "clg",
+    "body": ["console.log($1)"],
+    "description": ""
+  },
+  "": {
+    "prefix": "",
+    "body": [""],
+    "description": ""
+  },
+  "": {
+    "prefix": "",
+    "body": [""],
+    "description": ""
+  },
+  "": {
+    "prefix": "",
+    "body": [""],
+    "description": ""
+  },
+  "": {
+    "prefix": "",
+    "body": [""],
+    "description": ""
+  },
+  "": {
+    "prefix": "",
+    "body": [""],
+    "description": ""
+  },
+  "": {
+    "prefix": "",
+    "body": [""],
+    "description": ""
+  },
+  "": {
+    "prefix": "",
+    "body": [""],
+    "description": ""
+  },
+  "": {
+    "prefix": "",
+    "body": [""],
+    "description": ""
+  }
+}

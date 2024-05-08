@@ -9,7 +9,7 @@ g.netrw_banner = 0
 o.mouse = 'a'
 o.clipboard = 'unnamedplus'
 o.backspace = 'indent,start,eol'
-o.completeopt = 'menuone,noinsert,noselect,preview'
+o.completeopt = 'menuone,noinsert,noselect'
 o.relativenumber = true
 
 o.number = true

@@ -27,7 +27,7 @@ m('n', '<C-l>', '<C-w>l') -- Focus next window
 m('v', '<C-j>', ":m '>+1<CR>gv=gv", o) -- Move line down
 m('v', '<C-k>', ":m '<-2<CR>gv=gv", o) -- Move line up
 --
-m('v', '<C-[>', '"9Y"9[pgv', o) -- Duplicate
+m('v', '<Tab>', '"9Y"9[pgv', o) -- Duplicate
 --
 m('n', 'J', 'mzJ`z', o) -- Join line below without change cursor position
 --
