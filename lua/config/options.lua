@@ -1,9 +1,9 @@
 local o = vim.opt
 local g = vim.g
 
-g.loaded_tutor = 1
+g.loaded_tutor_mode_plugin = 1
 
-g.netrw_keepdir = 0
+-- g.netrw_keepdir = 0
 g.netrw_banner = 0
 
 o.mouse = 'a'
