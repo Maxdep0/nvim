@@ -24,6 +24,9 @@ return {
             map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
             map('K', vim.lsp.buf.hover, 'Hover Documentation')
             map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+            map('[d', vim.diagnostic.goto_prev, 'Go to previous diagnostic')
+            map(']d', vim.diagnostic.goto_prev, 'Go to next diagnostic')
+            map('<C-h>', vim.lsp.buf.signature_help, 'Get signature help')
 
             if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
                 map('<leader>th', function()
@@ -39,7 +42,7 @@ return {
             })
         end
 
-        local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = '● ' }
+        local signs = { Error = '● ', Warn = '● ', Hint = '● ', Info = '● ' }
         for type, icon in pairs(signs) do
             local hl = 'DiagnosticSign' .. type
             vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
