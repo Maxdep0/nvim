@@ -3,7 +3,6 @@ local o = { noremap = true, silent = true }
 
 vim.g.mapleader = ' '
 
--- Disable
 m('n', 'u', '<nop>')
 m('n', '<C-r>', '<nop>')
 m('n', 'ZQ', '<nop>')

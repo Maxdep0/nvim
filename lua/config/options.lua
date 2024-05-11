@@ -22,6 +22,8 @@ o.wrap = true
 o.colorcolumn = ''
 o.cursorline = true
 
+o.inccommand = 'split'
+
 o.signcolumn = 'number'
 o.scrolloff = 5
 
@@ -40,7 +42,7 @@ o.hidden = true
 o.history = 100
 --o.lazyredraw = true
 o.synmaxcol = 500
-o.updatetime = 500
+o.updatetime = 250
 
 o.swapfile = false
 o.backup = false
