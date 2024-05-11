@@ -24,7 +24,7 @@ o.cursorline = true
 
 o.inccommand = 'split'
 
-o.signcolumn = 'number'
+o.signcolumn = 'yes'
 o.scrolloff = 5
 
 o.ignorecase = true

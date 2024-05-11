@@ -4,10 +4,33 @@ return {
     branch = '0.1.x',
     dependencies = {
         'nvim-lua/plenary.nvim',
-        { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+        {
+            'nvim-telescope/telescope-fzf-native.nvim',
+
+            -- Windows: https://github.com/niXman/mingw-builds-binaries
+            -- Create a copy of mingw64/bin/mingw32-make.exe and name it make.exe or use build = 'mingw32-make'
+            -- https://www.reddit.com/r/neovim/comments/10nzgdx/im_trying_to_set_up_telescope_with_fzfnative_and/
+            build = 'make',
+        },
+        {
+            'nvim-tree/nvim-web-devicons',
+            enabled = vim.g.have_nerd_font,
+        },
     },
     config = function()
         local builtin = require('telescope.builtin')
+
+        require('telescope').setup({
+            extensions = {
+                fzf = {
+                    fuzzy = true,
+                    override_generic_sorter = true,
+                    override_file_sorter = true,
+                    case_mode = 'smart_case',
+                },
+            },
+        })
+        require('telescope').load_extension('fzf')
 
         local map = function(keys, func, desc)
             vim.keymap.set('n', keys, func, { desc = 'Search: ' .. desc })
