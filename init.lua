@@ -11,6 +11,9 @@ vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
         vim.fn.system('eslint_d stop')
     end,
 })
+local text = function() end
+
+text()
 
 function kill()
     vim.cmd('LspStop')
@@ -20,3 +23,4 @@ function kill()
 end
 
 vim.keymap.set('n', '<S-F5>', ':lua kill()<CR>')
+
