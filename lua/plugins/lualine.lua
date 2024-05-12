@@ -135,7 +135,7 @@ return {
                     normal = {
                         a = { bg = 'None', gui = 'bold' },
                         b = { bg = 'None', gui = 'bold' },
-                        c = { bg = 'None', gui = 'bold' },
+                        c = { bg = 'None', gui = 'bold', fg = '#FFFFFF' },
                         x = { bg = 'None', gui = 'bold' },
                         y = { bg = 'None', gui = 'bold' },
                         z = { bg = 'None', gui = 'bold' },
@@ -175,7 +175,7 @@ return {
                     inactive = {
                         a = { bg = 'None', gui = 'bold' },
                         b = { bg = 'None', gui = 'bold' },
-                        c = { bg = 'None', fg = '#d1d1d1' },
+                        c = { bg = 'None', fg = '#ababab' },
                         x = { bg = 'None', gui = 'bold' },
                         y = { bg = 'None', gui = 'bold' },
                         z = { bg = 'None', gui = 'bold' },

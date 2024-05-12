@@ -89,10 +89,11 @@ return {
             },
 
             sources = {
-                { name = 'nvim_lsp' },
-                { name = 'luasnip' },
-                { name = 'buffer' },
-                { name = 'path' },
+                { name = 'nvim_lsp', max_item_count = 8 },
+                { name = 'nvim_lua', max_item_count = 8 },
+                { name = 'luasnip', max_item_count = 5 },
+                { name = 'buffer', max_item_count = 3 },
+                { name = 'path', max_item_count = 2 },
             },
 
             window = {
@@ -108,18 +109,17 @@ return {
         cmp.setup.cmdline({ '/', '?' }, {
             mapping = cmp.mapping.preset.cmdline(),
             sources = {
-                { name = 'buffer' },
+                { name = 'buffer', max_item_count = 5 },
             },
         })
 
         cmp.setup.cmdline(':', {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources({
-                { name = 'path' },
+                { name = 'path', max_item_count = 3 },
             }, {
-                { name = 'cmdline' },
+                { name = 'cmdline', max_item_count = 6 },
             }),
-            matching = { disallow_symbol_nonprefix_matching = false },
         })
     end,
 }

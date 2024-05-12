@@ -1,3 +1,6 @@
+-- https://github.com/niXman/mingw-builds-binaries
+-- https://github.com/sharkdp/fd
+
 return {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',

@@ -1,13 +1,15 @@
 return {
     'neovim/nvim-lspconfig',
     dependencies = {
-        'j-hui/fidget.nvim',
         'folke/neodev.nvim',
+        'j-hui/fidget.nvim',
     },
 
     config = function()
-        require('fidget').setup({})
         require('neodev').setup({})
+
+        require('fidget').setup({})
+
         local lspconfig = require('lspconfig')
         local builtin = require('telescope.builtin')
 
@@ -59,16 +61,17 @@ return {
                 focusable = false,
                 style = 'minimal',
                 border = 'rounded',
-                source = 'always',
+                source = true,
                 header = '',
                 prefix = '',
             },
         })
 
         local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities.textDocument.completion.completionItem.snippetSupport = true
         capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-        local SELECT_SERVERS = { 'lua_ls', 'tsserver' }
+        local SELECT_SERVERS = { 'lua_ls', 'tsserver', 'html', 'cssls', 'jsonls', 'emmet_language_server' }
 
         for _, lsp in ipairs(SELECT_SERVERS) do
             local ok, opts = pcall(require, 'servers.' .. lsp)

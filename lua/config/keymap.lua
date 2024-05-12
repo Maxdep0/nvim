@@ -19,17 +19,11 @@ map('n', 'ZQ', '<nop>', 'Disabled')
 vim.keymap.set('n', ';', ':', { noremap = true, desc = 'Keymap: Open command line' })
 map('n', '<Esc>', ':nohlsearch<CR>', 'Keymap: Toggle off hlsearch')
 map('n', '<C-a>', 'gg<S-v>G', 'Keymap: Select the entire file')
+map({ 'n', 'i' }, '<Esc>', '<Esc><Esc>', 'Keymap: Double <Esc>')
 
 --------------------------------------------------------
 --                     Special Keymaps               --
 --------------------------------------------------------
-
--- vim.keymap.set(
---     'n',
---     '<leader>tt',
---     ':lua toggleTransparent()<CR>',
---     { noremap = true, silent = true, desc = 'Keymap: [T]oggle [T]ransparent Background' }
--- )
 
 map('n', '<leader>tt', ':lua toggleTransparent()<CR>', 'Keymap: [T]oggle [T]ransparent Bacground')
 

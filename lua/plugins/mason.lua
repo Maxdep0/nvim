@@ -1,3 +1,5 @@
+-- https://chocolatey.org/install   --  gzip, unzip, wget
+
 return {
     'williamboman/mason.nvim',
     dependencies = {
@@ -16,7 +18,11 @@ return {
         require('mason-lspconfig').setup({
             ensure_installed = {
                 'tsserver',
+                'html',
+                'cssls',
+                'jsonls',
                 'lua_ls',
+                'emmet_language_server',
             },
             automatic_installation = true,
         })

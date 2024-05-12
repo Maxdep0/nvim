@@ -1,7 +1,7 @@
 return {
-	flags = {
-		debounce_text_changes = 150,
-	},
+    flags = {
+        debounce_text_changes = 150,
+    },
 
-	single_file_support = true,
+    single_file_support = true,
 }
