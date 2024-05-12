@@ -13,6 +13,14 @@ return {
             },
         })
 
+        require('mason-lspconfig').setup({
+            ensure_installed = {
+                'tsserver',
+                'lua_ls',
+            },
+            automatic_installation = true,
+        })
+
         require('mason-tool-installer').setup({
             ensure_installed = {
                 'prettierd',
@@ -20,13 +28,6 @@ return {
                 'stylua',
                 'selene',
             },
-        })
-        require('mason-lspconfig').setup({
-            ensure_installed = {
-                'tsserver',
-                'lua_ls',
-            },
-            automatic_installation = true,
         })
     end,
 }

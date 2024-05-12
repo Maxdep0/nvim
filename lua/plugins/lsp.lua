@@ -4,6 +4,7 @@ return {
         'j-hui/fidget.nvim',
         'folke/neodev.nvim',
     },
+
     config = function()
         require('fidget').setup({})
         require('neodev').setup({})
