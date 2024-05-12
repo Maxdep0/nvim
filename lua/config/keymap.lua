@@ -16,7 +16,6 @@ map('n', 'ZQ', '<nop>', 'Disabled')
 --                     Basic Operations               --
 --------------------------------------------------------
 
-vim.keymap.set('n', ';', ':', { noremap = true, desc = 'Keymap: Open command line' })
 map('n', '<Esc>', ':nohlsearch<CR>', 'Keymap: Toggle off hlsearch')
 map('n', '<C-a>', 'gg<S-v>G', 'Keymap: Select the entire file')
 map({ 'n', 'i' }, '<Esc>', '<Esc><Esc>', 'Keymap: Double <Esc>')
