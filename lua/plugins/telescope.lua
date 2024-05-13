@@ -1,3 +1,4 @@
+-- https://github.com/BurntSushi/ripgrep
 -- https://github.com/niXman/mingw-builds-binaries
 -- https://github.com/sharkdp/fd
 

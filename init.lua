@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
         vim.fn.system('eslint_d stop')
     end,
 })
---dddd
+
 function kill()
     vim.cmd('LspStop')
     vim.fn.system('taskkill /F /IM node.exe')
