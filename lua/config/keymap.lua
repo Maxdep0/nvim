@@ -24,7 +24,7 @@ map({ 'n', 'i' }, '<Esc>', '<Esc><Esc>', 'Keymap: Double <Esc>')
 --                     Special Keymaps               --
 --------------------------------------------------------
 
-map('n', '<leader>tt', ':lua toggleTransparent()<CR>', 'Keymap: [T]oggle [T]ransparent Bacground')
+map('n', '<leader>tt', ':lua toggleTransparent()<CR>', 'Keymap: [T]oggle [T]ransparent Background')
 
 --------------------------------------------------------
 --                     Editing                        --
