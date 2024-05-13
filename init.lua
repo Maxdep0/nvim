@@ -1,6 +1,6 @@
 vim.fn.setenv('ESLINT_USE_FLAT_CONFIG', 'true')
 
-require('config')
+require('core')
 
 -- Just for debugging
 vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {

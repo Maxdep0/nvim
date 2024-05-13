@@ -1,0 +1,5 @@
+require('core.keymap')
+require('core.options')
+require('core.lazy')
+require('core.cmd')
+require('core.utils')

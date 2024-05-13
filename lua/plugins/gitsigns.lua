@@ -1,6 +1,8 @@
 return {
     'lewis6991/gitsigns.nvim',
     config = function()
+        local notify = require('core.utils').notify
+
         require('gitsigns').setup({
             signs = {
                 add = { text = '┃' },
@@ -72,12 +74,17 @@ return {
                 end, { desc = 'Git: Navigate to the previous git hunk' })
 
                 -- Actions
+
                 map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'Git: Stage the current hunk for commit' })
-                map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'Git: Stage the entire file' })
+
+                map('n', '<leader>hS', function()
+                    gitsigns.stage_buffer()
+                    notify('Successfully staged file', 'GIT')
+                end, { desc = 'Git: Stage the entire file' })
+
                 map('v', '<leader>hs', function()
                     gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
                 end, { desc = 'Git: Stage the selected hunk' })
-
                 -- map(
                 --     'n',
                 --     '<leader>hr',
@@ -90,11 +97,11 @@ return {
                 --     gitsigns.reset_buffer,
                 --     { desc = 'Git: Resets all changes in the file to the state in HEAD commit' }
                 -- )
-                -- map('v', '<leader>hr', function()
+                -- map('v', '<leader>HR', function()
                 --     gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-                -- end)({ decs = 'Git: Reset the selected hunk to the state in HEAD commit' })
-                --
-                -- map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = 'Git: Undo staging of the last staged hunk' })
+                -- end, { desc = 'Git: Reset the selected hunk to the state in HEAD commit' })
+
+                -- map('n', '<leader>HU', gitsigns.undo_stage_hunk, { desc = 'Git: Undo staging of the last staged hunk' })
 
                 map(
                     'n',
