@@ -14,6 +14,7 @@ return {
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-cmdline',
         'onsails/lspkind.nvim',
+        'zbirenbaum/copilot-cmp',
     },
     event = { 'InsertEnter', 'CmdlineEnter' },
 
@@ -21,47 +22,49 @@ return {
         local cmp = require('cmp')
         local luasnip = require('luasnip')
         local lspkind = require('lspkind')
+        require('copilot_cmp').setup()
 
         require('luasnip.loaders.from_vscode').lazy_load()
         require('luasnip.loaders.from_vscode').load({ paths = './snippets' })
 
         cmp.setup({
             completion = { completeopt = 'menu,menuone,noinsert' },
+            -- formatting = {
+            --     fields = { 'kind', 'abbr', 'menu' },
+            --     format = function(entry, vim_item)
+            --         local kind = lspkind.cmp_format({
+            --             mode = 'symbol_text',
+            --             maxwidth = 100,
+            --             show_labelDetails = true,
+            --             ellipsis_char = '...',
+            --         })(entry, vim_item)
+            --         local strings = vim.split(kind.kind, '%s', { trimempty = true })
+            --         kind.kind = ' ' .. (strings[1] or '') .. ' '
+            --         kind.menu = '    (' .. (strings[2] or '') .. ')'
+            --
+            --         return kind
+            --     end,
+            -- },
             formatting = {
-                fields = { 'kind', 'abbr', 'menu' },
-                format = function(entry, vim_item)
-                    local kind = lspkind.cmp_format({
-                        mode = 'symbol_text',
-                        maxwidth = 100,
-                        show_labelDetails = true,
-                        ellipsis_char = '...',
-                    })(entry, vim_item)
-                    local strings = vim.split(kind.kind, '%s', { trimempty = true })
-                    kind.kind = ' ' .. (strings[1] or '') .. ' '
-                    kind.menu = '    (' .. (strings[2] or '') .. ')'
-
-                    return kind
-                end,
+                format = lspkind.cmp_format({
+                    mode = 'symbol_text',
+                    maxwidth = 100,
+                    ellipsis_char = '...',
+                    show_labelDetails = true,
+                    symbol_map = {
+                        Copilot = '',
+                    },
+                }),
             },
+
             mapping = cmp.mapping.preset.insert({
                 ['<C-p>'] = cmp.mapping.select_prev_item(),
                 ['<C-n>'] = cmp.mapping.select_next_item(),
-                ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-                ['<C-u>'] = cmp.mapping.scroll_docs(4),
+                ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+                ['<C-d>'] = cmp.mapping.scroll_docs(4),
                 ['<C-Space>'] = cmp.mapping.complete(),
                 ['<C-e>'] = cmp.mapping.abort(),
-
-                ['<CR>'] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        if luasnip.expandable() then
-                            luasnip.expand()
-                        else
-                            cmp.confirm({ select = true })
-                        end
-                    else
-                        fallback()
-                    end
-                end),
+                ['<CR>'] = cmp.mapping.confirm({ select = true }),
 
                 ['<Tab>'] = cmp.mapping(function(fallback)
                     if luasnip.locally_jumpable(1) then
@@ -89,11 +92,12 @@ return {
             },
 
             sources = {
-                { name = 'nvim_lsp', max_item_count = 8 },
-                { name = 'nvim_lua', max_item_count = 8 },
-                { name = 'luasnip', max_item_count = 5 },
-                { name = 'buffer', max_item_count = 3 },
-                { name = 'path', max_item_count = 2 },
+                { name = 'copilot', max_item_count = 4 },
+                -- { name = 'nvim_lsp', max_item_count = 2 }, -- 8
+                -- { name = 'nvim_lua', max_item_count = 2 }, -- 8
+                -- { name = 'luasnip', max_item_count = 5 },
+                -- { name = 'buffer', max_item_count = 3 },
+                -- { name = 'path', max_item_count = 2 },
             },
 
             window = {
@@ -104,6 +108,25 @@ return {
             view = { entries = 'custom' },
 
             experimental = { ghost_text = true },
+
+            sorting = {
+                priority_weight = 2,
+                comparators = {
+                    require('copilot_cmp.comparators').prioritize,
+
+                    -- Below is the default comparitor list and order for nvim-cmp
+                    cmp.config.compare.offset,
+                    -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+                    cmp.config.compare.exact,
+                    cmp.config.compare.score,
+                    cmp.config.compare.recently_used,
+                    cmp.config.compare.locality,
+                    cmp.config.compare.kind,
+                    cmp.config.compare.sort_text,
+                    cmp.config.compare.length,
+                    cmp.config.compare.order,
+                },
+            },
         })
 
         cmp.setup.cmdline({ '/', '?' }, {

@@ -52,8 +52,8 @@ map({ 'n', 'v' }, '<leader>h', '0', 'Keymap: Jump to the start of the line')
 --------------------------------------------------------
 
 map('n', '<leader>ft', vim.cmd.Ex, 'Keymap: Open netrw file tree')
-map('n', '<C-h>', '<C-w>h', 'Keymap: Focus previous window')
-map('n', '<C-l>', '<C-w>l', 'Keymap: Focus next window')
+-- map('n', '<C-h>', '<C-w>h', 'Keymap: Focus previous window')
+-- map('n', '<C-l>', '<C-w>l', 'Keymap: Focus next window')
 map('n', '<Tab>', 'gt', 'Keymap: Focus next tab')
 map('n', '<S-Tab>', 'gT', 'Keymap: Focus previous tab')
 map('n', '<C-j>', ':bp<CR>', 'Keymap: Go to the previous buffer')
