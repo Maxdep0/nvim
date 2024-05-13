@@ -16,10 +16,21 @@ return {
             typescriptreact = { 'eslint_d' },
         }
 
-        local eslintd = lint.linters.eslint_d
+        local function getSeleneConfig()
+            local projectConfig = vim.fn.getcwd() .. '/selene.toml'
+            local globalConfig = vim.fn.stdpath('config') .. '/selene.toml'
+            if vim.fn.filereadable(projectConfig) == 1 then
+                return projectConfig
+            else
+                return globalConfig
+            end
+        end
 
-        eslintd.args = {
-            --            '--no-warn-ignored',
+        -- Use 'nvim/selene.toml' config if using '<space>sn' from different directory
+        lint.linters.selene.args = { '--display-style', 'json', '-', '--config', getSeleneConfig() }
+
+        lint.linters.eslint_d.args = {
+            -- '--no-warn-ignored',
             '--format',
             'json',
             '--stdin',
