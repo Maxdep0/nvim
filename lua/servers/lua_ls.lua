@@ -33,7 +33,10 @@ return {
             hover = { enable = true },
             signatureHelp = { enable = true },
 
-            diagnostics = { enable = true },
+            diagnostics = {
+                enable = true,
+                disable = { 'missing-fields' },
+            },
             format = { enable = false },
             telemetry = { enable = false },
         },

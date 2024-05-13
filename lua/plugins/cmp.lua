@@ -4,17 +4,17 @@ return {
         {
             'L3MON4D3/LuaSnip',
             dependencies = {
+                'saadparwaiz1/cmp_luasnip',
                 'rafamadriz/friendly-snippets',
             },
         },
-        'saadparwaiz1/cmp_luasnip',
         'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-nvim-lua',
+        'hrsh7th/cmp-cmdline',
         'hrsh7th/cmp-buffer',
         'hrsh7th/cmp-path',
-        'hrsh7th/cmp-cmdline',
+        'hrsh7th/cmp-nvim-lua',
         'onsails/lspkind.nvim',
-        'zbirenbaum/copilot-cmp',
+        { 'zbirenbaum/copilot-cmp', event = 'LspAttach', fix_pairs = true },
     },
     event = { 'InsertEnter', 'CmdlineEnter' },
 
@@ -29,32 +29,22 @@ return {
 
         cmp.setup({
             completion = { completeopt = 'menu,menuone,noinsert' },
-            -- formatting = {
-            --     fields = { 'kind', 'abbr', 'menu' },
-            --     format = function(entry, vim_item)
-            --         local kind = lspkind.cmp_format({
-            --             mode = 'symbol_text',
-            --             maxwidth = 100,
-            --             show_labelDetails = true,
-            --             ellipsis_char = '...',
-            --         })(entry, vim_item)
-            --         local strings = vim.split(kind.kind, '%s', { trimempty = true })
-            --         kind.kind = ' ' .. (strings[1] or '') .. ' '
-            --         kind.menu = '    (' .. (strings[2] or '') .. ')'
-            --
-            --         return kind
-            --     end,
-            -- },
             formatting = {
-                format = lspkind.cmp_format({
-                    mode = 'symbol_text',
-                    maxwidth = 100,
-                    ellipsis_char = '...',
-                    show_labelDetails = true,
-                    symbol_map = {
-                        Copilot = '',
-                    },
-                }),
+                fields = { 'kind', 'abbr', 'menu' },
+                format = function(entry, vim_item)
+                    local kind = lspkind.cmp_format({
+                        mode = 'symbol_text',
+                        maxwidth = 100,
+                        show_labelDetails = true,
+                        ellipsis_char = '...',
+                        symbol_map = { Copilot = '' },
+                    })(entry, vim_item)
+                    local strings = vim.split(kind.kind, '%s', { trimempty = true })
+                    kind.kind = ' ' .. (strings[1] or '') .. ' '
+                    kind.menu = '    (' .. (strings[2] or '') .. ')'
+
+                    return kind
+                end,
             },
 
             mapping = cmp.mapping.preset.insert({
@@ -92,12 +82,12 @@ return {
             },
 
             sources = {
-                { name = 'copilot', max_item_count = 4 },
-                -- { name = 'nvim_lsp', max_item_count = 2 }, -- 8
-                -- { name = 'nvim_lua', max_item_count = 2 }, -- 8
-                -- { name = 'luasnip', max_item_count = 5 },
-                -- { name = 'buffer', max_item_count = 3 },
-                -- { name = 'path', max_item_count = 2 },
+                { name = 'copilot', keyword_length = 0, max_item_count = 4 },
+                { name = 'nvim_lsp', max_item_count = 4 },
+                { name = 'nvim_lua', keyword_length = 2, max_item_count = 4 },
+                { name = 'luasnip', keyword_length = 2, max_item_count = 5 },
+                { name = 'buffer', keyword_length = 4, max_item_count = 3 },
+                { name = 'path', max_item_count = 4 },
             },
 
             window = {
@@ -113,10 +103,7 @@ return {
                 priority_weight = 2,
                 comparators = {
                     require('copilot_cmp.comparators').prioritize,
-
-                    -- Below is the default comparitor list and order for nvim-cmp
                     cmp.config.compare.offset,
-                    -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
                     cmp.config.compare.exact,
                     cmp.config.compare.score,
                     cmp.config.compare.recently_used,
@@ -129,7 +116,7 @@ return {
             },
         })
 
-        cmp.setup.cmdline({ '/', '?' }, {
+        cmp.setup.cmdline({ '/' }, {
             mapping = cmp.mapping.preset.cmdline(),
             sources = {
                 { name = 'buffer', max_item_count = 5 },

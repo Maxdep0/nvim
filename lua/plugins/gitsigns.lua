@@ -1,4 +1,3 @@
--- stylua: ignore
 return {
     'lewis6991/gitsigns.nvim',
     config = function()
@@ -56,37 +55,79 @@ return {
                 end
 
                 -- Navigation
-                map('n', ']c',         function() if vim.wo.diff 
-                                                  then vim.cmd.normal({ ']c', bang = true }) 
-                                                  else gitsigns.nav_hunk('next') 
-                                                  end end,                                                           { desc = 'Git: Navigate to the next git hunk' })
+                map('n', ']c', function()
+                    if vim.wo.diff then
+                        vim.cmd.normal({ ']c', bang = true })
+                    else
+                        gitsigns.nav_hunk('next')
+                    end
+                end, { desc = 'Git: Navigate to the next git hunk' })
 
-                map('n', '[c',         function() if vim.wo.diff 
-                                                  then vim.cmd.normal({ '[c', bang = true }) 
-                                                  else gitsigns.nav_hunk('prev') 
-                                                  end end,                                                           { desc = 'Git: Navigate to the previous git hunk' })
+                map('n', '[c', function()
+                    if vim.wo.diff then
+                        vim.cmd.normal({ '[c', bang = true })
+                    else
+                        gitsigns.nav_hunk('prev')
+                    end
+                end, { desc = 'Git: Navigate to the previous git hunk' })
 
                 -- Actions
-                map('n', '<leader>hs',            gitsigns.stage_hunk,                                               { desc = 'Git: Stage the current hunk for commit' })
-                map('n', '<leader>hS',            gitsigns.stage_buffer,                                             { desc = 'Git: Stage the entire file' })
-                map('v', '<leader>hs', function() gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })   end, { desc = 'Git: Stage the selected hunk'})
+                map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'Git: Stage the current hunk for commit' })
+                map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'Git: Stage the entire file' })
+                map('v', '<leader>hs', function()
+                    gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+                end, { desc = 'Git: Stage the selected hunk' })
 
-                -- map('n', '<leader>hr',            gitsigns.reset_hunk,                                               { desc = 'Git: Reset the current hunk to the state in HEAD commit' })
-                -- map('n', '<leader>hR',            gitsigns.reset_buffer,                                             { desc = 'Git: Resets all changes in the file to the state in HEAD commit' })
-                -- map('v', '<leader>hr', function() gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })   end) { decs = 'Git: Reset the selected hunk to the state in HEAD commit' }
+                -- map(
+                --     'n',
+                --     '<leader>hr',
+                --     gitsigns.reset_hunk,
+                --     { desc = 'Git: Reset the current hunk to the state in HEAD commit' }
+                -- )
+                -- map(
+                --     'n',
+                --     '<leader>hR',
+                --     gitsigns.reset_buffer,
+                --     { desc = 'Git: Resets all changes in the file to the state in HEAD commit' }
+                -- )
+                -- map('v', '<leader>hr', function()
+                --     gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+                -- end)({ decs = 'Git: Reset the selected hunk to the state in HEAD commit' })
+                --
+                -- map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = 'Git: Undo staging of the last staged hunk' })
 
+                map(
+                    'n',
+                    '<leader>tp',
+                    gitsigns.preview_hunk,
+                    { desc = 'Git: [T]oggle [P]review window showing current hunk' }
+                )
+                map(
+                    'n',
+                    '<leader>td',
+                    gitsigns.toggle_deleted,
+                    { desc = 'Git: [T]oggle [D]iff view of deleted lines in current file' }
+                )
 
-                map('n', '<leader>hu',            gitsigns.undo_stage_hunk,                                          { desc = 'Git: Undo staging of the last staged hunk' })
+                map('n', '<leader>tb', function()
+                    gitsigns.blame_line({ full = true })
+                end, { desc = 'Git: [T]oggle git [B]lame info for the current hunk' })
+                map(
+                    'n',
+                    '<leader>tB',
+                    gitsigns.toggle_current_line_blame,
+                    { desc = 'Git: [T]oggle git [B]lame info for current line' }
+                )
 
-                map('n', '<leader>tp',            gitsigns.preview_hunk,                                             { desc = 'Git: [T]oggle [P]review window showing current hunk' })
-                map('n', '<leader>td',            gitsigns.toggle_deleted,                                           { desc = 'Git: [T]oggle [D]iff view of deleted lines in current file' })
-
-                map('n', '<leader>tb', function() gitsigns.blame_line({ full = true }) end,                          { desc = 'Git: [T]oggle git [B]lame info for the current hunk' })
-                map('n', '<leader>tB',            gitsigns.toggle_current_line_blame,                                { desc = 'Git: [T]oggle git [B]lame info for current line' })
-
-                map('n', '<leader>hd',            gitsigns.diffthis,                                                 { desc = 'Git: Show a diff for current file against the HEAD commit' })
-                map('n', '<leader>hD', function() gitsigns.diffthis('~') end,                                        { desc = 'Git: Show a diff for current file against against the previous commit' })
-
+                map(
+                    'n',
+                    '<leader>hd',
+                    gitsigns.diffthis,
+                    { desc = 'Git: Show a diff for current file against the HEAD commit' }
+                )
+                map('n', '<leader>hD', function()
+                    gitsigns.diffthis('~')
+                end, { desc = 'Git: Show a diff for current file against against the previous commit' })
 
                 -- Text object
                 map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
