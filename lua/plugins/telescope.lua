@@ -13,8 +13,9 @@ return {
 
             -- Windows: https://github.com/niXman/mingw-builds-binaries
             -- Create a copy of mingw64/bin/mingw32-make.exe and name it make.exe or use build = 'mingw32-make'
+            -- https://github.com/nvim-telescope/telescope-fzf-native.nvim?tab=readme-ov-file#installation
             -- https://www.reddit.com/r/neovim/comments/10nzgdx/im_trying_to_set_up_telescope_with_fzfnative_and/
-            build = 'make',
+            build = 'mingw32-make',
         },
         {
             'nvim-tree/nvim-web-devicons',
@@ -34,7 +35,13 @@ return {
                 },
             },
         })
-        require('telescope').load_extension('fzf')
+
+        -- require('telescope').load_extension('fzf')
+        local ok = pcall(require('telescope').load_extension, 'fzf')
+
+        if not ok then
+            print('Failed to load telescope-fzf-native.nvim')
+        end
 
         local map = function(keys, func, desc)
             vim.keymap.set('n', keys, func, { desc = 'Search: ' .. desc })

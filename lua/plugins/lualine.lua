@@ -102,7 +102,7 @@ return {
                 modified = { fg = colors.orange, bg = 'None' },
                 removed = { fg = colors.red, bg = 'None' },
             },
-            cond = conditions.hide_in_width,
+            -- cond = conditions.hide_in_width,
         }
         local fileformat = {
             'fileformat',
@@ -114,7 +114,7 @@ return {
             'buffers',
             icons_enabled = false,
             symbols = { modified = ' ●', alternate_file = '' },
-            cond = conditions.hide_in_width,
+            -- cond = conditions.hide_in_width,
         }
         local location = {
             'location',
