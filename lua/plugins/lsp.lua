@@ -33,13 +33,6 @@ return {
                     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
                 end, '[T]oggle Inlay [H]ints')
             end
-
-            vim.api.nvim_create_autocmd('CursorHold', {
-                desc = 'Open float on hover',
-                callback = function()
-                    vim.diagnostic.open_float(nil, { focus = false })
-                end,
-            })
         end
 
         local signs = { Error = '● ', Warn = '● ', Hint = '● ', Info = '● ' }

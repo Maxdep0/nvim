@@ -5,6 +5,7 @@ function toggleTransparent()
 
     if not ok or not transparent then
         M.notify('Enabled Transparent Background', 'UI')
+
         vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
         vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
         vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'none' })
@@ -12,8 +13,34 @@ function toggleTransparent()
         vim.api.nvim_set_var('isTransparent', true)
     elseif transparent then
         M.notify('Disabled Transparent Background', 'UI')
+
         vim.cmd('colorscheme nightfox')
         vim.api.nvim_set_var('isTransparent', false)
+    end
+end
+
+function toggleFloatHover()
+    local ok, floatHover = pcall(vim.api.nvim_get_var, 'isFloatHover')
+
+    if not ok or not floatHover then
+        M.notify('Enabled Diagnostics Float on Hover', 'LSP')
+
+        local autocmd_id = vim.api.nvim_create_autocmd('CursorHold', {
+            desc = 'Enable float on hover',
+            callback = function()
+                vim.diagnostic.open_float(nil, { focus = false })
+            end,
+        })
+
+        vim.api.nvim_set_var('floatHoverAutoCmdId', autocmd_id)
+        vim.api.nvim_set_var('isFloatHover', true)
+    elseif floatHover then
+        M.notify('Disabled Diagnostics Float on Hover', 'LSP')
+
+        local autocmd_id = vim.api.nvim_get_var('floatHoverAutoCmdId')
+
+        vim.api.nvim_del_autocmd(autocmd_id)
+        vim.api.nvim_set_var('isFloatHover', false)
     end
 end
 
