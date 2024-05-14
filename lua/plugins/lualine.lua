@@ -19,12 +19,6 @@ return {
             red = '#f38ba8',
         }
 
-        local conditions = {
-            hide_in_width = function()
-                return vim.fn.winwidth(0) > 80
-            end,
-        }
-
         local mode_color = {
             n = colors.red,
             i = colors.green,
@@ -102,7 +96,6 @@ return {
                 modified = { fg = colors.orange, bg = 'None' },
                 removed = { fg = colors.red, bg = 'None' },
             },
-            -- cond = conditions.hide_in_width,
         }
         local fileformat = {
             'fileformat',
@@ -114,7 +107,6 @@ return {
             'buffers',
             icons_enabled = false,
             symbols = { modified = ' ●', alternate_file = '' },
-            -- cond = conditions.hide_in_width,
         }
         local location = {
             'location',
@@ -193,16 +185,31 @@ return {
                 lualine_y = { diff, fileformat },
                 lualine_z = { location },
             },
-            inactive_sections = {
-                lualine_a = { 'filename' },
-                lualine_b = {},
-                lualine_c = {},
-                lualine_x = {},
-                lualine_y = {},
-                lualine_z = { 'location' },
-            },
-            tabline = {},
-            extensions = {},
+            -- tabline = {
+            --     lualine_a = {},
+            --     lualine_b = {},
+            --     lualine_c = {},
+            --     lualine_x = {},
+            --     lualine_y = {},
+            --     lualine_z = {},
+            -- },
+            -- winbar = {
+            --     lualine_a = { sep },
+            --     lualine_b = {},
+            --     lualine_c = { sep, 'filename' },
+            --     lualine_x = {},
+            --     lualine_y = {},
+            --     lualine_z = { sep },
+            -- },
+            -- inactive_winbar = {
+            --     lualine_a = { sep },
+            --     lualine_b = {},
+            --     lualine_c = { sep, 'filename' },
+            --     lualine_x = {},
+            --     lualine_y = {},
+            --     lualine_z = { sep },
+            -- },
+            -- extensions = { },
         })
     end,
 }
