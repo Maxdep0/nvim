@@ -1,6 +1,7 @@
 return {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
+    fix_pairs = true,
     event = { 'InsertEnter', 'LspAttach' },
 
     config = function()

@@ -36,9 +36,7 @@ return {
             },
         })
 
-        -- require('telescope').load_extension('fzf')
         local ok = pcall(require('telescope').load_extension, 'fzf')
-        pcall(require('telescope').load_extension, 'fzf_native')
 
         if not ok then
             print('Failed to load telescope-fzf-native.nvim')
@@ -48,15 +46,15 @@ return {
             vim.keymap.set('n', keys, func, { desc = 'Search: ' .. desc })
         end
 
-        map('<leader><space>', builtin.find_files, 'Search Files')
-        map('<leader>sg', builtin.live_grep, '[S]earch by [G]rep')
-        map('<leader>sp', builtin.git_files, '[S]earch Git [P]roject  Files')
-        map('<leader>sb', builtin.buffers, '[S]earch for existing [B]uffers')
+        map('<leader><space>', builtin.find_files, 'Serach: Search Files')
+        map('<leader>sg', builtin.live_grep, 'Search: [S]earch by [G]rep')
+        map('<leader>sp', builtin.git_files, 'Search: [S]earch Git [P]roject  Files')
+        map('<leader>sb', builtin.buffers, 'Search: [S]earch for existing [B]uffers')
 
-        map('<leader>sw', builtin.grep_string, '[S]earch current [W]ord')
-        map('<leader>sd', builtin.diagnostics, '[S]earch [D]iagnostics')
-        map('<leader>sh', builtin.help_tags, '[S]earch [H]elp')
-        map('<leader>sk', builtin.keymaps, '[S]earch [K]eymaps')
+        map('<leader>sw', builtin.grep_string, 'Search: [S]earch current [W]ord')
+        map('<leader>sd', builtin.diagnostics, 'Search: [S]earch [D]iagnostics')
+        map('<leader>sh', builtin.help_tags, 'Search: [S]earch [H]elp')
+        map('<leader>sk', builtin.keymaps, 'Search: [S]earch [K]eymaps')
 
         map('<leader>sn', function()
             builtin.find_files({ cwd = vim.fn.stdpath('config') })
@@ -65,6 +63,5 @@ return {
         --testing
         map('<leader><F5>', builtin.quickfix, '')
         map('<leader><F6>', builtin.quickfixhistory, '')
-        map('<leader><F7>', builtin.grep_string, '')
     end,
 }
