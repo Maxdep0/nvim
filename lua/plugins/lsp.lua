@@ -2,13 +2,10 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
         'folke/neodev.nvim',
-        -- 'j-hui/fidget.nvim',
     },
 
     config = function()
         require('neodev').setup({})
-
-        -- require('fidget').setup({})
 
         local lspconfig = require('lspconfig')
         local builtin = require('telescope.builtin')

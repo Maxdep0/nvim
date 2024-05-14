@@ -1,10 +1,10 @@
+-- stylua: ignore
 return {
     'folke/flash.nvim',
     event = 'VeryLazy',
 
     opts = {},
 
-    -- stylua: ignore
     keys = {
         { 's',     mode = { 'n', 'x', 'o' }, function() require('flash').jump() end,               desc = 'Flash: Open flash', },
         { 'S',     mode = { 'n', 'x', 'o' }, function() require('flash').treesitter() end,         desc = 'Flash: Open flash in treesitter mode', },
