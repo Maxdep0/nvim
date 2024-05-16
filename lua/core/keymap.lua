@@ -18,7 +18,6 @@ map('n', 'ZQ', '<nop>', 'Disabled')
 
 map('n', '<Esc>', ':nohlsearch<CR>', 'Keymap: Toggle off hlsearch')
 map('n', '<C-a>', 'gg<S-v>G', 'Keymap: Select the entire file')
-map({ 'n', 'i' }, '<Esc>', '<Esc><Esc>', 'Keymap: Double <Esc>')
 
 --------------------------------------------------------
 --                     Special Keymaps               --
