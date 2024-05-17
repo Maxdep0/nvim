@@ -23,6 +23,7 @@ return {
                 'jsonls',
                 'lua_ls',
                 'emmet_language_server',
+                'pyright',
             },
             automatic_installation = true,
         })
@@ -33,6 +34,8 @@ return {
                 'eslint_d',
                 'stylua',
                 'selene',
+                'flake8',
+                'black',
             },
         })
     end,

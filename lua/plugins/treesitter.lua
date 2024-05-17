@@ -25,6 +25,8 @@ return {
                 'typescript',
                 'markdown',
                 'gitignore',
+                'python',
+                'toml',
             },
         })
     end,
