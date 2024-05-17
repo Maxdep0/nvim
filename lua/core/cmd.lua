@@ -13,3 +13,9 @@ vim.api.nvim_create_autocmd('BufEnter', {
     end,
     desc = 'Disable New Line Comment',
 })
+
+vim.api.nvim_create_autocmd('VimResized', {
+    group = vim.api.nvim_create_augroup('win_autoresize', { clear = true }),
+    desc = 'autoresize windows on resizing operation',
+    command = 'wincmd =',
+})
