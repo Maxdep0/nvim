@@ -24,6 +24,7 @@ return {
                 'lua_ls',
                 'emmet_language_server',
                 'pyright',
+                'marksman',
             },
             automatic_installation = true,
         })

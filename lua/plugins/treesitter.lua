@@ -27,6 +27,7 @@ return {
                 'gitignore',
                 'python',
                 'toml',
+                'markdown',
             },
         })
     end,

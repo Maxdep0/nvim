@@ -2,7 +2,7 @@ vim.fn.setenv('ESLINT_USE_FLAT_CONFIG', 'true')
 
 require('core')
 
--- Just for debugging
+-- Just for debugging/ testing
 vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
     group = vim.api.nvim_create_augroup('KillPrettierAndEslint', { clear = true }),
     callback = function()
@@ -20,3 +20,5 @@ function kill()
 end
 
 vim.keymap.set('n', '<S-F5>', ':lua kill()<CR>')
+
+vim.keymap.set('n', '<F5>', ':!python %<CR>', { noremap = true, silent = true, desc = 'Run Python script' })

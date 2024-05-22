@@ -108,6 +108,27 @@ return {
             icons_enabled = false,
             symbols = { modified = ' ●', alternate_file = '' },
         }
+
+        local virtual_env = function()
+            if vim.bo.filetype ~= 'python' then
+                return ''
+            end
+
+            local conda_env = os.getenv('CONDA_DEFAULT_ENV')
+            local venv_path = os.getenv('VIRTUAL_ENV')
+
+            if venv_path == nil then
+                if conda_env == nil then
+                    return ''
+                else
+                    return string.format('  %s (conda)', conda_env)
+                end
+            else
+                local venv_name = vim.fn.fnamemodify(venv_path, ':t')
+                return string.format('  %s (venv)', venv_name)
+            end
+        end
+
         local location = {
             'location',
             separator = { left = '', right = '' },
@@ -181,7 +202,7 @@ return {
                 lualine_a = { mode },
                 lualine_b = { branch, diagnostics },
                 lualine_c = { sep, buffers },
-                lualine_x = { activeLsp },
+                lualine_x = { activeLsp, virtual_env },
                 lualine_y = { diff, fileformat },
                 lualine_z = { location },
             },
