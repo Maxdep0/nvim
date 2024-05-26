@@ -7,8 +7,8 @@ return {
                 analysis = {
                     autoSearchPaths = true,
                     useLibraryCodeForTypes = true,
-                    diagnosticMode = 'workspace',
-                    typeCheckingMode = 'basic',
+                    diagnosticMode = 'openFilesOnly',
+                    typeCheckingMode = 'off',
                 },
             },
         },

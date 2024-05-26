@@ -87,7 +87,7 @@ return {
         capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
         local SELECT_SERVERS =
-            { 'lua_ls', 'tsserver', 'html', 'cssls', 'jsonls', 'emmet_language_server', 'pyright', 'marksman' }
+            { 'lua_ls', 'tsserver', 'html', 'cssls', 'jsonls', 'emmet_language_server', 'pylsp', 'marksman' }
 
         for _, lsp in ipairs(SELECT_SERVERS) do
             local ok, opts = pcall(require, 'servers.' .. lsp)

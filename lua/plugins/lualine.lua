@@ -57,7 +57,7 @@ return {
         }
         local diagnostics = {
             'diagnostics',
-            sources = { 'nvim_diagnostic' },
+            sources = { 'nvim_diagnostic', 'nvim_lsp' },
             sections = { 'error', 'warn', 'info', 'hint' },
             symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
             diagnostics_color = {
@@ -66,6 +66,7 @@ return {
                 color_info = { fg = colors.cyan, bg = 'None', gui = 'bold' },
             },
             color = { bg = mode, gui = 'bold' },
+            update_in_insert = false,
         }
 
         local activeLsp = {
@@ -97,6 +98,7 @@ return {
                 removed = { fg = colors.red, bg = 'None' },
             },
         }
+
         local fileformat = {
             'fileformat',
             fmt = string.upper,
@@ -106,7 +108,8 @@ return {
         local buffers = {
             'buffers',
             icons_enabled = false,
-            symbols = { modified = ' ●', alternate_file = '' },
+            max_length = vim.o.columns * 2 / 4,
+            symbols = { modified = '●', alternate_file = '' },
         }
 
         local virtual_env = function()
@@ -125,7 +128,8 @@ return {
                 end
             else
                 local venv_name = vim.fn.fnamemodify(venv_path, ':t')
-                return string.format('  %s (venv)', venv_name)
+                -- return string.format('  %s (venv)', venv_name)
+                return string.format(' %s', venv_name)
             end
         end
 
@@ -200,10 +204,10 @@ return {
             },
             sections = {
                 lualine_a = { mode },
-                lualine_b = { branch, diagnostics },
+                lualine_b = { branch, diff },
                 lualine_c = { sep, buffers },
                 lualine_x = { activeLsp, virtual_env },
-                lualine_y = { diff, fileformat },
+                lualine_y = { diagnostics }, --, fileformat },
                 lualine_z = { location },
             },
             -- tabline = {
