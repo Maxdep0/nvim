@@ -18,6 +18,8 @@ map('n', 'ZQ', '<nop>', 'Disabled')
 
 map('n', '<Esc>', ':nohlsearch<CR>', 'Keymap: Toggle off hlsearch')
 map('n', '<C-a>', 'gg<S-v>G', 'Keymap: Select the entire file')
+map('n', 'j', 'gj', 'Keymap: Navigate through wrapped lines')
+map('n', 'k', 'gk', 'Keymap: Navigate through wrapped lines')
 
 --------------------------------------------------------
 --                     Special Keymaps               --

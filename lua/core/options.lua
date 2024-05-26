@@ -1,4 +1,4 @@
-local o = vim.opt
+local o = vim.o
 
 o.mouse = 'a'
 o.clipboard = 'unnamedplus'
@@ -31,6 +31,7 @@ o.smartindent = true
 o.softtabstop = 4
 o.shiftwidth = 4
 o.tabstop = 4
+
 
 o.hidden = true
 o.history = 100
