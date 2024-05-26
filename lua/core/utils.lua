@@ -7,14 +7,18 @@ function toggleTransparent()
         M.notify('Enabled Transparent Background', 'UI')
 
         vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
-        vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
         vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'none' })
+        vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+        vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'none' })
+        vim.api.nvim_set_hl(0, 'StatusLine', { bg = 'none' })
+        vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#000000', bg = 'none' })
 
         vim.api.nvim_set_var('isTransparent', true)
     elseif transparent then
         M.notify('Disabled Transparent Background', 'UI')
 
         vim.cmd('colorscheme nightfox')
+        vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#000000', bg = 'none' })
         vim.api.nvim_set_var('isTransparent', false)
     end
 end
