@@ -6,9 +6,9 @@ return {
             workspace = {
                 checkThirdPart = false,
                 library = {
-                    -- '${3rd}/luv/library',
-                    -- unpack(vim.api.nvim_get_runtime_file('', true)),
-                    vim.api.nvim_get_runtime_file('', true),
+                    '${3rd}/luv/library',
+                    unpack(vim.api.nvim_get_runtime_file('', true)),
+                    -- vim.api.nvim_get_runtime_file('', true),
                 },
                 maxPreload = 2000,
                 preloadFileSize = 500,
@@ -36,6 +36,8 @@ return {
             diagnostics = {
                 enable = true,
                 disable = { 'missing-fields' },
+                globals = { 'vim' },
+                deprecated = true,
             },
             format = { enable = false },
             telemetry = { enable = false },

@@ -66,12 +66,15 @@ return {
             border = 'rounded',
         })
 
+        -- vim.lsp.set_log_level('debug')
+
         vim.diagnostic.config({
             update_in_insert = true,
             virtual_text = {
                 source = false,
                 prefix = '●',
             },
+
             float = {
                 focusable = false,
                 style = 'minimal',
