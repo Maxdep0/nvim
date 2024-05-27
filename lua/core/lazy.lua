@@ -13,6 +13,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local opts = {
+
+    change_detection = {
+        enabled = false,
+        notify = true,
+    },
+
     ui = {
         icons = vim.g.have_nerd_font and {} or {
             cmd = '⌘',
