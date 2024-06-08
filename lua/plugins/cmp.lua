@@ -27,12 +27,12 @@ return {
         require('luasnip.loaders.from_vscode').lazy_load()
         require('luasnip.loaders.from_vscode').load({ paths = './snippets' })
 
-        vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#6CC644' })
         cmp.setup({
             completion = { completeopt = 'menu,menuone,noinsert' },
             formatting = {
                 fields = { 'kind', 'abbr', 'menu' },
                 format = function(entry, vim_item)
+                    vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#6CC644' })
                     local kind = lspkind.cmp_format({
                         mode = 'symbol_text',
                         maxwidth = 100,

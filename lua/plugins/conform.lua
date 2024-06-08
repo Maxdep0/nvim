@@ -17,7 +17,7 @@ return {
                 html = { 'prettierd' },
                 css = { 'prettierd' },
                 scss = { 'prettierd' },
-                python = { 'black' },
+                python = { 'black' }, --, 'autopep8' },
             },
 
             format_on_save = {

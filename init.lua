@@ -22,3 +22,6 @@ end
 vim.keymap.set('n', '<S-F5>', ':lua kill()<CR>')
 
 vim.keymap.set('n', '<F5>', ':!python %<CR>', { noremap = true, silent = true, desc = 'Run Python script' })
+
+-- Somehow separate plugin load
+-- Reduce some keymaps

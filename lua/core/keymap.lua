@@ -39,6 +39,9 @@ map('v', '<C-j>', ":m '>+1<CR>gv=gv", 'Keymap: Move line down')
 map('v', '<C-k>', ":m '<-2<CR>gv=gv", 'Keymap: Move line up')
 map('v', '<Tab>', '"9Y"9[pgv', 'Keymap: Duplicate selected lines')
 map('n', 'J', 'mzJ`z', 'Keymap: Join line below without changing cursor position')
+vim.keymap.set('n', '<leader>;u', ':.,0s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', { noremap = true })
+vim.keymap.set('n', '<leader>;d', ':.,$s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', { noremap = true })
+vim.keymap.set('n', '<leader>;', ':s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', { noremap = true })
 
 --------------------------------------------------------
 --                     Movement                       --
