@@ -1,5 +1,3 @@
--- https://chocolatey.org/install   --  gzip, unzip, wget
-
 return {
     'williamboman/mason.nvim',
     dependencies = {

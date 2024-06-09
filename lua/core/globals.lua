@@ -1,7 +1,5 @@
 local g = vim.g
 
-g.python3_host_prog = os.getenv('USERPROFILE') .. '/AppData/Local/Programs/Python/Python312/python.exe'
-
 g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
 

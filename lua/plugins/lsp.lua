@@ -29,9 +29,9 @@ return {
             map('<C-h>', vim.lsp.buf.signature_help, 'Get signature help')
 
             if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-                map('<leader>th', function()
+                map('<leader>ih', function()
                     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-                end, '[T]oggle Inlay [H]ints')
+                end, 'Toggle Inlay hints')
             end
 
             if client.server_capabilities.documentHighlightProvider then

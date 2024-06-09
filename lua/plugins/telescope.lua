@@ -1,6 +1,3 @@
--- https://github.com/BurntSushi/ripgrep
--- https://github.com/niXman/mingw-builds-binaries
--- https://github.com/sharkdp/fd
 -------------- stylua: ignore
 return {
     'nvim-telescope/telescope.nvim',
@@ -11,11 +8,7 @@ return {
         {
             'nvim-telescope/telescope-fzf-native.nvim',
 
-            -- Windows: https://github.com/niXman/mingw-builds-binaries
-            -- Create a copy of mingw64/bin/mingw32-make.exe and name it make.exe or use build = 'mingw32-make'
-            -- https://github.com/nvim-telescope/telescope-fzf-native.nvim?tab=readme-ov-file#installation
-            -- https://www.reddit.com/r/neovim/comments/10nzgdx/im_trying_to_set_up_telescope_with_fzfnative_and/
-            build = 'mingw32-make',
+            build = 'make',
         },
         {
             'nvim-tree/nvim-web-devicons',

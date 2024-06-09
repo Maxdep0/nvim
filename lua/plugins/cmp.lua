@@ -14,7 +14,7 @@ return {
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-nvim-lua',
         'onsails/lspkind.nvim',
-        { 'zbirenbaum/copilot-cmp', event = 'LspAttach', fix_pairs = true },
+        { 'zbirenbaum/copilot-cmp', event = 'LspAttach' },
     },
     event = { 'InsertEnter', 'CmdlineEnter' },
 
