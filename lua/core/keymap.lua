@@ -4,6 +4,9 @@ end
 
 vim.g.mapleader = ' '
 
+-- Add ALT+W  To save all, and   close
+-- SHIFT+ZZ save current buffer, close current buffer
+
 --------------------------------------------------------
 --                     Disabled Keys                  --
 --------------------------------------------------------
@@ -39,10 +42,12 @@ map('v', '<C-j>', ":m '>+1<CR>gv=gv", 'Keymap: Move line down')
 map('v', '<C-k>', ":m '<-2<CR>gv=gv", 'Keymap: Move line up')
 map('v', '<Tab>', '"9Y"9[pgv', 'Keymap: Duplicate selected lines')
 map('n', 'J', 'mzJ`z', 'Keymap: Join line below without changing cursor position')
+
 vim.keymap.set('n', '<leader>;u', ':.,0s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', { noremap = true })
 vim.keymap.set('n', '<leader>;d', ':.,$s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', { noremap = true })
 vim.keymap.set('n', '<leader>;', ':s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', { noremap = true })
 
+-- -- stylua: ignore start
 --------------------------------------------------------
 --                     Movement                       --
 --------------------------------------------------------
@@ -68,27 +73,33 @@ map('n', 'N', 'Nzzzv', 'Keymap: Repeat search in opposite direction and center c
 --                     Clipboard and Registers        --
 --------------------------------------------------------
 
--- System Clipboard
+-- Yank
 map('n', 'y', '"+y', 'Operator: Yank to system clipboard (combine with motion)')
-map('n', 'd', '"_d', 'Operator: Delete without register change (combine with motion)')
-map('n', 'p', '"+P', 'Operator: Paste from system clipboard')
 map('n', 'Y', '"+Y', 'Keymap: Yank whole line to system clipboard')
 map('v', 'y', '"+y', 'Keymap: Yank selected text to system clipboard')
-map('v', 'p', '"_d"+P', 'Keymap: Replace selected text with system clipboard without register change')
-map('v', 'd', '"_d', 'Keymap: Delete selected text without changing clipboard')
+
+map('n', '<leader>y', '"1y', 'Operator: Yank to register 1 (combine with motion)')
+map('n', '<leader>Y', '"1Y', 'Keymap: Yank whole line to register 1')
+map('v', '<leader>y', '"1y', 'Keymap: Yank selected text to register 1')
+
+-- Paste
+map('n', 'p', '"+P', 'Operator: Paste from system clipboard')
+map('v', 'p', '"_d"+P', 'Keymap: Replace selected text with system clipboard')
+
+map('n', '<leader>p', '"1P', 'Operator: Paste from register 1')
+map('v', '<leader>p', '"_d"1P', 'Keymap: Replace selected text with register 1')
+
+-- Delete
+map('n', 'd', '"_d', 'Operator: Delete without register change (combine with motion)')
 map('n', 'D', '"_D', 'Keymap: Delete to end of line without changing clipboard')
+map('v', 'd', '"_d', 'Keymap: Delete selected text without changing clipboard')
+
+map('n', '<leader>d', '"+d', 'Operator: Delete and yank to system clipboard (combine with motion)')
+map('n', '<leader>D', '"+D', 'Keymap: Delete to end of line and yank to system clipboard')
+map('v', '<leader>d', '"+d', 'Keymap: Delete selected text and yank to system clipboard')
+map('v', '<leader>D', '"+D', 'Keymap: Delete whole line and yank to system clipboard')
+
 map('n', 'x', '"_x', 'Keymap: Cut character without changing clipboard')
 map('v', 'x', '"_x', 'Keymap: Cut character without changing clipboard')
 
--- Register 1
-map('n', '<leader>y', '"1y', 'Operator: Yank to register 1 (combine with motion)')
-map('n', '<leader>d', '"+d', 'Operator: Delete and yank to system clipboard (combine with motion)')
-map('n', '<leader>p', '"1P', 'Operator: Paste from register 1')
-map('v', '<leader>y', '"1y', 'Keymap: Yank selected text to register 1')
-map('n', '<leader>Y', '"1Y', 'Keymap: Yank whole line to register 1')
-map('v', '<leader>d', '"+d', 'Keymap: Delete selected text and yank to system clipboard')
-map('n', '<leader>D', '"+D', 'Keymap: Delete to end of line and yank to system clipboard')
-map('v', '<leader>D', '"+D', 'Keymap: Delete whole line and yank to system clipboard')
-map('v', '<leader>p', '"_d"1P', 'Keymap: Replace selected text with register 1 without register change')
-map('n', '<leader>x', '"+x', 'Keymap: Cut character and yank to system clipboard')
-map('v', '<leader>x', '"+x', 'Keymap: Cut selected text and yank to system clipboard')
+-- stylua: ignore end

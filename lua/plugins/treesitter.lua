@@ -11,6 +11,9 @@ return {
             indent = { enable = true },
             autotag = { enable = true },
             auto_install = true,
+            rainbow = { enable = false },
+            textobject = { enable = false },
+            playground = { enable = false },
 
             ensure_installed = {
                 'css',

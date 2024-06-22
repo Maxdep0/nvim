@@ -34,9 +34,11 @@ o.tabstop = 4
 
 o.hidden = true
 o.history = 100
---o.lazyredraw = true
-o.synmaxcol = 500
-o.updatetime = 250
+o.lazyredraw = true
+o.ttyfast = true
+o.synmaxcol = 150
+o.updatetime = 200
+o.timeoutlen = 500
 
 o.swapfile = false
 o.backup = false
