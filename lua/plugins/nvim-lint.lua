@@ -15,6 +15,7 @@ return {
             javascriptreact = { 'eslint_d' },
             typescriptreact = { 'eslint_d' },
             python = { 'flake8' },
+            bash = { 'shellcheck' },
         }
 
         local function getSeleneConfig()

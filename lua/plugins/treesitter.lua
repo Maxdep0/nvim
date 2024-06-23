@@ -31,6 +31,7 @@ return {
                 'python',
                 'toml',
                 'markdown',
+                'bash',
             },
         })
     end,

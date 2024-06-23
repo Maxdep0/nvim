@@ -24,6 +24,7 @@ return {
                 -- 'pyright',
                 'pylsp',
                 'marksman',
+                'bashls',
             },
             automatic_installation = true,
         })
@@ -37,6 +38,7 @@ return {
                 'flake8',
                 'black',
                 -- 'autopep8',
+                'shellcheck',
             },
         })
     end,
