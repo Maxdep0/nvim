@@ -118,7 +118,7 @@ return {
 
             view = { entries = 'custom' },
 
-            experimental = { ghost_text = true },
+            experimental = { ghost_text = false },
 
             sorting = {
                 priority_weight = 2,
