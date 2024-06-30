@@ -29,7 +29,7 @@ map('n', 'k', 'gk', 'Keymap: Navigate through wrapped lines')
 --------------------------------------------------------
 
 map('n', '<leader>th', ':lua toggleFloatHover()<CR>', 'SPECIAL: [T]oggle float on [H]over')
-map('n', '<leader>tt', ':lua toggleTransparent()<CR>', 'SPECIAL: [T]oggle [T]ransparent Background')
+map('n', '<leader>tt', ':lua toggleTransparency()<CR>', 'SPECIAL: [T]oggle [T]ransparent Background')
 
 --------------------------------------------------------
 --                     Editing                        --
