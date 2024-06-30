@@ -12,7 +12,7 @@ o.splitbelow = true
 o.linebreak = true
 o.termguicolors = true
 o.laststatus = 3
-o.wrap = true
+o.wrap = false
 o.colorcolumn = ''
 o.cursorline = true
 
