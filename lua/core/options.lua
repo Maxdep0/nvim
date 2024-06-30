@@ -36,7 +36,7 @@ o.hidden = true
 o.history = 100
 o.lazyredraw = true
 o.ttyfast = true
-o.synmaxcol = 150
+o.synmaxcol = 250
 o.updatetime = 200
 o.timeoutlen = 500
 
