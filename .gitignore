@@ -1,2 +1,5 @@
 lazy-lock.json
 cache
+yarn.lock
+
+node_modules

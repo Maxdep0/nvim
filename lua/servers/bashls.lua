@@ -6,5 +6,5 @@ return {
             globPattern = '*@(.sh|.inc|.bash|.command)',
         },
     },
-    filetypes = { 'sh' },
+    filetypes = { 'sh', 'zsh', 'bash' },
 }

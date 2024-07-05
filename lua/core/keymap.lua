@@ -102,4 +102,10 @@ map('v', '<leader>D', '"+D', 'Keymap: Delete whole line and yank to system clipb
 map('n', 'x', '"_x', 'Keymap: Cut character without changing clipboard')
 map('v', 'x', '"_x', 'Keymap: Cut character without changing clipboard')
 
+-- Change
+map('n', 'c', '"_c', 'Operator: Change without register change (combine with motion)')
+map('n', 'C', '"_C', 'Keymap: Change to end of line without changing clipboard')
+map('v', 'c', '"_c', 'Keymap: Change selected text without changing clipboard')
+map('v', 'C', '"_C', 'Keymap: Change selected text without changing clipboard')
+
 -- stylua: ignore end
