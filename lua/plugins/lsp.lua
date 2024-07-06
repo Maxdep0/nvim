@@ -52,11 +52,11 @@ return {
             end
         end
 
-        local signs = { Error = '● ', Warn = '● ', Hint = '● ', Info = '● ' }
-        for type, icon in pairs(signs) do
-            local hl = 'DiagnosticSign' .. type
-            vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-        end
+        -- local signs = { Error = '● ', Warn = '● ', Hint = '● ', Info = '● ' }
+        -- for type, icon in pairs(signs) do
+        --     local hl = 'DiagnosticSign' .. type
+        --     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+        -- end
 
         vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
             border = 'rounded',
@@ -70,6 +70,7 @@ return {
 
         vim.diagnostic.config({
             update_in_insert = true,
+            -- severity_sort = true,
             virtual_text = {
                 source = false,
                 prefix = '●',
@@ -82,6 +83,26 @@ return {
                 source = true,
                 header = '',
                 prefix = '',
+            },
+            signs = {
+                text = {
+                    [vim.diagnostic.severity.ERROR] = '● ',
+                    [vim.diagnostic.severity.WARN] = '● ',
+                    [vim.diagnostic.severity.INFO] = '● ',
+                    [vim.diagnostic.severity.HINT] = '● ',
+                },
+                linehl = {
+                    [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+                    [vim.diagnostic.severity.WARN] = 'WarningMsg',
+                    [vim.diagnostic.severity.INFO] = 'InfoMsg',
+                    [vim.diagnostic.severity.HINT] = 'HintMsg',
+                },
+                numhl = {
+                    [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+                    [vim.diagnostic.severity.WARN] = 'WarningMsg',
+                    [vim.diagnostic.severity.INFO] = 'InfoMsg',
+                    [vim.diagnostic.severity.HINT] = 'HintMsg',
+                },
             },
         })
 
