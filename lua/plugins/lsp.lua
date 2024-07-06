@@ -70,7 +70,7 @@ return {
 
         vim.diagnostic.config({
             update_in_insert = true,
-            -- severity_sort = true,
+            severity_sort = true,
             virtual_text = {
                 source = false,
                 prefix = '●',
@@ -91,18 +91,18 @@ return {
                     [vim.diagnostic.severity.INFO] = '● ',
                     [vim.diagnostic.severity.HINT] = '● ',
                 },
-                linehl = {
-                    [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
-                    [vim.diagnostic.severity.WARN] = 'WarningMsg',
-                    [vim.diagnostic.severity.INFO] = 'InfoMsg',
-                    [vim.diagnostic.severity.HINT] = 'HintMsg',
-                },
-                numhl = {
-                    [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
-                    [vim.diagnostic.severity.WARN] = 'WarningMsg',
-                    [vim.diagnostic.severity.INFO] = 'InfoMsg',
-                    [vim.diagnostic.severity.HINT] = 'HintMsg',
-                },
+                -- linehl = {
+                -- [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+                -- [vim.diagnostic.severity.WARN] = 'WarningMsg',
+                -- [vim.diagnostic.severity.INFO] = 'InfoMsg',
+                -- [vim.diagnostic.severity.HINT] = 'HintMsg',
+                -- },
+                -- numhl = {
+                -- [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+                -- [vim.diagnostic.severity.WARN] = 'WarningMsg',
+                -- [vim.diagnostic.severity.INFO] = 'InfoMsg',
+                -- [vim.diagnostic.severity.HINT] = 'HintMsg',
+                -- },
             },
         })
 
