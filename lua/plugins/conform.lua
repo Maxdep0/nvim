@@ -18,6 +18,7 @@ return {
                 css = { 'prettierd' },
                 scss = { 'prettierd' },
                 python = { 'black' }, --, 'autopep8' },
+                bash = { 'shfmt' },
             },
 
             format_on_save = {

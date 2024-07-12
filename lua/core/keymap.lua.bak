@@ -11,10 +11,9 @@ vim.g.mapleader = ' '
 --                     Disabled Keys                  --
 --------------------------------------------------------
 
-map('n', 'u', '<noop>', 'Disabled: Use <C-z> instead')
-map('i', '<C-u>', '<noop>', 'Disabled: Use <C-z> instead')
-map({ 'n', 'i' }, '<C-r>', '<noop>', 'Disabled: Use <C-y> instead')
-map('n', 'ZQ', '<noop>', 'Disabled')
+map('n', 'u', '<nop>', 'Disabled: Use <C-z> instead')
+map('n', '<C-r>', '<nop>', 'Disabled: Use <C-y> instead')
+map('n', 'ZQ', '<nop>', 'Disabled')
 
 --------------------------------------------------------
 --                     Basic Operations               --
@@ -24,8 +23,6 @@ map('n', '<Esc>', ':nohlsearch<CR>', 'Keymap: Toggle off hlsearch')
 map('n', '<C-a>', 'gg<S-v>G', 'Keymap: Select the entire file')
 map('n', 'j', 'gj', 'Keymap: Navigate through wrapped lines')
 map('n', 'k', 'gk', 'Keymap: Navigate through wrapped lines')
-
-map('i', '<C-l>', '<CR>', 'Keymap: Same as enter key')
 
 --------------------------------------------------------
 --                     Special Keymaps               --
@@ -65,6 +62,8 @@ map({ 'n', 'v' }, '<leader>h', '0', 'Keymap: Jump to the start of the line')
 --------------------------------------------------------
 
 map('n', '<leader>ft', vim.cmd.Ex, 'Keymap: Open netrw file tree')
+map('n', '<Tab>', 'gt', 'Keymap: Focus next tab')
+map('n', '<S-Tab>', 'gT', 'Keymap: Focus previous tab')
 map('n', '<C-j>', ':bp<CR>', 'Keymap: Go to the previous buffer')
 map('n', '<C-k>', ':bn<CR>', 'Keymap: Go to the next buffer')
 map('n', 'n', 'nzzzv', 'Keymap: Repeat search in same direction and center cursor')
