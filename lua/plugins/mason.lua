@@ -39,6 +39,7 @@ return {
                 'black',
                 -- 'autopep8',
                 'shellcheck',
+                'shfmt',
             },
         })
     end,
