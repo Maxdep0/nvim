@@ -42,7 +42,6 @@ o.timeoutlen = 500
 
 o.swapfile = false
 o.backup = false
--- o.undodir = vim.fn.getcwd() .. '/cache/undir'
 o.undofile = true
 
 o.shortmess = 'sI'
