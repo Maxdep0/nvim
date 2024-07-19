@@ -14,9 +14,6 @@ end
 function toggleTransparency()
     local ok, transparent = pcall(vim.api.nvim_get_var, 'isTransparent')
 
-    -- local function toggleWeztermTabBar(value) end
-
-    -- os.execute(cmd .. path)
     if not ok or not transparent then
         M.notify('Enabled Transparent Background', 'UI')
 

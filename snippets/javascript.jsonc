@@ -1,0 +1,63 @@
+{
+    "consoleLog": {
+        "prefix": "clg",
+        "body": [
+            "console.log($1)"
+        ],
+        "description": ""
+    },
+    "JSDoc": {
+        "prefix": "jsdoc",
+        "body": [
+            "/**",
+            "* @desc $1",
+            "* @route $2",
+            "* @param $3",
+            "*/"
+        ],
+        "description": ""
+    },
+    "importFrom": {
+        "prefix": "imp",
+        "body": [
+            "import ${1:moduleName} from '${2:module}'"
+        ],
+        "description": "Import module statement in ES6 syntax"
+    },
+    "multiLineFunc": {
+        "prefix": "func",
+        "body": [
+            "const ${1:name} = (${2:param}) => {",
+            "$3",
+            "}"
+        ],
+        "description": "Create multi-line array function"
+    },
+    "singleLineFunc": {
+        "prefix": "sfunc",
+        "body": [
+            "const ${1:name} = (${2:param}) => $3"
+        ],
+        "description": "Create single-line array function"
+    },
+    "asyncFunc": {
+        "prefix": "afunc",
+        "body": [
+            "const ${1:name} = async (${2:param}) => {",
+            "$3",
+            "}"
+        ],
+        "description": "Create multi-line async array function"
+    },
+    "tryCatch": {
+        "prefix": "trycatch",
+        "body": [
+            "try {",
+            "$1",
+            "} catch (error) {",
+            "$2",
+            "}"
+        ],
+        "description": "Create try catch"
+    }
+}

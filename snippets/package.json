@@ -4,10 +4,9 @@
     "snippets": [
       {
         "language": [
-          "javascript",
-          "typescript"
+          "javascript"
         ],
-        "path": "./shared.json"
+        "path": "./javascript.jsonc"
       },
       {
         "language": [
