@@ -1,4 +1,3 @@
--- Windows: https://github.com/niXman/mingw-builds-binaries
 return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -11,7 +10,7 @@ return {
             indent = { enable = true },
             autotag = { enable = true },
             auto_install = true,
-            rainbow = { enable = false },
+            rainbow = { enable = true },
             textobject = { enable = false },
             playground = { enable = false },
 

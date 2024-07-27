@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd('TextYankPost', {
-    group = vim.api.nvim_create_augroup('highlight_yank', {}),
+    group = vim.api.nvim_create_augroup('HighlightYank', {}),
     desc = 'Hightlight selection on yank',
     pattern = '*',
     callback = function()
@@ -15,7 +15,15 @@ vim.api.nvim_create_autocmd('BufEnter', {
 })
 
 vim.api.nvim_create_autocmd('VimResized', {
-    group = vim.api.nvim_create_augroup('win_autoresize', { clear = true }),
+    group = vim.api.nvim_create_augroup('WinAutoresize', { clear = true }),
     desc = 'autoresize windows on resizing operation',
     command = 'wincmd =',
+})
+
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+    group = vim.api.nvim_create_augroup('ApplyCustomTreesitter', { clear = true }),
+    pattern = '.aliasrc',
+    callback = function()
+        vim.cmd('set filetype=zsh')
+    end,
 })
