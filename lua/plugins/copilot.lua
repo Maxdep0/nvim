@@ -2,6 +2,7 @@ return {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
     event = { 'InsertEnter', 'LspAttach' },
+    cond = false,
 
     config = function()
         -- vim.api.nvim_set_hl(0, 'CopilotSuggestion', { fg = '#f5c2e7' })
