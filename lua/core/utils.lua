@@ -11,6 +11,12 @@ function toggleWeztermTabBar(value)
     end
 end
 
+function saveAndCloseCurrentBuffer()
+    vim.cmd('write')
+    local current_buf = vim.api.nvim_get_current_buf()
+    vim.api.nvim_buf_delete(current_buf, { force = false })
+end
+
 function toggleTransparency()
     local ok, transparent = pcall(vim.api.nvim_get_var, 'isTransparent')
 

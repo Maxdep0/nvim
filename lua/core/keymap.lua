@@ -4,9 +4,6 @@ end
 
 vim.g.mapleader = ' '
 
--- Add ALT+W  To save all, and   close
--- SHIFT+ZZ save current buffer, close current buffer
-
 --------------------------------------------------------
 --                     Disabled Keys                  --
 --------------------------------------------------------
@@ -14,7 +11,7 @@ vim.g.mapleader = ' '
 map('n', 'u', '<noop>', 'Disabled: Use <C-z> instead')
 map('i', '<C-u>', '<noop>', 'Disabled: Use <C-z> instead')
 map({ 'n', 'i' }, '<C-r>', '<noop>', 'Disabled: Use <C-y> instead')
-map('n', 'ZQ', '<noop>', 'Disabled')
+map({ 'n', 'i', 'v' }, 'ZQ', '<noop>', 'Disabled')
 
 --------------------------------------------------------
 --                     Basic Operations               --
@@ -33,6 +30,7 @@ map('i', '<C-l>', '<CR>', 'Keymap: Same as enter key')
 
 map('n', '<leader>th', ':lua toggleFloatHover()<CR>', 'SPECIAL: [T]oggle float on [H]over')
 map('n', '<leader>tt', ':lua toggleTransparency()<CR>', 'SPECIAL: [T]oggle [T]ransparent Background')
+map({ 'n', 'i' }, 'ZZ', ':lua saveAndCloseCurrentBuffer()<CR>', 'Save and close current buffer')
 
 --------------------------------------------------------
 --                     Editing                        --
