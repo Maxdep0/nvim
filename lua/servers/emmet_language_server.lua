@@ -11,6 +11,7 @@ return {
         'sass',
         'scss',
         'typescriptreact',
+        'ts_ls',
     },
     init_options = { provideFormatter = true },
     settings = {
