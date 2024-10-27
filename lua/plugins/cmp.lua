@@ -14,7 +14,6 @@ return {
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-nvim-lua',
         'onsails/lspkind.nvim',
-        { 'zbirenbaum/copilot-cmp', event = 'LspAttach' },
     },
     event = { 'InsertEnter', 'CmdlineEnter' },
 
@@ -22,7 +21,6 @@ return {
         local cmp = require('cmp')
         local luasnip = require('luasnip')
         local lspkind = require('lspkind')
-        require('copilot_cmp').setup()
 
         require('luasnip.loaders.from_vscode').lazy_load()
         require('luasnip.loaders.from_vscode').load({ paths = './snippets' })
@@ -32,13 +30,11 @@ return {
             formatting = {
                 fields = { 'kind', 'abbr', 'menu' },
                 format = function(entry, vim_item)
-                    vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#6CC644' })
                     local kind = lspkind.cmp_format({
                         mode = 'symbol_text',
                         maxwidth = 100,
                         show_labelDetails = true,
                         ellipsis_char = '...',
-                        symbol_map = { Copilot = '' },
                     })(entry, vim_item)
                     local strings = vim.split(kind.kind, '%s', { trimempty = true })
                     kind.kind = ' ' .. (strings[1] or '') .. ' '
@@ -114,7 +110,6 @@ return {
             },
 
             sources = {
-                { name = 'copilot', keyword_length = 0, max_item_count = 5 },
                 { name = 'nvim_lsp', max_item_count = 20 },
                 { name = 'nvim_lua', keyword_length = 2, max_item_count = 10 },
                 { name = 'luasnip', keyword_length = 2, max_item_count = 8 },
@@ -134,7 +129,6 @@ return {
             sorting = {
                 priority_weight = 2,
                 comparators = {
-                    require('copilot_cmp.comparators').prioritize,
                     cmp.config.compare.offset,
                     cmp.config.compare.exact,
                     cmp.config.compare.score,

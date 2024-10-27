@@ -36,7 +36,7 @@ return {
                 'stylua',
                 'selene',
                 'flake8',
-                'black',
+                -- 'black',
                 -- 'autopep8',
                 'shellcheck',
                 'shfmt',

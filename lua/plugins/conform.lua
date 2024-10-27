@@ -17,7 +17,7 @@ return {
                 html = { 'prettierd' },
                 css = { 'prettierd' },
                 scss = { 'prettierd' },
-                python = { 'black' }, --, 'autopep8' },
+                python = { 'flake9' }, -- autopep8  black pyling flake8
                 bash = { 'shfmt' },
             },
 

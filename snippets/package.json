@@ -4,7 +4,8 @@
     "snippets": [
       {
         "language": [
-          "javascript"
+          "javascript",
+          "typescript"
         ],
         "path": "./javascript.jsonc"
       },

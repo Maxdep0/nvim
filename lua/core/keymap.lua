@@ -1,17 +1,19 @@
 local map = function(mode, lhs, rhs, desc)
     vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
 end
-
 vim.g.mapleader = ' '
 
 --------------------------------------------------------
 --                     Disabled Keys                  --
 --------------------------------------------------------
 
-map('n', 'u', '<noop>', 'Disabled: Use <C-z> instead')
-map('i', '<C-u>', '<noop>', 'Disabled: Use <C-z> instead')
-map({ 'n', 'i' }, '<C-r>', '<noop>', 'Disabled: Use <C-y> instead')
-map({ 'n', 'i', 'v' }, 'ZQ', '<noop>', 'Disabled')
+map('n', 'u', '<Nop>', 'Disabled: Use <C-z> instead')
+map('i', '<C-u>', '<Nopp>', 'Disabled: Use <C-z> instead')
+map({ 'n', 'i' }, '<C-r>', '<Nop>', 'Disabled: Use <C-y> instead')
+map('n', 'ZQ', '<Nop>', 'Disabled')
+map('n', 'ZZ', '<Nop>', 'Disabled')
+map('n', 'C', '<Nop>', 'Disabled')
+map('n', 'gQ', '<Nop>', 'Disabled')
 
 --------------------------------------------------------
 --                     Basic Operations               --
@@ -21,7 +23,6 @@ map('n', '<Esc>', ':nohlsearch<CR>', 'Keymap: Toggle off hlsearch')
 map('n', '<C-a>', 'gg<S-v>G', 'Keymap: Select the entire file')
 map('n', 'j', 'gj', 'Keymap: Navigate through wrapped lines')
 map('n', 'k', 'gk', 'Keymap: Navigate through wrapped lines')
-
 map('i', '<C-l>', '<CR>', 'Keymap: Same as enter key')
 
 --------------------------------------------------------
@@ -30,7 +31,7 @@ map('i', '<C-l>', '<CR>', 'Keymap: Same as enter key')
 
 map('n', '<leader>th', ':lua toggleFloatHover()<CR>', 'SPECIAL: [T]oggle float on [H]over')
 map('n', '<leader>tt', ':lua toggleTransparency()<CR>', 'SPECIAL: [T]oggle [T]ransparent Background')
-map({ 'n', 'i' }, 'ZZ', ':lua saveAndCloseCurrentBuffer()<CR>', 'Save and close current buffer')
+map('n', 'ZZ', ':lua saveAndCloseCurrentBuffer()<CR>', 'Save and close current buffer')
 
 --------------------------------------------------------
 --                     Editing                        --
