@@ -70,30 +70,30 @@ return {
             update_in_insert = false,
         }
 
-        local activeLsp = {
-            function()
-                local msg = 'No Active Lsp'
-
-                local buf_ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
-                local bufnr = vim.api.nvim_get_current_buf()
-                local clients = vim.lsp.get_clients({ bufnr = bufnr })
-
-                if next(clients) == nil then
-                    return msg
-                end
-
-                for _, client in pairs(clients) do
-                    local filetypes = client.config.filetypes or {}
-                    if vim.tbl_contains(filetypes, buf_ft) then
-                        return client.name
-                    end
-                end
-
-                return msg
-            end,
-            icon = '⚙️ ',
-            color = { fg = '#c4c4c4', gui = 'bold' },
-        }
+        -- local activeLsp = {
+        --     function()
+        --         local msg = 'No Active Lsp'
+        --
+        --         local buf_ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
+        --         local bufnr = vim.api.nvim_get_current_buf()
+        --         local clients = vim.lsp.get_clients({ bufnr = bufnr })
+        --
+        --         if next(clients) == nil then
+        --             return msg
+        --         end
+        --
+        --         for _, client in pairs(clients) do
+        --             local filetypes = client.config.filetypes or {}
+        --             if vim.tbl_contains(filetypes, buf_ft) then
+        --                 return client.name
+        --             end
+        --         end
+        --
+        --         return msg
+        --     end,
+        --     icon = '⚙️ ',
+        --     color = { fg = '#c4c4c4', gui = 'bold' },
+        -- }
 
         local diff = {
             'diff',
@@ -114,30 +114,31 @@ return {
         local buffers = {
             'buffers',
             icons_enabled = false,
-            max_length = vim.o.columns * 2 / 4,
+            -- max_length = vim.o.columns * 2 / 4,
+            max_length = math.floor(vim.o.columns * 0.5),
             symbols = { modified = '●', alternate_file = '' },
         }
 
-        local virtual_env = function()
-            if vim.bo.filetype ~= 'python' then
-                return ''
-            end
-
-            local conda_env = os.getenv('CONDA_DEFAULT_ENV')
-            local venv_path = os.getenv('VIRTUAL_ENV')
-
-            if venv_path == nil then
-                if conda_env == nil then
-                    return ''
-                else
-                    return string.format('  %s (conda)', conda_env)
-                end
-            else
-                local venv_name = vim.fn.fnamemodify(venv_path, ':t')
-                -- return string.format('  %s (venv)', venv_name)
-                return string.format(' %s', venv_name)
-            end
-        end
+        -- local virtual_env = function()
+        --     if vim.bo.filetype ~= 'python' then
+        --         return ''
+        --     end
+        --
+        --     local conda_env = os.getenv('CONDA_DEFAULT_ENV')
+        --     local venv_path = os.getenv('VIRTUAL_ENV')
+        --
+        --     if venv_path == nil then
+        --         if conda_env == nil then
+        --             return ''
+        --         else
+        --             return string.format('  %s (conda)', conda_env)
+        --         end
+        --     else
+        --         local venv_name = vim.fn.fnamemodify(venv_path, ':t')
+        --         -- return string.format('  %s (venv)', venv_name)
+        --         return string.format(' %s', venv_name)
+        --     end
+        -- end
 
         local location = {
             'location',
@@ -212,7 +213,8 @@ return {
                 lualine_a = { mode },
                 lualine_b = { branch, diff },
                 lualine_c = { sep, buffers },
-                lualine_x = { activeLsp, virtual_env },
+                -- lualine_x = { activeLsp, virtual_env },
+                lualine_x = { '' },
                 lualine_y = { diagnostics }, --, fileformat },
                 lualine_z = { location },
             },
