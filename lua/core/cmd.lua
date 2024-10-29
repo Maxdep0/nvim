@@ -27,3 +27,9 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
         vim.cmd('set filetype=zsh')
     end,
 })
+
+vim.api.nvim_create_autocmd('VimLeave', {
+    callback = function()
+        vim.fn.system('bash ~/.config/nvim/scripts/clean_processes.sh')
+    end,
+})
