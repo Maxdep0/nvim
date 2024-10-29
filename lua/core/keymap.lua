@@ -6,7 +6,6 @@ vim.g.mapleader = ' '
 --------------------------------------------------------
 --                     Disabled Keys                  --
 --------------------------------------------------------
-
 map('n', 'u', '<Nop>', 'Disabled: Use <C-z> instead')
 map('i', '<C-u>', '<Nopp>', 'Disabled: Use <C-z> instead')
 map({ 'n', 'i' }, '<C-r>', '<Nop>', 'Disabled: Use <C-y> instead')
@@ -29,8 +28,9 @@ map('i', '<C-l>', '<CR>', 'Keymap: Same as enter key')
 --                     Special Keymaps               --
 --------------------------------------------------------
 
-map('n', '<leader>th', ':lua toggleFloatHover()<CR>', 'SPECIAL: [T]oggle float on [H]over')
-map('n', '<leader>tt', ':lua toggleTransparency()<CR>', 'SPECIAL: [T]oggle [T]ransparent Background')
+map('n', '<F1>', ':lua toggleFloatHover()<CR>', 'SPECIAL: Toggle float on hover')
+map('n', '<F2>', ':lua toggle_document_highlight()<CR>', 'SPECIAL: Toggle document highlights')
+map('n', '<F4>', ':lua toggleTransparency()<CR>', 'SPECIAL: Toggle transparent background')
 map('n', 'ZZ', ':lua saveAndCloseCurrentBuffer()<CR>', 'Save and close current buffer')
 
 --------------------------------------------------------
@@ -60,6 +60,18 @@ map({ 'n', 'v' }, '<leader>l', '$', 'Keymap: Jump to the end of the line')
 map({ 'n', 'v' }, '<leader>h', '0', 'Keymap: Jump to the start of the line')
 
 --------------------------------------------------------
+--                  LSP/DIAGNOSTIC                    --
+--------------------------------------------------------
+
+map('n', 'gd', vim.lsp.buf.definition, 'LSP: Goto definition')
+map('n', 'gI', vim.lsp.buf.implementation, 'LSP: Goto implementation')
+map('n', 'K', vim.lsp.buf.hover, 'LSP: Hover Documentation')
+map({ 'i', 'n' }, '<C-h>', vim.lsp.buf.signature_help, 'LSP: Get signature help')
+
+map('n', '[d', vim.diagnostic.goto_prev, 'Diagnostic: Go to previous diagnostic')
+map('n', ']d', vim.diagnostic.goto_prev, 'Diagnostic: Go to next diagnostic')
+
+--------------------------------------------------------
 --                     Navigation                     --
 --------------------------------------------------------
 
@@ -70,7 +82,7 @@ map('n', 'n', 'nzzzv', 'Keymap: Repeat search in same direction and center curso
 map('n', 'N', 'Nzzzv', 'Keymap: Repeat search in opposite direction and center cursor')
 
 --------------------------------------------------------
---                     Clipboard and Registers        --
+--              Clipboard and Registers               --
 --------------------------------------------------------
 
 -- Yank

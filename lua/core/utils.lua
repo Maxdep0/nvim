@@ -43,6 +43,31 @@ function toggleTransparency()
     end
 end
 
+function toggle_document_highlight()
+    if vim.g.document_highlight_active then
+        -- Clear highlights and autocommands
+        vim.api.nvim_clear_autocmds({ group = 'lsp_document_highlight' })
+        vim.lsp.buf.clear_references() -- Ensure any highlights are removed
+        vim.g.document_highlight_active = false
+        M.notify('Disabled Document Highlight', 'UI')
+    else
+        -- Set up highlights and autocommands
+        vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
+        vim.api.nvim_create_autocmd('CursorHold', {
+            callback = vim.lsp.buf.document_highlight,
+            group = 'lsp_document_highlight',
+            desc = 'Document Highlight',
+        })
+        vim.api.nvim_create_autocmd('CursorMoved', {
+            callback = vim.lsp.buf.clear_references,
+            group = 'lsp_document_highlight',
+            desc = 'Clear All the References',
+        })
+        vim.g.document_highlight_active = true
+        M.notify('Enabled Document Highlight', 'UI')
+    end
+end
+
 function toggleFloatHover()
     local ok, floatHover = pcall(vim.api.nvim_get_var, 'isFloatHover')
 
