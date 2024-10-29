@@ -19,13 +19,12 @@ return {
         local builtin = require('telescope.builtin')
         local actions = require('telescope.actions')
         local action_layout = require('telescope.actions.layout')
-        -- local TSLayout = require('telescope.pickers.layout')
-
-        -- dropdown, cursor, ivy
 
         require('telescope').setup({
             defaults = {
                 path_display = { 'smart' },
+
+                file_ignore_patterns = { '.git/', 'node_modules', 'dist', 'build', 'target', '__pycache__', 'venv' },
 
                 mappings = {
                     i = {
@@ -71,34 +70,16 @@ return {
                 },
             },
             pickers = {
-                find_files = {
-                    previewer = false,
-                    theme = 'dropdown',
-                },
-                live_grep = {
-                    previewer = false,
-                    theme = 'dropdown',
-                },
-                grep_string = {
-                    previewer = false,
-                    theme = 'dropdown',
-                },
-                help_tags = {
-                    previewer = false,
-                    theme = 'dropdown',
-                },
-                diagnostics = {
-                    previewer = true,
-                    theme = 'cursor',
-                    layout_config = {
-                        width = 0.6,
-                        height = 0.2,
-                    },
-                },
-                lsp_references = {
-                    previewer = true,
-                    theme = 'ivy',
-                },
+                find_files = { previewer = false, theme = 'dropdown' },
+                live_grep = { previewer = false, theme = 'dropdown' },
+                grep_string = { previewer = false, theme = 'dropdown' },
+                buffers = { previewer = false, theme = 'dropdown' },
+                git_files = { previewer = false, theme = 'dropdown' },
+                lsp_references = { previewer = false, theme = 'dropdown', layout_config = { width = 0.6 } },
+                diagnostics = { previewer = false, theme = 'dropdown', layout_config = { width = 0.6 } },
+                help_tags = { previewer = false, theme = 'dropdown' },
+                keymaps = { previewer = false, theme = 'dropdown', layout_config = { width = 0.6 } },
+                lsp_document_symbols = { previewer = false, theme = 'dropdown', layout_config = { width = 0.6 } },
             },
         })
 
@@ -114,18 +95,22 @@ return {
 
         map('<leader><space>', builtin.find_files, 'Search Files')
 
-        map('<leader>sw', builtin.grep_string, 'Search current Word')
-        map('<leader>sg', builtin.live_grep, 'Search by Grep')
-        map('<leader>sb', builtin.buffers, 'Search for existing Buffers')
-        map('<leader>sp', builtin.git_files, 'Search Git Project  Files')
-        map('<leader>sr', builtin.lsp_references, 'Search LSP References')
+        map('<leader>sw', builtin.grep_string, 'Search current word')
+        map('<leader>sg', builtin.live_grep, 'Search by grep')
+        map('<leader>sb', builtin.buffers, 'Search for existing buffers')
+        map('<leader>sp', function()
+            local project_root = vim.fs.dirname(vim.fs.find('.git', { upward = true })[1]) or vim.fn.getcwd()
+            builtin.find_files({ no_ignore = true, hidden = true, cwd = project_root })
+        end, 'Search project files from project root')
 
-        map('<leader>sd', builtin.diagnostics, ' Search Diagnostics')
-        map('<leader>sh', builtin.help_tags, 'Search Help')
-        map('<leader>sk', builtin.keymaps, 'Search Keymaps')
+        map('<leader>sr', builtin.lsp_references, 'Search LSP references')
+        map('<leader>sd', builtin.diagnostics, 'Search diagnostics')
+        map('<leader>sh', builtin.help_tags, 'Search help')
+        map('<leader>sk', builtin.keymaps, 'Search keymaps')
+        map('<leader>ss', builtin.lsp_document_symbols, 'Search document symbols')
 
         map('<leader>sn', function()
             builtin.find_files({ cwd = vim.fn.stdpath('config') })
-        end, 'Search Neovim files')
+        end, 'Search neovim files')
     end,
 }
