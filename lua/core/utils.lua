@@ -43,15 +43,16 @@ function toggleTransparency()
     end
 end
 
-function toggle_document_highlight()
+function toggleDocumentHighlight()
     if vim.g.document_highlight_active then
-        -- Clear highlights and autocommands
+        M.notify('Disabled Document Highlight', 'LSP')
+
         vim.api.nvim_clear_autocmds({ group = 'lsp_document_highlight' })
-        vim.lsp.buf.clear_references() -- Ensure any highlights are removed
+        vim.lsp.buf.clear_references()
         vim.g.document_highlight_active = false
-        M.notify('Disabled Document Highlight', 'UI')
     else
-        -- Set up highlights and autocommands
+        M.notify('Enabled Document Highlight', 'LSP')
+
         vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
         vim.api.nvim_create_autocmd('CursorHold', {
             callback = vim.lsp.buf.document_highlight,
@@ -64,7 +65,30 @@ function toggle_document_highlight()
             desc = 'Clear All the References',
         })
         vim.g.document_highlight_active = true
-        M.notify('Enabled Document Highlight', 'UI')
+    end
+end
+
+function toggleSignatureHelp()
+    local ok, signatureHelpActive = pcall(vim.api.nvim_get_var, 'isSignatureHelp')
+
+    if not ok or not signatureHelpActive then
+        M.notify('Enabled Signature Help', 'LSP')
+
+        local autocmd_id = vim.api.nvim_create_autocmd('CursorHoldI', {
+            desc = 'Enable Signature Help in Insert Mode',
+            callback = function()
+                vim.lsp.buf.signature_help()
+            end,
+        })
+
+        vim.api.nvim_set_var('signatureHelpAutoCmdId', autocmd_id)
+        vim.api.nvim_set_var('isSignatureHelp', true)
+    else
+        M.notify('Disabled Signature Help', 'LSP')
+        local autocmd_id = vim.api.nvim_get_var('signatureHelpAutoCmdId')
+
+        vim.api.nvim_del_autocmd(autocmd_id)
+        vim.api.nvim_set_var('isSignatureHelp', false)
     end
 end
 

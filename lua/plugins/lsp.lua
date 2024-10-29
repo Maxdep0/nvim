@@ -13,8 +13,16 @@ return {
             border = 'rounded',
         })
 
+        -- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+        --     border = 'rounded',
+        -- })
+
         vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
             border = 'rounded',
+            focusable = false,
+            relative = 'cursor',
+            anchor = 'SW',
+            row = -1,
         })
 
         -- vim.lsp.set_log_level('debug')
