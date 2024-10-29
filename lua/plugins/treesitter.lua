@@ -7,8 +7,8 @@ return {
 
         require('nvim-treesitter.configs').setup({
             highlight = { enable = true },
-            indent = { enable = true },
-            autotag = { enable = true },
+            indent = { enable = false },
+            autotag = { enable = false },
             auto_install = true,
             rainbow = { enable = true },
             textobject = { enable = false },
