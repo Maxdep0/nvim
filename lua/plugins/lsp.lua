@@ -8,21 +8,33 @@ return {
         require('neodev').setup({})
 
         local lspconfig = require('lspconfig')
+        local utils = require('core.utils')
+
+        local on_attach = function(client, bufnr)
+            local map = function(keys, func, desc)
+                vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+            end
+
+            if client.server_capabilities.signatureHelpProvider then
+                map('<F3>', function()
+                    utils.toggleSignatureHelp(bufnr)
+                end, 'SPECIAL: Toggle Signature Help')
+                utils.toggleSignatureHelp(bufnr)
+            end
+        end
 
         vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
             border = 'rounded',
         })
-
-        -- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        --     border = 'rounded',
-        -- })
 
         vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
             border = 'rounded',
             focusable = false,
             relative = 'cursor',
             anchor = 'SW',
-            row = -1,
+            max_height = 5,
+            -- row = -10,
+            offset_y = -6,
         })
 
         -- vim.lsp.set_log_level('debug')
@@ -64,6 +76,7 @@ return {
         for _, lsp in ipairs(SELECT_SERVERS) do
             local ok, opts = pcall(require, 'servers.' .. lsp)
             if ok then
+                opts.on_attach = on_attach
                 opts.capabilities = capabilities
                 lspconfig[lsp].setup(opts)
             else

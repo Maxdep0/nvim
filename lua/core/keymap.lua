@@ -30,7 +30,7 @@ map('i', '<C-l>', '<CR>', 'Keymap: Same as enter key')
 
 map('n', '<F1>', ':lua toggleFloatHover()<CR>', 'SPECIAL: Toggle float on hover')
 map('n', '<F2>', ':lua toggleDocumentHighlight()<CR>', 'SPECIAL: Toggle document highlights')
-map({ 'n', 'i' }, '<F3>', ':lua toggleSignatureHelp()<CR>', 'SPECIAL: Toggle signature help')
+-- map('n', '<F3>', ':lua toggleSignatureHelp()<CR>', 'SPECIAL: Toggle signature help')
 map('n', '<F4>', ':lua toggleTransparency()<CR>', 'SPECIAL: Toggle transparent background')
 map('n', 'ZZ', ':lua saveAndCloseCurrentBuffer()<CR>', 'Save and close current buffer')
 

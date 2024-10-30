@@ -1,5 +1,6 @@
 local M = {}
 
+-- Toggle wezterm tab bar to get full transparent mode. Works only on specific linux_env_user name.
 function toggleWeztermTabBar(value)
     local linux_env_user = os.getenv('USER')
     if linux_env_user == 'maxdep' then
@@ -68,27 +69,23 @@ function toggleDocumentHighlight()
     end
 end
 
-function toggleSignatureHelp()
-    local ok, signatureHelpActive = pcall(vim.api.nvim_get_var, 'isSignatureHelp')
-
-    if not ok or not signatureHelpActive then
+function M.toggleSignatureHelp(bufnr)
+    if vim.g.signature_help_active then
+        M.notify('Disabled Signature Help', 'LSP')
+        local autocmd_id = vim.api.nvim_get_var('signatureHelpAutoCmdId')
+        vim.api.nvim_del_autocmd(autocmd_id)
+        vim.g.signature_help_active = false
+    else
         M.notify('Enabled Signature Help', 'LSP')
-
         local autocmd_id = vim.api.nvim_create_autocmd('CursorHoldI', {
-            desc = 'Enable Signature Help in Insert Mode',
+            buffer = bufnr,
+            desc = 'Show Signature Help in Insert Mode',
             callback = function()
                 vim.lsp.buf.signature_help()
             end,
         })
-
         vim.api.nvim_set_var('signatureHelpAutoCmdId', autocmd_id)
-        vim.api.nvim_set_var('isSignatureHelp', true)
-    else
-        M.notify('Disabled Signature Help', 'LSP')
-        local autocmd_id = vim.api.nvim_get_var('signatureHelpAutoCmdId')
-
-        vim.api.nvim_del_autocmd(autocmd_id)
-        vim.api.nvim_set_var('isSignatureHelp', false)
+        vim.g.signature_help_active = true
     end
 end
 
