@@ -1,3 +1,14 @@
+vim.lsp.enable({
+    'bashls',
+    'cssls',
+    'emmet_language_server',
+    'html',
+    'jsonls',
+    'pylsp',
+    'lua_ls',
+    'ts_ls',
+})
+
 local utils = require('core.utils')
 
 local on_attach = function(client, bufnr)

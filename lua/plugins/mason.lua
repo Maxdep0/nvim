@@ -1,7 +1,6 @@
 return {
     'williamboman/mason.nvim',
     dependencies = {
-        'williamboman/mason-lspconfig.nvim',
         'WhoIsSethDaniel/mason-tool-installer',
     },
 
@@ -13,33 +12,32 @@ return {
             },
         })
 
-        require('mason-lspconfig').setup({
-            ensure_installed = {
-                'ts_ls',
-                'html',
-                'cssls',
-                'jsonls',
-                'lua_ls',
-                'emmet_language_server',
-                -- 'pyright',
-                'pylsp',
-                'marksman',
-                'bashls',
-            },
-            automatic_installation = true,
-        })
-
         require('mason-tool-installer').setup({
             ensure_installed = {
+                -- LSP servers
+                'typescript-language-server',
+                'html-lsp',
+                'emmet-language-server',
+                'css-lsp',
+                'json-lsp',
+                'lua-language-server',
+                'emmet-ls',
+                'python-lsp-server',
+                'bash-language-server',
+
+                -- Formatters
                 'prettierd',
-                'eslint_d',
                 'stylua',
+                'black',
+                'shfmt',
+
+                -- Linters
+                'eslint_d',
                 'selene',
                 'flake8',
-                -- 'black',
-                -- 'autopep8',
                 'shellcheck',
-                'shfmt',
+                'stylelint',
+                'htmlhint',
             },
         })
     end,
