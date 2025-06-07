@@ -1,5 +1,5 @@
 {
-  "name": "example-snippets",
+  "name": " ¯(°_o)/¯ ",
   "contributes": {
     "snippets": [
       {
@@ -8,12 +8,6 @@
           "typescript"
         ],
         "path": "./javascript.jsonc"
-      },
-      {
-        "language": [
-          "lua"
-        ],
-        "path": "./lua.json"
       }
     ]
   }

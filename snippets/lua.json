@@ -1,6 +1,0 @@
-{
-  "Set keymap": {
-    "prefix": "vks",
-    "body": ["vim.keymap.set('$1', '$2', '$3')"]
-  }
-}
