@@ -30,7 +30,6 @@ map('i', '<C-l>', '<CR>', 'Keymap: Same as enter key')
 
 map('n', '<F1>', ':lua toggleFloatHover()<CR>', 'SPECIAL: Toggle float on hover')
 map('n', '<F2>', ':lua toggleDocumentHighlight()<CR>', 'SPECIAL: Toggle document highlights')
--- map('n', '<F3>', ':lua toggleSignatureHelp()<CR>', 'SPECIAL: Toggle signature help')
 map('n', '<F4>', ':lua toggleTransparency()<CR>', 'SPECIAL: Toggle transparent background')
 map('n', 'ZZ', ':lua saveAndCloseCurrentBuffer()<CR>', 'Save and close current buffer')
 
@@ -93,16 +92,9 @@ map('n', 'y', '"+y', 'Operator: Yank to system clipboard (combine with motion)')
 map('n', 'Y', '"+Y', 'Keymap: Yank whole line to system clipboard')
 map('v', 'y', '"+y', 'Keymap: Yank selected text to system clipboard')
 
-map('n', '<leader>y', '"1y', 'Operator: Yank to register 1 (combine with motion)')
-map('n', '<leader>Y', '"1Y', 'Keymap: Yank whole line to register 1')
-map('v', '<leader>y', '"1y', 'Keymap: Yank selected text to register 1')
-
 -- Paste
 map('n', 'p', '"+P', 'Operator: Paste from system clipboard')
 map('v', 'p', '"_d"+P', 'Keymap: Replace selected text with system clipboard')
-
-map('n', '<leader>p', '"1P', 'Operator: Paste from register 1')
-map('v', '<leader>p', '"_d"1P', 'Keymap: Replace selected text with register 1')
 
 -- Delete
 map('n', 'd', '"_d', 'Operator: Delete without register change (combine with motion)')

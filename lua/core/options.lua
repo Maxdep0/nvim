@@ -38,7 +38,7 @@ o.lazyredraw = true
 o.ttyfast = true
 o.synmaxcol = 250
 o.updatetime = 200
-o.timeoutlen = 500
+o.timeoutlen = 400
 
 o.swapfile = false
 o.backup = false

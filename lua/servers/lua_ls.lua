@@ -7,7 +7,7 @@ return {
                 checkThirdPart = false,
                 library = {
                     '${3rd}/luv/library',
-                    unpack(vim.api.nvim_get_runtime_file('', true)),
+                    -- unpack(vim.api.nvim_get_runtime_file('', true)),
                     -- vim.api.nvim_get_runtime_file('', true),
                 },
                 maxPreload = 2000,

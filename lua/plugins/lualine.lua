@@ -70,30 +70,30 @@ return {
             update_in_insert = false,
         }
 
-        -- local activeLsp = {
-        --     function()
-        --         local msg = 'No Active Lsp'
-        --
-        --         local buf_ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
-        --         local bufnr = vim.api.nvim_get_current_buf()
-        --         local clients = vim.lsp.get_clients({ bufnr = bufnr })
-        --
-        --         if next(clients) == nil then
-        --             return msg
-        --         end
-        --
-        --         for _, client in pairs(clients) do
-        --             local filetypes = client.config.filetypes or {}
-        --             if vim.tbl_contains(filetypes, buf_ft) then
-        --                 return client.name
-        --             end
-        --         end
-        --
-        --         return msg
-        --     end,
-        --     icon = '⚙️ ',
-        --     color = { fg = '#c4c4c4', gui = 'bold' },
-        -- }
+        local activeLsp = {
+            function()
+                local msg = 'No Active Lsp'
+
+                local buf_ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
+                local bufnr = vim.api.nvim_get_current_buf()
+                local clients = vim.lsp.get_clients({ bufnr = bufnr })
+
+                if next(clients) == nil then
+                    return msg
+                end
+
+                for _, client in pairs(clients) do
+                    local filetypes = client.config.filetypes or {}
+                    if vim.tbl_contains(filetypes, buf_ft) then
+                        return client.name
+                    end
+                end
+
+                return msg
+            end,
+            icon = '⚙️ ',
+            color = { fg = '#c4c4c4', gui = 'bold' },
+        }
 
         local diff = {
             'diff',
@@ -213,8 +213,8 @@ return {
                 lualine_a = { mode },
                 lualine_b = { branch, diff },
                 lualine_c = { sep, buffers },
-                -- lualine_x = { activeLsp, virtual_env },
-                lualine_x = { '' },
+                lualine_x = { activeLsp, virtual_env },
+                -- lualine_x = { '' },
                 lualine_y = { diagnostics }, --, fileformat },
                 lualine_z = { location },
             },
