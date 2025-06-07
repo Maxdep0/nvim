@@ -1,7 +1,4 @@
 -- https://luals.github.io/wiki/
-
-local unpack = table.unpack or unpack
-
 return {
     settings = {
         Lua = {
