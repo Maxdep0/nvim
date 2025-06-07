@@ -67,8 +67,12 @@ map({ 'n', 'v' }, '<leader>h', '0', 'Keymap: Jump to the start of the line')
 map('n', 'gd', vim.lsp.buf.definition, 'LSP: Goto definition')
 map('n', 'gI', vim.lsp.buf.implementation, 'LSP: Goto implementation')
 map('n', 'K', vim.lsp.buf.hover, 'LSP: Hover Documentation')
-map('n', '[d', vim.diagnostic.goto_prev, 'Diagnostic: Go to previous diagnostic')
-map('n', ']d', vim.diagnostic.goto_prev, 'Diagnostic: Go to next diagnostic')
+map('n', '[d', function()
+    vim.diagnostic.jump({ count = 1, float = true })
+end, 'Diagnostic: Go to previous diagnostic')
+map('n', ']d', function()
+    vim.diagnostic.jump({ count = -1, float = true })
+end, 'Diagnostic: Go to next diagnostic')
 
 --------------------------------------------------------
 --                     Navigation                     --
