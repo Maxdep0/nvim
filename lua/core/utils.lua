@@ -81,7 +81,7 @@ function M.toggleSignatureHelp(bufnr)
             buffer = bufnr,
             desc = 'Show Signature Help in Insert Mode',
             callback = function()
-                vim.lsp.buf.signature_help()
+                vim.lsp.buf.signature_help({ border = 'single' })
             end,
         })
         vim.api.nvim_set_var('signatureHelpAutoCmdId', autocmd_id)
