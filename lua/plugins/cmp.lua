@@ -1,6 +1,5 @@
 return {
     'saghen/blink.cmp',
-    -- dependencies = { 'rafamadriz/friendly-snippets' },
     dependencies = {
         {
             'folke/lazydev.nvim',
@@ -11,15 +10,70 @@ return {
     version = '1.*',
     event = { 'InsertEnter', 'CmdLineEnter' },
     opts = {
-        keymap = { preset = 'default' },
+        keymap = {
+            preset = 'none',
+
+            ['<C-k>'] = { 'select_prev' },
+            ['<C-j>'] = { 'select_next' },
+
+            ['<C-u>'] = { 'scroll_documentation_up' },
+            ['<C-d>'] = { 'scroll_documentation_down' },
+
+            ['<C-e>'] = { 'hide' },
+
+            ['<Tab>'] = { 'snippet_forward', 'fallback' },
+            ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+
+            ['<C-l>'] = { 'accept', 'fallback' },
+
+            ['<F3>'] = { 'show_signature', 'hide_signature' },
+        },
+
+        cmdline = {
+            enable = true,
+            keymap = { preset = 'inherit' },
+
+            completion = {
+                menu = {
+                    auto_show = true,
+                },
+            },
+        },
 
         appearance = {
             nerd_font_variant = 'mono',
         },
 
         completion = {
-            documentation = { auto_show = true, auto_show_delay_ms = 500 },
-            ghost_text = { enabled = true },
+            menu = {
+                draw = {
+                    padding = { 1, 1 },
+                },
+            },
+
+            list = {
+                selection = {
+                    preselect = false,
+                    auto_insert = true,
+                },
+            },
+
+            documentation = {
+                auto_show = true,
+                auto_show_delay_ms = 500,
+
+                window = {
+                    border = 'single',
+                },
+            },
+
+            ghost_text = { enabled = false },
+
+            window = {
+                completion = {
+                    side_padding = 0,
+                },
+            },
         },
 
         sources = {
@@ -31,6 +85,20 @@ return {
                     module = 'lazydev.integrations.blink',
                     score_offset = 100,
                 },
+            },
+        },
+
+        signature = {
+            enabled = true,
+            triggers = {
+                enabled = true,
+            },
+            window = {
+                min_width = 1,
+                max_width = 100,
+                max_hgeight = 15,
+                border = 'single',
+                winblend = 100,
             },
         },
 
