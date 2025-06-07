@@ -1,368 +1,40 @@
--- return {
---     'hrsh7th/nvim-cmp',
---     dependencies = {
---         {
---             'L3MON4D3/LuaSnip',
---             dependencies = {
---                 'saadparwaiz1/cmp_luasnip',
---                 -- 'rafamadriz/friendly-snippets',
---             },
---         },
---         'hrsh7th/cmp-nvim-lsp',
---         'hrsh7th/cmp-cmdline',
---         'hrsh7th/cmp-buffer',
---         'hrsh7th/cmp-path',
---         'hrsh7th/cmp-nvim-lua',
---         'onsails/lspkind.nvim',
---     },
---     event = { 'InsertEnter', 'CmdlineEnter' },
---
---     config = function()
---         local cmp = require('cmp')
---         local luasnip = require('luasnip')
---         local lspkind = require('lspkind')
---
---         require('luasnip.loaders.from_vscode').lazy_load()
---         require('luasnip.loaders.from_vscode').load({ paths = './snippets' })
---
---         cmp.setup({
---             completion = { completeopt = 'menu,menuone,noinsert' },
---             formatting = {
---                 fields = { 'kind', 'abbr', 'menu' },
---                 format = function(entry, vim_item)
---                     local kind = lspkind.cmp_format({
---                         mode = 'symbol_text',
---                         maxwidth = 100,
---                         show_labelDetails = true,
---                         ellipsis_char = '...',
---                     })(entry, vim_item)
---                     local strings = vim.split(kind.kind, '%s', { trimempty = true })
---                     kind.kind = ' ' .. (strings[1] or '') .. ' '
---                     kind.menu = '    (' .. (strings[2] or '') .. ')'
---
---                     return kind
---                 end,
---             },
---
---             mapping = cmp.mapping.preset.insert({
---                 ['<C-p>'] = cmp.mapping.select_prev_item(),
---                 ['<C-k>'] = cmp.mapping.select_prev_item(),
---                 ['<C-n>'] = cmp.mapping.select_next_item(),
---                 ['<C-j>'] = cmp.mapping.select_next_item(),
---
---                 ['<C-u>'] = cmp.mapping.scroll_docs(-4),
---                 -- ['<C-l>'] = cmp.mapping.scroll_docs(-4),
---                 ['<C-d>'] = cmp.mapping.scroll_docs(4),
---                 -- ['<C-h>'] = cmp.mapping.scroll_docs(4),
---
---                 ['<C-e>'] = cmp.mapping.abort(),
---
---                 -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
---
---                 ['<CR>'] = cmp.mapping({
---                     i = function(fallback)
---                         if cmp.visible() and cmp.get_active_entry() then
---                             cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
---                         else
---                             fallback()
---                         end
---                     end,
---                     s = cmp.mapping.confirm({ select = true }),
---                     -- c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
---                 }),
---
---                 ['<C-l>'] = cmp.mapping({
---                     i = function(fallback)
---                         if cmp.visible() and cmp.get_active_entry() then
---                             cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
---                         else
---                             fallback()
---                         end
---                     end,
---                     s = cmp.mapping.confirm({ select = true }),
---                 }),
---
---                 ['<C-Space>'] = cmp.mapping.complete(),
---
---                 ['<Tab>'] = cmp.mapping(function(fallback)
---                     if luasnip.locally_jumpable(1) then
---                         luasnip.jump(1)
---                     elseif cmp.visible() then
---                         cmp.confirm({ select = true })
---                     else
---                         fallback()
---                     end
---                 end, { 'i', 's' }),
---
---                 ['<S-Tab>'] = cmp.mapping(function(fallback)
---                     if luasnip.locally_jumpable(-1) then
---                         luasnip.jump(-1)
---                     else
---                         fallback()
---                     end
---                 end, { 'i', 's' }),
---             }),
---
---             snippet = {
---                 expand = function(args)
---                     luasnip.lsp_expand(args.body)
---                 end,
---             },
---
---             sources = {
---                 { name = 'nvim_lsp', max_item_count = 20 },
---                 { name = 'nvim_lua', keyword_length = 2, max_item_count = 10 },
---                 { name = 'luasnip', keyword_length = 2, max_item_count = 8 },
---                 { name = 'buffer', keyword_length = 2, max_item_count = 5 },
---                 { name = 'path', max_item_count = 4 },
---             },
---
---             window = {
---                 completion = cmp.config.window.bordered(),
---                 documentation = cmp.config.window.bordered(),
---             },
---
---             view = { entries = 'custom' },
---
---             experimental = { ghost_text = false },
---
---             sorting = {
---                 priority_weight = 2,
---                 comparators = {
---                     cmp.config.compare.offset,
---                     cmp.config.compare.exact,
---                     cmp.config.compare.score,
---                     cmp.config.compare.recently_used,
---                     cmp.config.compare.locality,
---                     cmp.config.compare.kind,
---                     cmp.config.compare.sort_text,
---                     cmp.config.compare.length,
---                     cmp.config.compare.order,
---                 },
---             },
---         })
---
---         cmp.setup.cmdline({ '/' }, {
---             mapping = cmp.mapping.preset.cmdline(),
---             sources = {
---                 { name = 'buffer', max_item_count = 5 },
---             },
---         })
---
---         cmp.setup.cmdline(':', {
---             mapping = cmp.mapping.preset.cmdline(),
---             sources = cmp.config.sources({
---                 { name = 'path', max_item_count = 3 },
---             }, {
---                 { name = 'cmdline', max_item_count = 6 },
---             }),
---         })
---     end,
--- }
-
 return {
     'saghen/blink.cmp',
     -- dependencies = { 'rafamadriz/friendly-snippets' },
-
+    dependencies = {
+        {
+            'folke/lazydev.nvim',
+            ft = 'lua',
+            opts = { library = { { path = '${3rd}/luv/library', words = { 'vim%.uv' } } } },
+        },
+    },
     version = '1.*',
-
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
+    event = { 'InsertEnter', 'CmdLineEnter' },
     opts = {
-        -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
-        -- 'super-tab' for mappings similar to vscode (tab to accept)
-        -- 'enter' for enter to accept
-        -- 'none' for no mappings
-        --
-        -- All presets have the following mappings:
-        -- C-space: Open menu or open docs if already open
-        -- C-n/C-p or Up/Down: Select next/previous item
-        -- C-e: Hide menu
-        -- C-k: Toggle signature help (if signature.enabled = true)
-        --
-        -- See :h blink-cmp-config-keymap for defining your own keymap
         keymap = { preset = 'default' },
 
         appearance = {
             nerd_font_variant = 'mono',
         },
 
-        -- (Default) Only show the documentation popup when manually triggered
-        completion = { documentation = { auto_show = false } },
-
-        -- Default list of enabled providers defined so that you can extend it
-        -- elsewhere in your config, without redefining it, due to `opts_extend`
-        sources = {
-            default = { 'lsp', 'path', 'snippets', 'buffer' },
+        completion = {
+            documentation = { auto_show = true, auto_show_delay_ms = 500 },
+            ghost_text = { enabled = true },
         },
 
-        -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
-        -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
-        -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
-        --
-        -- See the fuzzy documentation for more information
+        sources = {
+            default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+
+            providers = {
+                lazydev = {
+                    name = 'LazyDev',
+                    module = 'lazydev.integrations.blink',
+                    score_offset = 100,
+                },
+            },
+        },
+
         fuzzy = { implementation = 'prefer_rust_with_warning' },
     },
     opts_extend = { 'sources.default' },
 }
--- return {
---     'hrsh7th/nvim-cmp',
---     dependencies = {
---         {
---             'L3MON4D3/LuaSnip',
---             dependencies = {
---                 'saadparwaiz1/cmp_luasnip',
---                 -- 'rafamadriz/friendly-snippets',
---             },
---         },
---         'hrsh7th/cmp-nvim-lsp',
---         'hrsh7th/cmp-cmdline',
---         'hrsh7th/cmp-buffer',
---         'hrsh7th/cmp-path',
---         'hrsh7th/cmp-nvim-lua',
---         'onsails/lspkind.nvim',
---     },
---     event = { 'InsertEnter', 'CmdlineEnter' },
---
---     config = function()
---         local cmp = require('cmp')
---         local luasnip = require('luasnip')
---         local lspkind = require('lspkind')
---
---         require('luasnip.loaders.from_vscode').lazy_load()
---         require('luasnip.loaders.from_vscode').load({ paths = './snippets' })
---
---         cmp.setup({
---             completion = { completeopt = 'menu,menuone,noinsert' },
---             formatting = {
---                 fields = { 'kind', 'abbr', 'menu' },
---                 format = function(entry, vim_item)
---                     local kind = lspkind.cmp_format({
---                         mode = 'symbol_text',
---                         maxwidth = 100,
---                         show_labelDetails = true,
---                         ellipsis_char = '...',
---                     })(entry, vim_item)
---                     local strings = vim.split(kind.kind, '%s', { trimempty = true })
---                     kind.kind = ' ' .. (strings[1] or '') .. ' '
---                     kind.menu = '    (' .. (strings[2] or '') .. ')'
---
---                     return kind
---                 end,
---             },
---
---             mapping = cmp.mapping.preset.insert({
---                 ['<C-p>'] = cmp.mapping.select_prev_item(),
---                 ['<C-k>'] = cmp.mapping.select_prev_item(),
---                 ['<C-n>'] = cmp.mapping.select_next_item(),
---                 ['<C-j>'] = cmp.mapping.select_next_item(),
---
---                 ['<C-u>'] = cmp.mapping.scroll_docs(-4),
---                 -- ['<C-l>'] = cmp.mapping.scroll_docs(-4),
---                 ['<C-d>'] = cmp.mapping.scroll_docs(4),
---                 -- ['<C-h>'] = cmp.mapping.scroll_docs(4),
---
---                 ['<C-e>'] = cmp.mapping.abort(),
---
---                 -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
---
---                 ['<CR>'] = cmp.mapping({
---                     i = function(fallback)
---                         if cmp.visible() and cmp.get_active_entry() then
---                             cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
---                         else
---                             fallback()
---                         end
---                     end,
---                     s = cmp.mapping.confirm({ select = true }),
---                     -- c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
---                 }),
---
---                 ['<C-l>'] = cmp.mapping({
---                     i = function(fallback)
---                         if cmp.visible() and cmp.get_active_entry() then
---                             cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
---                         else
---                             fallback()
---                         end
---                     end,
---                     s = cmp.mapping.confirm({ select = true }),
---                 }),
---
---                 ['<C-Space>'] = cmp.mapping.complete(),
---
---                 ['<Tab>'] = cmp.mapping(function(fallback)
---                     if luasnip.locally_jumpable(1) then
---                         luasnip.jump(1)
---                     elseif cmp.visible() then
---                         cmp.confirm({ select = true })
---                     else
---                         fallback()
---                     end
---                 end, { 'i', 's' }),
---
---                 ['<S-Tab>'] = cmp.mapping(function(fallback)
---                     if luasnip.locally_jumpable(-1) then
---                         luasnip.jump(-1)
---                     else
---                         fallback()
---                     end
---                 end, { 'i', 's' }),
---             }),
---
---             snippet = {
---                 expand = function(args)
---                     luasnip.lsp_expand(args.body)
---                 end,
---             },
---
---             sources = {
---                 { name = 'nvim_lsp', max_item_count = 20 },
---                 { name = 'nvim_lua', keyword_length = 2, max_item_count = 10 },
---                 { name = 'luasnip', keyword_length = 2, max_item_count = 8 },
---                 { name = 'buffer', keyword_length = 2, max_item_count = 5 },
---                 { name = 'path', max_item_count = 4 },
---             },
---
---             window = {
---                 completion = cmp.config.window.bordered(),
---                 documentation = cmp.config.window.bordered(),
---             },
---
---             view = { entries = 'custom' },
---
---             experimental = { ghost_text = false },
---
---             sorting = {
---                 priority_weight = 2,
---                 comparators = {
---                     cmp.config.compare.offset,
---                     cmp.config.compare.exact,
---                     cmp.config.compare.score,
---                     cmp.config.compare.recently_used,
---                     cmp.config.compare.locality,
---                     cmp.config.compare.kind,
---                     cmp.config.compare.sort_text,
---                     cmp.config.compare.length,
---                     cmp.config.compare.order,
---                 },
---             },
---         })
---
---         cmp.setup.cmdline({ '/' }, {
---             mapping = cmp.mapping.preset.cmdline(),
---             sources = {
---                 { name = 'buffer', max_item_count = 5 },
---             },
---         })
---
---         cmp.setup.cmdline(':', {
---             mapping = cmp.mapping.preset.cmdline(),
---             sources = cmp.config.sources({
---                 { name = 'path', max_item_count = 3 },
---             }, {
---                 { name = 'cmdline', max_item_count = 6 },
---             }),
---         })
---     end,
--- }
