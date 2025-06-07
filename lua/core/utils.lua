@@ -69,26 +69,6 @@ function toggleDocumentHighlight()
     end
 end
 
-function M.toggleSignatureHelp(bufnr)
-    if vim.g.signature_help_active then
-        M.notify('Disabled Signature Help', 'LSP')
-        local autocmd_id = vim.api.nvim_get_var('signatureHelpAutoCmdId')
-        vim.api.nvim_del_autocmd(autocmd_id)
-        vim.g.signature_help_active = false
-    else
-        M.notify('Enabled Signature Help', 'LSP')
-        local autocmd_id = vim.api.nvim_create_autocmd('CursorHoldI', {
-            buffer = bufnr,
-            desc = 'Show Signature Help in Insert Mode',
-            callback = function()
-                vim.lsp.buf.signature_help({ border = 'single' })
-            end,
-        })
-        vim.api.nvim_set_var('signatureHelpAutoCmdId', autocmd_id)
-        vim.g.signature_help_active = true
-    end
-end
-
 function toggleFloatHover()
     local ok, floatHover = pcall(vim.api.nvim_get_var, 'isFloatHover')
 
