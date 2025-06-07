@@ -16,6 +16,11 @@ return {
             typescriptreact = { 'eslint_d' },
             python = { 'flake8' },
             bash = { 'shellcheck' },
+            css = { 'stylelint' },
+            sass = { 'stylelint' },
+            scss = { 'stylelint' },
+            less = { 'stylelint' },
+            html = { 'htmlhint' },
         }
 
         local function getSeleneConfig()

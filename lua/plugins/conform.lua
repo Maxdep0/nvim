@@ -8,6 +8,7 @@ return {
         conform.setup({
             formatters_by_ft = {
                 lua = { 'stylua' },
+
                 javascript = { 'prettierd' },
                 typescript = { 'prettierd' },
                 javascriptreact = { 'prettierd' },
@@ -17,8 +18,12 @@ return {
                 html = { 'prettierd' },
                 css = { 'prettierd' },
                 scss = { 'prettierd' },
-                python = { 'flake9' }, -- autopep8  black pyling flake8
+
+                python = { 'black' },
+
                 bash = { 'shfmt' },
+                mksh = { 'shfmt' },
+                shell = { 'shfmt' },
             },
 
             format_on_save = {
