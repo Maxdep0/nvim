@@ -28,8 +28,12 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
     end,
 })
 
+local linux_env_user = os.getenv('USER')
+
 vim.api.nvim_create_autocmd('VimLeave', {
     callback = function()
-        vim.fn.system('bash ~/.config/nvim/scripts/clean_processes.sh')
+        if linux_env_user == 'maxdep' then
+            vim.fn.system('bash ~/.config/nvim/scripts/clean_processes.sh')
+        end
     end,
 })
