@@ -30,7 +30,6 @@ return {
         },
 
         cmdline = {
-            enable = true,
             keymap = { preset = 'inherit' },
 
             completion = {
@@ -68,12 +67,6 @@ return {
             },
 
             ghost_text = { enabled = false },
-
-            window = {
-                completion = {
-                    side_padding = 0,
-                },
-            },
         },
 
         sources = {
@@ -90,13 +83,10 @@ return {
 
         signature = {
             enabled = true,
-            triggers = {
-                enabled = true,
-            },
             window = {
                 min_width = 1,
                 max_width = 100,
-                max_hgeight = 15,
+                max_height = 10,
                 border = 'single',
                 winblend = 100,
             },
