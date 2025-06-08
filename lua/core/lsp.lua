@@ -14,7 +14,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
 
 vim.diagnostic.config({
-    update_in_intesrt = false,
+    update_in_insert = false,
     severity_sort = true,
     virtual_text = {
         prefix = '',
