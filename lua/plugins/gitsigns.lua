@@ -18,7 +18,6 @@ return {
             attach_to_untracked = true,
             current_line_blame = true,
             max_file_length = 20000,
-
         })
     end,
 }
