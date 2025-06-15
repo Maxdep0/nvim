@@ -15,8 +15,8 @@ return {
                     unpack(vim.api.nvim_get_runtime_file('', true)),
                     -- vim.api.nvim_get_runtime_file('', true),
                 },
-                maxPreload = 2000,
-                preloadFileSize = 500,
+                maxPreload = 1000,
+                preloadFileSize = 200,
             },
 
             hint = { enable = true },

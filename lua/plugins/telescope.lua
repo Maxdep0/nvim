@@ -51,6 +51,9 @@ return {
 
         require('telescope').setup({
             defaults = {
+
+                file_ignore_patters = { '.git', 'node_modules', 'dist', 'build', 'target', '__pucache', 'venv' },
+
                 mappings = {
                     i = {
                         ['<esc>'] = actions.close,
@@ -60,6 +63,7 @@ return {
                         ['<C-l>'] = actions.select_default,
                         ['<C-_>'] = actions.which_key,
                         ['<C-p>'] = action_layout.toggle_preview,
+                        ['<A-p>'] = action_layout.toggle_preview,
                     },
                 },
             },
@@ -70,8 +74,8 @@ return {
                 live_grep = { previewer = false, theme = 'dropdown' },
                 diagnostics = { previewer = false, theme = 'dropdown' },
                 lsp_references = { previewer = false, theme = 'dropdown' },
-                help_tags = { previewer = false, theme = 'dropdown' },
-                keymaps = { previewer = false, theme = 'dropdown' },
+                help_tags = { previewer = true, theme = 'ivy', layout_config = { height = 0.6 } },
+                keymaps = { previewer = false, theme = 'dropdown', layout_config = { height = 0.7, width = 0.6 } },
             },
 
             extensions = { fzf = {} },
@@ -116,7 +120,7 @@ return {
                 :find()
         end
 
-        local map = function(keys, func, desc) vim.keymap.set('n', keys, func, { desc = 'Search: ' .. desc }) end
+        local map = function(keys, func, desc) vim.keymap.set('n', keys, func, { desc = desc }) end
 
         map('<leader><space>', builtin.find_files, 'Search files')
         map('<leader>sw', builtin.grep_string, 'Search word under the cursor')
