@@ -1,14 +1,13 @@
 return {
+
     'saghen/blink.cmp',
-    dependencies = {
-        {
-            'folke/lazydev.nvim',
-            ft = 'lua',
-            opts = { library = { { path = '${3rd}/luv/library', words = { 'vim%.uv' } } } },
-        },
-    },
     version = '1.*',
     event = { 'InsertEnter', 'CmdLineEnter' },
+    dependencies = {
+        'folke/lazydev.nvim',
+        ft = 'lua',
+        opts = { library = { { path = '${3rd}/luv/library', words = { 'vim%.uv' } } } },
+    },
     opts = {
         keymap = {
             preset = 'none',
@@ -29,13 +28,14 @@ return {
             ['<F3>'] = { 'show_signature', 'hide_signature' },
         },
 
+        term = { enabled = true },
+
         cmdline = {
             keymap = { preset = 'inherit' },
 
             completion = {
-                menu = {
-                    auto_show = true,
-                },
+                menu = { auto_show = true },
+                list = { selection = { preselect = false } },
             },
         },
 
@@ -52,7 +52,7 @@ return {
 
             list = {
                 selection = {
-                    preselect = false,
+                    preselect = true,
                     auto_insert = true,
                 },
             },
@@ -70,7 +70,7 @@ return {
         },
 
         sources = {
-            default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+            default = { 'lazydev', 'lsp', 'buffer', 'snippets', 'path', 'omni', 'cmdline' },
 
             providers = {
                 lazydev = {
