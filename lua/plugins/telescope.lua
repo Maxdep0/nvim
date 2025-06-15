@@ -1,13 +1,8 @@
 local cmds = {
     {
-        name = 'Preview Hunk I',
-        fn = function() vim.cmd('Gitsigns preview_hunk_inline') end,
-        info = 'Show preview hunks inline',
-    },
-    {
-        name = 'Preview Hunk P',
-        fn = function() vim.cmd('Gitsigns preview_hunk') end,
-        info = 'Show preview hunks in popup',
+        name = 'Stage Buffer',
+        fn = function() vim.cmd('Gitsigns stage_buffer') end,
+        info = 'Stage current buffer',
     },
     {
         name = 'Stage Hunk',
@@ -20,9 +15,14 @@ local cmds = {
         info = 'Unstage current hunk',
     },
     {
-        name = 'Stage Buffer',
-        fn = function() vim.cmd('Gitsigns stage_buffer') end,
-        info = 'Stage current buffer',
+        name = 'Preview Hunk I',
+        fn = function() vim.cmd('Gitsigns preview_hunk_inline') end,
+        info = 'Show preview hunks inline',
+    },
+    {
+        name = 'Preview Hunk P',
+        fn = function() vim.cmd('Gitsigns preview_hunk') end,
+        info = 'Show preview hunks in popup',
     },
 }
 
@@ -54,11 +54,12 @@ return {
                 mappings = {
                     i = {
                         ['<esc>'] = actions.close,
+                        ['<C-h>'] = actions.close,
                         ['<C-j>'] = actions.move_selection_next,
                         ['<C-k>'] = actions.move_selection_previous,
                         ['<C-l>'] = actions.select_default,
                         ['<C-_>'] = actions.which_key,
-                        ['<M-p>'] = action_layout.toggle_preview,
+                        ['<C-p>'] = action_layout.toggle_preview,
                     },
                 },
             },
@@ -91,13 +92,14 @@ return {
             pickers
                 .new(require('telescope.themes').get_dropdown({}), {
                     prompt_title = 'Custom Actions',
+                    sorter = require('telescope.sorters').get_generic_fuzzy_sorter(),
                     finder = finders.new_table({
                         results = cmds,
                         entry_maker = function(entry)
                             return {
                                 value = entry,
                                 display = function() return entry_display({ entry.name, entry.info or '' }) end,
-                                ordinal = entry.name .. (entry.info or ''),
+                                ordinal = entry.name .. ' ' .. (entry.info or ''),
                             }
                         end,
                     }),
@@ -106,8 +108,8 @@ return {
                             actions.close(prompt_bufnr)
                             actions_state.get_selected_entry().value.fn()
                         end
-                        map1('i', '<CR>', select)
-                        map1('n', '<CR>', select)
+                        map1({ 'n', 'i' }, '<CR>', select)
+                        map1({ 'n', 'i' }, '<C-l>', select)
                         return true
                     end,
                 })
@@ -123,7 +125,7 @@ return {
         map('<leader>sr', builtin.lsp_references, 'Search LSP references')
         map('<leader>sh', builtin.help_tags, 'Search help')
         map('<leader>sk', builtin.keymaps, 'Search keymaps')
-        map('<leader>s', custom_menu, 'Search commands')
+        map('<leader>sc', custom_menu, 'Search commands')
 
         map('<leader>sn', function() builtin.find_files({ cwd = vim.fn.stdpath('config') }) end, 'Search nvim dir')
 
