@@ -40,7 +40,7 @@ return {
             pattern = '*prettier*',
             callback = function()
                 vim.fn.system('prettierd restart')
-                print('prettierd restarted due to config change')
+                notify('Prettierd restarted due to config change')
             end,
         })
     end,

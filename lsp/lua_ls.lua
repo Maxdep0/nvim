@@ -30,7 +30,7 @@ return {
 
             diagnostics = {
                 enable = true,
-                disable = { 'missing-fields' },
+                disable = { 'missing-fields', 'lowercase-global' },
                 globals = { 'vim' },
                 deprecated = true,
             },

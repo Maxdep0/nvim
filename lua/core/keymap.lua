@@ -28,10 +28,10 @@ map('i', '<C-l>', '<CR>', 'Keymap: Same as enter key')
 --                     Special Keymaps               --
 --------------------------------------------------------
 
-map('n', '<F1>', ':lua toggleFloatHover()<CR>', 'SPECIAL: Toggle float on hover')
-map('n', '<F2>', ':lua toggleDocumentHighlight()<CR>', 'SPECIAL: Toggle document highlights')
-map('n', '<F4>', ':lua toggleTransparency()<CR>', 'SPECIAL: Toggle transparent background')
-map('n', 'ZZ', ':lua saveAndCloseCurrentBuffer()<CR>', 'Save and close current buffer') --   :w | bd
+map('n', '<F1>', ':lua toggle_float_hover()<CR>', 'SPECIAL: Toggle float on hover')
+map('n', '<F2>', ':lua toggle_document_highlight()<CR>', 'SPECIAL: Toggle document highlights')
+map('n', '<F4>', ':lua toggle_transparency()<CR>', 'SPECIAL: Toggle transparent background')
+map('n', 'ZZ', ':lua save_and_close_current_buffer()<CR>', 'Save and close current buffer') --   :w | bd
 
 --------------------------------------------------------
 --                     Editing                        --
