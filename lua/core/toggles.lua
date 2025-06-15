@@ -1,3 +1,5 @@
+local M = {}
+
 -- Toggle wezterm tab bar to get full transparent mode. Works only on specific linux_env_user name.
 local function toggle_wezterm_tab_bar(value)
     if os.getenv('USER') == 'maxdep' then
@@ -9,11 +11,11 @@ local function toggle_wezterm_tab_bar(value)
     end
 end
 
-function toggle_transparency()
+function M.toggle_transparency()
     local ok, transparent = pcall(vim.api.nvim_get_var, 'isTransparent')
 
     if not ok or not transparent then
-        notify('Enabled Transparent Background', 'UI')
+        M.notify('Enabled Transparent Background')
 
         toggle_wezterm_tab_bar('false')
 
@@ -24,7 +26,7 @@ function toggle_transparency()
         vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#000000', bg = 'none' })
         vim.api.nvim_set_var('isTransparent', true)
     elseif transparent then
-        notify('Disabled Transparent Background', 'UI')
+        M.notify('Disabled Transparent Background')
 
         toggle_wezterm_tab_bar('true')
 
@@ -34,15 +36,15 @@ function toggle_transparency()
     end
 end
 
-function toggle_document_highlight()
+function M.toggle_document_highlight()
     if vim.g.document_highlight_active then
-        notify('Disabled Document Highlight', 'LSP')
+        M.notify('Disabled Document Highlight')
 
         vim.api.nvim_clear_autocmds({ group = 'lsp_document_highlight' })
         vim.lsp.buf.clear_references()
         vim.g.document_highlight_active = false
     else
-        notify('Enabled Document Highlight', 'LSP')
+        M.notify('Enabled Document Highlight')
 
         vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
         vim.api.nvim_create_autocmd('CursorHold', {
@@ -59,11 +61,11 @@ function toggle_document_highlight()
     end
 end
 
-function toggle_float_hover()
+function M.toggle_float_hover()
     local ok, active = pcall(vim.api.nvim_get_var, 'isFloatHoverActive')
 
     if not ok or not active then
-        notify('Enabled Diagnostics Float on Hover', 'LSP')
+        M.notify('Enabled Diagnostics Float on Hover')
 
         local id = vim.api.nvim_create_autocmd('CursorHold', {
             desc = 'Enable float on hover',
@@ -73,18 +75,18 @@ function toggle_float_hover()
         vim.api.nvim_set_var('floatHoverAutoCmdId', id)
         vim.api.nvim_set_var('isFloatHoverActive', true)
     elseif active then
-        notify('Disabled Diagnostics Float on Hover', 'LSP')
+        M.notify('Disabled Diagnostics Float on Hover')
 
         vim.api.nvim_del_autocmd(vim.api.nvim_get_var('floatHoverAutoCmdId'))
         vim.api.nvim_set_var('isFloatHoverActive', false)
     end
 end
 
-function notify(msg, hl)
+function M.notify(msg, hl)
     local buf = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, { msg })
 
-    local width = #msg + 4
+    local width = #msg
     local height = 1
     local col = vim.o.columns - width - 2
     local opts = {
@@ -101,3 +103,41 @@ function notify(msg, hl)
 
     vim.defer_fn(function() pcall(vim.api.nvim_win_close, win, true) end, 2000)
 end
+
+local state = {
+    terminal = { buf = -1, win = -1 },
+}
+
+function M.toggle_terminal()
+    local function create_floating_window()
+        local width = math.floor(vim.o.columns * 0.5)
+        local height = math.floor(vim.o.lines * 0.5)
+
+        local buf = vim.api.nvim_create_buf(false, true)
+
+        local win_config = {
+            relative = 'editor',
+            width = width,
+            height = height,
+            row = math.floor((vim.o.lines - height) / 2),
+            col = math.floor((vim.o.columns - width) / 2),
+            style = 'minimal',
+            border = 'rounded',
+        }
+
+        local win = vim.api.nvim_open_win(buf, true, win_config)
+
+        return { buf = buf, win = win }
+    end
+
+    if not vim.api.nvim_win_is_valid(state.terminal.win) then
+        state.terminal = create_floating_window()
+        if vim.bo[state.terminal.buf].buftype ~= 'terminal' then vim.cmd.terminal() end
+
+        vim.cmd('normal i')
+    else
+        vim.api.nvim_buf_delete(state.terminal.buf, { force = true })
+    end
+end
+
+return M

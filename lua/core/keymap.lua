@@ -1,4 +1,6 @@
 -- stylua: ignore start
+local toggles = require('core.toggles')
+
 local map = function(mode, lhs, rhs, desc, opts)
     opts = vim.tbl_extend('force', { noremap = true, silent = true, desc = desc }, opts or {})
     vim.keymap.set(mode, lhs, rhs, opts)
@@ -31,9 +33,9 @@ map('i', '<C-l>', '<CR>', 'Same as enter key')
 --                     Special Keymaps               --
 --------------------------------------------------------
 
-map('n', '<F1>', ':lua toggle_float_hover()<CR>', 'Toggle float on hover')
-map('n', '<F2>', ':lua toggle_document_highlight()<CR>', 'Toggle document highlights')
-map('n', '<F4>', ':lua toggle_transparency()<CR>', 'Toggle transparent background')
+map('n', '<F1>', toggles.toggle_float_hover, 'Toggle float on hover')
+map('n', '<F2>', toggles.toggle_document_highlight, 'Toggle document highlights')
+map('n', '<F4>', toggles.toggle_transparency, 'Toggle transparent background')
 
 --------------------------------------------------------
 --                     Editing                        --

@@ -48,8 +48,10 @@ return {
         vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
             group = vim.api.nvim_create_augroup('RestartEslint', { clear = true }),
             pattern = '*eslint*',
-            callback = function() vim.fn.system('eslint_d restart') end,
-            notify('eslint_d restarted due to config change'),
+            callback = function()
+                vim.fn.system('eslint_d restart')
+                require('core.toggles').notify('eslint_d restarted due to config change')
+            end,
         })
 
         vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
