@@ -36,6 +36,8 @@ map('i', '<C-l>', '<CR>', 'Same as enter key')
 map('n', '<F1>', toggles.toggle_float_hover, 'Toggle float on hover')
 map('n', '<F2>', toggles.toggle_document_highlight, 'Toggle document highlights')
 map('n', '<F4>', toggles.toggle_transparency, 'Toggle transparent background')
+map({ 'n', 't' }, '<A-CR>', toggles.toggle_terminal, 'Open floating terminal')
+
 
 --------------------------------------------------------
 --                     Editing                        --
