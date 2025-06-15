@@ -1,4 +1,3 @@
--- stylua: ignore
 local cmds = {
     {
         name = 'Preview Hunk I',
@@ -38,9 +37,7 @@ return {
 
             build = 'make',
 
-            cond = function()
-                return vim.fn.executable('make') == 1
-            end,
+            cond = function() return vim.fn.executable('make') == 1 end,
         },
     },
 
@@ -83,11 +80,7 @@ return {
 
         local fzf_ok = pcall(require('telescope').load_extension, 'fzf')
 
-        if not fzf_ok then
-            print('Failed to load telescope-fzf-native.nvim')
-        end
-
-        -- INFO: CUSTOMS
+        if not fzf_ok then print('Failed to load telescope-fzf-native.nvim') end
 
         local entry_display = require('telescope.pickers.entry_display').create({
             separator = ' │ ',
@@ -103,9 +96,7 @@ return {
                         entry_maker = function(entry)
                             return {
                                 value = entry,
-                                display = function()
-                                    return entry_display({ entry.name, entry.info or '' })
-                                end,
+                                display = function() return entry_display({ entry.name, entry.info or '' }) end,
                                 ordinal = entry.name .. (entry.info or ''),
                             }
                         end,
@@ -123,11 +114,7 @@ return {
                 :find()
         end
 
-        -- INFO: Keymaps
-
-        local map = function(keys, func, desc)
-            vim.keymap.set('n', keys, func, { desc = 'Search: ' .. desc })
-        end
+        local map = function(keys, func, desc) vim.keymap.set('n', keys, func, { desc = 'Search: ' .. desc }) end
 
         map('<leader><space>', builtin.find_files, 'Search files')
         map('<leader>sw', builtin.grep_string, 'Search word under the cursor')
@@ -138,9 +125,7 @@ return {
         map('<leader>sk', builtin.keymaps, 'Search keymaps')
         map('<leader>s', custom_menu, 'Search commands')
 
-        map('<leader>sn', function()
-            builtin.find_files({ cwd = vim.fn.stdpath('config') })
-        end, 'Search nvim dir')
+        map('<leader>sn', function() builtin.find_files({ cwd = vim.fn.stdpath('config') }) end, 'Search nvim dir')
 
         map('<leader>sp', function()
             local project_root = vim.fs.dirname(vim.fs.find('.git', { upward = true })[1]) or vim.fn.getcwd()

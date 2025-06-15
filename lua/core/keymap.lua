@@ -31,7 +31,7 @@ map('i', '<C-l>', '<CR>', 'Keymap: Same as enter key')
 map('n', '<F1>', ':lua toggleFloatHover()<CR>', 'SPECIAL: Toggle float on hover')
 map('n', '<F2>', ':lua toggleDocumentHighlight()<CR>', 'SPECIAL: Toggle document highlights')
 map('n', '<F4>', ':lua toggleTransparency()<CR>', 'SPECIAL: Toggle transparent background')
-map('n', 'ZZ', ':lua saveAndCloseCurrentBuffer()<CR>', 'Save and close current buffer')
+map('n', 'ZZ', ':lua saveAndCloseCurrentBuffer()<CR>', 'Save and close current buffer') --   :w | bd
 
 --------------------------------------------------------
 --                     Editing                        --
@@ -49,7 +49,6 @@ vim.keymap.set('n', '<leader>;u', ':.,0s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Le
 vim.keymap.set('n', '<leader>;d', ':.,$s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', { noremap = true })
 vim.keymap.set('n', '<leader>;', ':s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', { noremap = true })
 
--- -- stylua: ignore start
 --------------------------------------------------------
 --                     Movement                       --
 --------------------------------------------------------
@@ -66,12 +65,8 @@ map({ 'n', 'v' }, '<leader>h', '0', 'Keymap: Jump to the start of the line')
 map('n', 'gd', vim.lsp.buf.definition, 'LSP: Goto definition')
 map('n', 'gI', vim.lsp.buf.implementation, 'LSP: Goto implementation')
 map('n', 'K', vim.lsp.buf.hover, 'LSP: Hover Documentation')
-map('n', '[d', function()
-    vim.diagnostic.jump({ count = 1, float = true })
-end, 'Diagnostic: Go to previous diagnostic')
-map('n', ']d', function()
-    vim.diagnostic.jump({ count = -1, float = true })
-end, 'Diagnostic: Go to next diagnostic')
+map('n', '[d', function() vim.diagnostic.jump({ count = 1, float = true }) end, 'Diagnostic: Go to previous diagnostic')
+map('n', ']d', function() vim.diagnostic.jump({ count = -1, float = true }) end, 'Diagnostic: Go to next diagnostic')
 
 --------------------------------------------------------
 --                     Navigation                     --
