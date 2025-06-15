@@ -74,8 +74,6 @@ map({ 'n', 'v' }, '<leader>h', '0', 'Jump to the start of the line')
 map('n', 'gd', vim.lsp.buf.definition, 'Go to definition')
 map('n', 'gI', vim.lsp.buf.implementation, 'Go to implementation')
 map('n', 'K', vim.lsp.buf.hover, 'Hover Documentation')
-map('n', '[d', function() vim.diagnostic.jump({ count = 1, float = true }) end, 'Go to previous diagnostic')
-map('n', ']d', function() vim.diagnostic.jump({ count = -1, float = true }) end, 'Go to next diagnostic')
 
 --------------------------------------------------------
 --                     Navigation                     --
