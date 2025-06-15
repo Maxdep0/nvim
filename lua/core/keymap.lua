@@ -28,6 +28,8 @@ map('n', '<C-a>', 'gg<S-v>G', 'Select the entire file')
 map('n', 'j', 'gj', 'Navigate through wrapped lines')
 map('n', 'k', 'gk', 'Navigate through wrapped lines')
 map('i', '<C-l>', '<CR>', 'Same as enter key')
+map('t', '<esc>', '<C-\\><C-n>')
+
 
 --------------------------------------------------------
 --                     Special Keymaps               --
