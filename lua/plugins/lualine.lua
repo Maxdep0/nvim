@@ -3,7 +3,6 @@ return {
     dependencies = {
         'nvim-tree/nvim-web-devicons',
     },
-    -- cond = false,
     config = function()
         local lualine = require('lualine')
         local colors = {
@@ -43,13 +42,13 @@ return {
             t = colors.red,
         }
 
+        local function mode_bg() return { bg = mode_color[vim.fn.mode()], fg = colors.bg } end
+
         local mode = {
             'mode',
             separator = { left = '', right = '' },
             right_padding = 2,
-            color = function()
-                return { bg = mode_color[vim.fn.mode()], fg = colors.bg }
-            end,
+            color = mode_bg,
         }
         local branch = {
             'branch',
@@ -66,11 +65,10 @@ return {
                 color_warn = { fg = colors.yellow, bg = 'None', gui = 'bold' },
                 color_info = { fg = colors.cyan, bg = 'None', gui = 'bold' },
             },
-            color = { bg = mode, gui = 'bold' },
             update_in_insert = false,
         }
 
-        local activeLsp = {
+        local active_lsp = {
             function()
                 local msg = 'No Active Lsp'
 
@@ -78,20 +76,16 @@ return {
                 local bufnr = vim.api.nvim_get_current_buf()
                 local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
-                if next(clients) == nil then
-                    return msg
-                end
+                if next(clients) == nil then return msg end
 
                 for _, client in pairs(clients) do
                     local filetypes = client.config.filetypes or {}
-                    if vim.tbl_contains(filetypes, buf_ft) then
-                        return client.name
-                    end
+                    if vim.tbl_contains(filetypes, buf_ft) then return client.name end
                 end
 
                 return msg
             end,
-            icon = '⚙️ ',
+            icon = '⚙️',
             color = { fg = '#c4c4c4', gui = 'bold' },
         }
 
@@ -105,24 +99,23 @@ return {
             },
         }
 
-        local fileformat = {
-            'fileformat',
-            fmt = string.upper,
-            color = { fg = colors.green, bg = 'None', gui = 'bold' },
-        }
-
         local buffers = {
             'buffers',
             icons_enabled = false,
-            -- max_length = vim.o.columns * 2 / 4,
             max_length = math.floor(vim.o.columns * 0.5),
             symbols = { modified = '●', alternate_file = '' },
         }
 
+        local virtual_env = function()
+            if vim.bo.filetype ~= 'python' then return '' end
+            local conda, venv = os.getenv('CONDA_DEFAULT_ENV'), os.getenv('VIRTUAL_ENV')
+            if venv then return ' ' .. vim.fn.fnamemodify(venv, ':t') end
+            if conda then return '  ' .. conda .. ' (conda)' end
+            return ''
+        end
+
         -- local virtual_env = function()
-        --     if vim.bo.filetype ~= 'python' then
-        --         return ''
-        --     end
+        --     if vim.bo.filetype ~= 'python' then return '' end
         --
         --     local conda_env = os.getenv('CONDA_DEFAULT_ENV')
         --     local venv_path = os.getenv('VIRTUAL_ENV')
@@ -135,7 +128,6 @@ return {
         --         end
         --     else
         --         local venv_name = vim.fn.fnamemodify(venv_path, ':t')
-        --         -- return string.format('  %s (venv)', venv_name)
         --         return string.format(' %s', venv_name)
         --     end
         -- end
@@ -144,9 +136,7 @@ return {
             'location',
             separator = { left = '', right = '' },
             left_padding = 2,
-            color = function()
-                return { bg = mode_color[vim.fn.mode()], fg = colors.bg }
-            end,
+            color = mode_bg,
         }
         local sep = {
             '%=',
@@ -167,7 +157,7 @@ return {
                     insert = {
                         a = { bg = 'None', gui = 'bold' },
                         b = { bg = 'None', gui = 'bold' },
-                        c = { bg = 'None', gui = 'bold' },
+                        c = { bg = 'None', gui = 'bold', fg = '#FFFFFF' },
                         x = { bg = 'None', gui = 'bold' },
                         y = { bg = 'None', gui = 'bold' },
                         z = { bg = 'None', gui = 'bold' },
@@ -175,7 +165,7 @@ return {
                     visual = {
                         a = { bg = 'None', gui = 'bold' },
                         b = { bg = 'None', gui = 'bold' },
-                        c = { bg = 'None', gui = 'bold' },
+                        c = { bg = 'None', gui = 'bold', fg = '#FFFFFF' },
                         x = { bg = 'None', gui = 'bold' },
                         y = { bg = 'None', gui = 'bold' },
                         z = { bg = 'None', gui = 'bold' },
@@ -183,15 +173,7 @@ return {
                     replace = {
                         a = { bg = 'None', gui = 'bold' },
                         b = { bg = 'None', gui = 'bold' },
-                        c = { bg = 'None', gui = 'bold' },
-                        x = { bg = 'None', gui = 'bold' },
-                        y = { bg = 'None', gui = 'bold' },
-                        z = { bg = 'None', gui = 'bold' },
-                    },
-                    command = {
-                        a = { bg = 'None', gui = 'bold' },
-                        b = { bg = 'None', gui = 'bold' },
-                        c = { bg = 'None', gui = 'bold' },
+                        c = { bg = 'None', gui = 'bold', fg = '#FFFFFF' },
                         x = { bg = 'None', gui = 'bold' },
                         y = { bg = 'None', gui = 'bold' },
                         z = { bg = 'None', gui = 'bold' },
@@ -199,7 +181,7 @@ return {
                     inactive = {
                         a = { bg = 'None', gui = 'bold' },
                         b = { bg = 'None', gui = 'bold' },
-                        c = { bg = 'None', fg = '#ababab' },
+                        c = { bg = 'None', gui = 'bold', fg = '#ababab' },
                         x = { bg = 'None', gui = 'bold' },
                         y = { bg = 'None', gui = 'bold' },
                         z = { bg = 'None', gui = 'bold' },
@@ -213,36 +195,10 @@ return {
                 lualine_a = { mode },
                 lualine_b = { branch, diff },
                 lualine_c = { sep, buffers },
-                lualine_x = { activeLsp, virtual_env },
-                -- lualine_x = { '' },
-                lualine_y = { diagnostics }, --, fileformat },
+                lualine_x = { active_lsp, virtual_env },
+                lualine_y = { diagnostics },
                 lualine_z = { location },
             },
-            -- tabline = {
-            --     lualine_a = {},
-            --     lualine_b = {},
-            --     lualine_c = {},
-            --     lualine_x = {},
-            --     lualine_y = {},
-            --     lualine_z = {},
-            -- },
-            -- winbar = {
-            --     lualine_a = { sep },
-            --     lualine_b = {},
-            --     lualine_c = { sep, 'filename' },
-            --     lualine_x = {},
-            --     lualine_y = {},
-            --     lualine_z = { sep },
-            -- },
-            -- inactive_winbar = {
-            --     lualine_a = { sep },
-            --     lualine_b = {},
-            --     lualine_c = { sep, 'filename' },
-            --     lualine_x = {},
-            --     lualine_y = {},
-            --     lualine_z = { sep },
-            -- },
-            -- extensions = { },
         })
     end,
 }
