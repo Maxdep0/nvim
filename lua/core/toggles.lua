@@ -2,8 +2,7 @@ local M = {}
 
 -- Toggle wezterm tab bar to get full transparent mode. Works only on specific linux_env_user name.
 function toggleWeztermTabBar(value)
-    local linux_env_user = os.getenv('USER')
-    if linux_env_user == 'maxdep' then
+    if os.getenv('USER') == 'maxdep' then
         local cmd = string.format(
             "sed -i 's/^[[:space:]]*use_fancy_tab_bar[[:space:]]*=.*/use_fancy_tab_bar = %s,/' ~/dotfiles/wezterm/.config/wezterm/wezterm.lua",
             value
@@ -25,19 +24,18 @@ function toggleTransparency()
         M.notify('Enabled Transparent Background', 'UI')
 
         toggleWeztermTabBar('false')
-        vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
 
-        vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'none' })
-        vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
-        vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'none' })
-        vim.api.nvim_set_hl(0, 'StatusLine', { bg = 'none' })
+        for _, hl in ipairs({ 'Normal', 'NormalNC', 'NormalFloat', 'CursorLine', 'StatusLine' }) do
+            vim.api.nvim_set_hl(0, hl, { bg = 'none' })
+        end
+
         vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#000000', bg = 'none' })
-
         vim.api.nvim_set_var('isTransparent', true)
     elseif transparent then
         M.notify('Disabled Transparent Background', 'UI')
 
         toggleWeztermTabBar('true')
+
         vim.cmd('colorscheme nightfox')
         vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#000000', bg = 'none' })
         vim.api.nvim_set_var('isTransparent', false)
@@ -70,27 +68,23 @@ function toggleDocumentHighlight()
 end
 
 function toggleFloatHover()
-    local ok, floatHover = pcall(vim.api.nvim_get_var, 'isFloatHover')
+    local ok, active = pcall(vim.api.nvim_get_var, 'isFloatHoverActive')
 
-    if not ok or not floatHover then
+    if not ok or not active then
         M.notify('Enabled Diagnostics Float on Hover', 'LSP')
 
-        local autocmd_id = vim.api.nvim_create_autocmd('CursorHold', {
+        local id = vim.api.nvim_create_autocmd('CursorHold', {
             desc = 'Enable float on hover',
-            callback = function()
-                vim.diagnostic.open_float(nil, { focus = false })
-            end,
+            callback = function() vim.diagnostic.open_float(nil, { focus = false }) end,
         })
 
-        vim.api.nvim_set_var('floatHoverAutoCmdId', autocmd_id)
-        vim.api.nvim_set_var('isFloatHover', true)
-    elseif floatHover then
+        vim.api.nvim_set_var('floatHoverAutoCmdId', id)
+        vim.api.nvim_set_var('isFloatHoverActive', true)
+    elseif active then
         M.notify('Disabled Diagnostics Float on Hover', 'LSP')
 
-        local autocmd_id = vim.api.nvim_get_var('floatHoverAutoCmdId')
-
-        vim.api.nvim_del_autocmd(autocmd_id)
-        vim.api.nvim_set_var('isFloatHover', false)
+        vim.api.nvim_del_autocmd(vim.api.nvim_get_var('floatHoverAutoCmdId'))
+        vim.api.nvim_set_var('isFloatHoverActive', false)
     end
 end
 
