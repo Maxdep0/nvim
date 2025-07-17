@@ -7,7 +7,7 @@
           "javascript",
           "typescript"
         ],
-        "path": "./javascript.jsonc"
+        "path": "./javascript.json"
       }
     ]
   }

@@ -1,0 +1,52 @@
+{
+  "a": {
+    "prefix": "clg",
+    "body": ["console.log($1)"],
+    "description": ""
+  },
+  "aa": {
+    "prefix": "imp{}",
+    "body": ["import { $1 } from '$2'"],
+    "description": ""
+  },
+  "aaad": {
+    "prefix": "imp",
+    "body": ["import $1 from '$2'"],
+    "description": ""
+  },
+  "aaa": {
+    "prefix": "func",
+    "body": ["const $1 = ($2) => {", "$3", "}"],
+    "description": ""
+  },
+  "aaaa": {
+    "prefix": "func1",
+    "body": ["const $1 = ($2) => $3"],
+    "description": ""
+  },
+  "aaasadf": {
+    "prefix": "afunc",
+    "body": ["const $1 = async ($2) => {", "$3", "}"],
+    "description": ""
+  },
+  "aaaa99asd9f": {
+    "prefix": "afunc1",
+    "body": ["const $1 = async ($2) => await $3"],
+    "description": ""
+  },
+  "aaaaa": {
+    "prefix": "forin",
+    "body": ["for (const $1 in $2) {", "$3", "}"],
+    "description": ""
+  },
+  "aaaaaa": {
+    "prefix": "forof",
+    "body": ["for (const $1 of $2) {", "$3", "}"],
+    "description": ""
+  },
+  "aaaaaaa": {
+    "prefix": "trycatch",
+    "body": ["try {", "", "} catch (err) {", "", "}"],
+    "description": ""
+  }
+}
