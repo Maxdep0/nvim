@@ -39,16 +39,10 @@ return {
             },
         },
 
-        appearance = {
-            nerd_font_variant = 'mono',
-        },
+        appearance = { nerd_font_variant = 'mono' },
 
         completion = {
-            menu = {
-                draw = {
-                    padding = { 1, 1 },
-                },
-            },
+            menu = { draw = { padding = { 1, 1 } } },
 
             list = {
                 selection = {
@@ -61,9 +55,7 @@ return {
                 auto_show = true,
                 auto_show_delay_ms = 500,
 
-                window = {
-                    border = 'single',
-                },
+                window = { border = 'single' },
             },
 
             ghost_text = { enabled = false },

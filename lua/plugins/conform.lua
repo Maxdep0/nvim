@@ -14,6 +14,7 @@ return {
                 javascriptreact = { 'prettierd' },
                 typescriptreact = { 'prettierd' },
                 json = { 'prettierd' },
+                jsonc = { 'prettierd' },
                 markdown = { 'prettierd' },
                 html = { 'prettierd' },
                 css = { 'prettierd' },
@@ -40,7 +41,7 @@ return {
             pattern = '*prettier*',
             callback = function()
                 vim.fn.system('prettierd restart')
-                notify('Prettierd restarted due to config change')
+                require('core.toggles').notify('Prettierd restarted due to config change')
             end,
         })
     end,
