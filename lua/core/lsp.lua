@@ -4,7 +4,8 @@ vim.lsp.enable({
     'emmet_language_server',
     'html',
     'jsonls',
-    'pylsp',
+    -- 'pylsp',
+    'pyright',
     'lua_ls',
     'ts_ls',
 })

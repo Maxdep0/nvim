@@ -24,6 +24,7 @@ return {
                 'emmet-ls',
                 'python-lsp-server',
                 'bash-language-server',
+                'pyright',
 
                 -- Formatters
                 'prettierd',
