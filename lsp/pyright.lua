@@ -5,10 +5,13 @@ return {
     settings = {
         python = {
             analysis = {
-                -- diagnosticMode = 'openFilesOnly',
-                typeCheckingMode = 'basic',
+                autoImportCompletions = true,
                 autoSearchPaths = true,
+                stubPath = 'typings',
+                -- typeCheckingMode = 'strict',
                 useLibraryCodeForTypes = true,
+                diagnosticMode = 'openFilesOnly',
+                logLevel = 'Error',
             },
         },
     },

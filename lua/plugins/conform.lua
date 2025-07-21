@@ -13,8 +13,6 @@ return {
                 typescript = { 'prettierd' },
                 javascriptreact = { 'prettierd' },
                 typescriptreact = { 'prettierd' },
-                json = { 'prettierd' },
-                jsonc = { 'prettierd' },
                 markdown = { 'prettierd' },
                 html = { 'prettierd' },
                 css = { 'prettierd' },
