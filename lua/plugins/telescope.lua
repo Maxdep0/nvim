@@ -73,7 +73,7 @@ return {
                 grep_string = { previewer = false, theme = 'dropdown' },
                 live_grep = { previewer = false, theme = 'dropdown' },
                 diagnostics = { previewer = false, theme = 'dropdown' },
-                lsp_references = { previewer = false, theme = 'dropdown' },
+                lsp_references = { previewer = true, theme = 'ivy', layout_config = { height = 0.6 } },
                 help_tags = { previewer = true, theme = 'ivy', layout_config = { height = 0.6 } },
                 keymaps = { previewer = false, theme = 'dropdown', layout_config = { height = 0.7, width = 0.6 } },
             },
@@ -125,8 +125,8 @@ return {
         map('<leader><space>', builtin.find_files, 'Search files')
         map('<leader>sw', builtin.grep_string, 'Search word under the cursor')
         map('<leader>sg', builtin.live_grep, 'Search by grep')
-        map('<leader>sd', builtin.diagnostics, 'Search diagnostics')
         map('<leader>sr', builtin.lsp_references, 'Search LSP references')
+        map('<leader>se', builtin.diagnostics, 'Search diagnostics')
         map('<leader>sh', builtin.help_tags, 'Search help')
         map('<leader>sk', builtin.keymaps, 'Search keymaps')
         map('<leader>sc', custom_menu, 'Search commands')

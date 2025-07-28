@@ -1,6 +1,6 @@
 return {
     'stevearc/conform.nvim',
-    event = { 'BufWritePre' },
+    event = { 'bufwritepre' },
 
     config = function()
         local conform = require('conform')
@@ -17,6 +17,7 @@ return {
                 html = { 'prettierd' },
                 css = { 'prettierd' },
                 scss = { 'prettierd' },
+                json = { 'prettierd' },
 
                 python = { 'black' },
 
@@ -34,12 +35,12 @@ return {
             notify_on_error = true,
         })
 
-        vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
-            group = vim.api.nvim_create_augroup('RestartPrettierd', { clear = true }),
+        vim.api.nvim_create_autocmd({ 'bufwritepost' }, {
+            group = vim.api.nvim_create_augroup('restartprettierd', { clear = true }),
             pattern = '*prettier*',
             callback = function()
                 vim.fn.system('prettierd restart')
-                require('core.toggles').notify('Prettierd restarted due to config change')
+                require('core.toggles').notify('prettierd restarted due to config change')
             end,
         })
     end,

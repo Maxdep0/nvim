@@ -61,6 +61,16 @@ function M.toggle_document_highlight()
     end
 end
 
+function M.toggle_inlay_hint()
+    if vim.lsp.inlay_hint.is_enabled() then
+        M.notify('Disabled Inlay Hint')
+        vim.lsp.inlay_hint.enable(false)
+    else
+        M.notify('Enabled Inlay Hint')
+        vim.lsp.inlay_hint.enable(true)
+    end
+end
+
 function M.toggle_float_hover()
     local ok, active = pcall(vim.api.nvim_get_var, 'isFloatHoverActive')
 
