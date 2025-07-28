@@ -17,26 +17,12 @@ capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').g
 vim.api.nvim_create_user_command('Lsp', function() vim.cmd('checkhealth vim.lsp') end, {})
 vim.api.nvim_create_user_command('LspBlink', function() vim.cmd('=require("blink.cmp").get_lsp_capabilities()') end, {})
 
-vim.api.nvim_create_user_command(
-    'LspInspect',
-    [[
-  lua for _,c in ipairs(vim.lsp.get_clients({bufnr=0})) do
-    print("=== "..c.name.." ===")
-    print("Settings:", vim.inspect(c.config.settings or {}))
-    print("Capabilities:", vim.inspect(c.server_capabilities))
-  end
-]],
-    {}
-)
-
 local toggles = require('core.toggles')
 
 local map = function(mode, lhs, rhs, desc, opts)
     opts = vim.tbl_extend('force', { noremap = true, silent = true, desc = desc }, opts or {})
     vim.keymap.set(mode, lhs, rhs, opts)
 end
-
--- :lua print(vim.inspect(vim.lsp.get_active_clients()[1].server_capabilities))
 
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('my.lsp', {}),
