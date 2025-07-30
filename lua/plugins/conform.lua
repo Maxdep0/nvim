@@ -1,6 +1,6 @@
 return {
     'stevearc/conform.nvim',
-    event = { 'bufwritepre' },
+    event = { 'BufWritePre' },
 
     config = function()
         local conform = require('conform')
@@ -35,7 +35,7 @@ return {
             notify_on_error = true,
         })
 
-        vim.api.nvim_create_autocmd({ 'bufwritepost' }, {
+        vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
             group = vim.api.nvim_create_augroup('restartprettierd', { clear = true }),
             pattern = '*prettier*',
             callback = function()
