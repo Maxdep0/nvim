@@ -2,6 +2,7 @@ return {
     'EdenEast/nightfox.nvim',
     priority = 999,
 
+    cond = false,
     config = function()
         require('nightfox').setup({
             options = {
@@ -22,7 +23,8 @@ return {
             palettes = {
                 nightfox = {
                     bg0 = '#2d353b', -- status line and float
-                    bg1 = '#2d353b', -- default bg
+                    -- bg1 = '#2d353b', -- default bg -- NOTE: CHANGE LATER
+                    bg1 = '#000000', -- default bg
                     bg2 = '#353d43', -- colorcolumn folds
                     bg3 = '#3a4248', -- cursor line
                     bg4 = '#acb4ba', -- Conceal, border fg
@@ -41,6 +43,7 @@ return {
         })
 
         vim.cmd('colorscheme nightfox')
-        vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#000000', bg = 'none' })
+        -- NOTE: CHANGE LATER
+        -- vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#000000', bg = 'none' })
     end,
 }
