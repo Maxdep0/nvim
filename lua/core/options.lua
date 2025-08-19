@@ -19,6 +19,7 @@ o.cursorline = true
 o.inccommand = 'split'
 
 o.signcolumn = 'yes'
+
 o.scrolloff = 5
 
 o.ignorecase = true
@@ -34,11 +35,14 @@ o.tabstop = 4
 
 o.hidden = true
 o.history = 100
-o.lazyredraw = true
+o.lazyredraw = false -- true
 o.ttyfast = true
-o.synmaxcol = 250
+o.synmaxcol = 750 --- 250
 o.updatetime = 200
 o.timeoutlen = 400
+
+o.redrawtime = 10000 --
+o.regexpengine = 0 --
 
 o.swapfile = false
 o.backup = false
@@ -58,5 +62,18 @@ g.loaded_tarPlugin = 1
 g.loaded_tutor_mode_plugin = 1
 g.loaded_sql_completion = 1
 
+vim.opt.fillchars:append({ vert = '┃' })
+
 -- g.netrw_keepdir = 0
 g.netrw_banner = 0
+
+vim.filetype.add({
+    filename = {
+        ['.aliasrc'] = 'zsh',
+        ['.zshenv'] = 'zsh',
+        ['.zprofile'] = 'zsh',
+    },
+    extension = {
+        zsh = 'zsh',
+    },
+})

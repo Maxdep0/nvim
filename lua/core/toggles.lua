@@ -11,6 +11,16 @@ local function toggle_wezterm_tab_bar(value)
     end
 end
 
+function M.toggle_windows_layout()
+    local total_wins = vim.fn.winnr('$')
+    if total_wins == 1 then return end
+
+    local cur_win = vim.fn.winnr()
+    local has_vertical_split = vim.fn.winnr('h') ~= cur_win or vim.fn.winnr('l') ~= cur_win
+
+    vim.cmd(has_vertical_split and 'windo wincmd J' or 'windo wincmd H')
+end
+
 function M.toggle_transparency()
     local ok, transparent = pcall(vim.api.nvim_get_var, 'isTransparent')
 
@@ -30,7 +40,7 @@ function M.toggle_transparency()
 
         toggle_wezterm_tab_bar('true')
 
-        vim.cmd('colorscheme nightfox')
+        vim.cmd('MaxoTheme')
         vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#000000', bg = 'none' })
         vim.api.nvim_set_var('isTransparent', false)
     end

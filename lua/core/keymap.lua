@@ -1,10 +1,9 @@
 -- stylua: ignore start
 local toggles = require('core.toggles')
+local utils = require('core.utils')
 
-local map = function(mode, lhs, rhs, desc, opts)
-    opts = vim.tbl_extend('force', { noremap = true, silent = true, desc = desc }, opts or {})
-    vim.keymap.set(mode, lhs, rhs, opts)
-end
+local map = utils.map
+
 
 vim.g.mapleader = ' '
 
@@ -12,11 +11,10 @@ vim.g.mapleader = ' '
 --                     Disabled Keys                  --
 --------------------------------------------------------
 map('n', 'u', '<Nop>', 'Disabled')
-map('i', '<C-u>', '<Nopp>', 'Disabled')
-map({ 'n', 'i' }, '<C-r>', '<Nop>', 'Disabled')
+map('i', '<C-u>', '<Nop>', 'Disabled')
+map( 'n',  '<C-r>', '<Nop>', 'Disabled')
 map('n', 'ZQ', '<Nop>', 'Disabled')
 map('n', 'ZZ', '<Nop>', 'Disabled')
-map('n', 'C', '<Nop>', 'Disabled')
 map('n', 'gQ', '<Nop>', 'Disabled')
 
 --------------------------------------------------------
@@ -38,25 +36,27 @@ map('t', '<esc>', '<C-\\><C-n>')
 map('n', '<F1>', toggles.toggle_float_hover, 'Toggle float on hover')
 map('n', '<F2>', toggles.toggle_document_highlight, 'Toggle document highlights')
 map('n', '<F4>', toggles.toggle_transparency, 'Toggle transparent background')
-map({ 'n', 't' }, '<A-CR>', toggles.toggle_terminal, 'Open floating terminal')
 
 
 --------------------------------------------------------
 --                     Editing                        --
 --------------------------------------------------------
 
-map('n', 'ZZ', ':w | bd<CR>', 'Save and close current buffer')
-map({ 'n', 'v', 'i' }, '<C-s>', '<Esc>:w<CR>', 'Save file')
-map('n', '<C-z>', ':undo<CR>', 'Undo')
-map('n', '<C-y>', ':redo<CR>', 'Redo')
-map('v', '<C-j>', ":m '>+1<CR>gv=gv", 'Move line down')
-map('v', '<C-k>', ":m '<-2<CR>gv=gv", 'Move line up')
+map({ 'n', 'v' }, '<C-s>', '<Esc>:w<CR>', 'Save file')
+
+map('n', '<A-u>', ':undo<CR>', 'Undo')
+map('n', '<A-r>', ':redo<CR>', 'Redo')
+
+map('v', '<C-j>', ":<C-u>silent! '<,'>move '>+1<CR>gv=gv", 'Move selection down' )
+map('v', '<C-k>', ":<C-u>silent! '<,'>move '<-2<CR>gv=gv", 'Move selection up' )
+
 map('v', '<Tab>', '"9Y"9[pgv', 'Duplicate selected lines')
 map('n', 'J', 'mzJ`z', 'Join line below without changing cursor position')
 
-map('n', '<leader>;u', ':.,0s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', 'Select word under the cursor and edit all above', { noremap = true, silent = false })
-map('n', '<leader>;d', ':.,$s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', 'Select word under the cursor and edit all below', { noremap = true, silent = false })
-map('n', '<leader>;', ':s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', 'Select word under the cursor and edit all in buffer', { noremap = true, silent = false })
+
+map('n', '<leader>/u', ':.,0s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', 'Select word under the cursor and edit all above', { noremap = true, silent = false })
+map('n', '<leader>/d', ':.,$s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', 'Select word under the cursor and edit all below', { noremap = true, silent = false })
+map('n', '<leader>/', ':s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', 'Select word under the cursor and edit all in buffer', { noremap = true, silent = false })
 
 --------------------------------------------------------
 --                     Movement                       --
@@ -66,14 +66,40 @@ map('n', '<C-d>', '<C-d>zz', 'Move down 1/2 page and center cursor')
 map('n', '<C-u>', '<C-u>zz', 'Move up 1/2 page and center cursor')
 map({ 'n', 'v' }, '<leader>l', '$', 'Jump to the end of the line')
 map({ 'n', 'v' }, '<leader>h', '0', 'Jump to the start of the line')
+map('n', '<C-.>', '<C-w>>', '...')
+map('n', '<C-,>', '<C-w><', '...')
+map('n', '<leader><C-Cr>', '<C-w>c', '...')
 
 --------------------------------------------------------
---                  LSP/DIAGNOSTIC                    --
+--                     Windows                        --
 --------------------------------------------------------
 
+map('n', '<A-CR>', '<C-w>v', 'Open new window')
+map('n', '<A-S-Q>', '<C-w>c', 'Close current window')
+
+map('n', '<A-h>', '<C-w>h', 'Move focus left')
+map('n', '<A-l>', '<C-w>l', 'Move focus right window')
+map('n', '<A-j>', '<C-w>j', 'Move focus up')
+map('n', '<A-k>', '<C-w>k', 'Move focus down')
+
+map('n', '<A-S-h>', '<C-w>H', 'Move window left')
+map('n', '<A-S-l>', '<C-w>L', 'Move window right')
+map('n', '<A-S-k>', '<C-w>K', 'Move window up')
+map('n', '<A-S-j>', '<C-w>J', 'Move window down')
+
+
+map('n', 'ZZ', utils.delete_buffer_and_keep_window_open, 'Delete buffer and keep window open')
+map('n', '<A-C-h>', function() utils.resize_window('left') end, 'Move divider left')
+map('n', '<A-C-l>', function() utils.resize_window('right') end, 'Move divider right')
+map('n', '<A-C-k>', function() utils.resize_window('up') end, 'Move divider up')
+map('n', '<A-C-j>', function() utils.resize_window('down') end, 'Move divider down')
+map('n', '<A-c>', toggles.toggle_windows_layout, 'Toggle horizontal/vertical layout')
+
+-- ------------------------------------------------------
+--                  LSP/DIAGNOSTIC                     --
+-- ------------------------------------------------------
+--
 map('n', 'gd', vim.lsp.buf.definition, 'Go to definition')
-map('n', 'gI', vim.lsp.buf.implementation, 'Go to implementation')
-map('n', 'K', vim.lsp.buf.hover, 'Hover Documentation')
 
 --------------------------------------------------------
 --                     Navigation                     --
@@ -89,32 +115,15 @@ map('n', 'N', 'Nzzzv', 'Repeat search in opposite direction and center cursor')
 --              Clipboard and Registers               --
 --------------------------------------------------------
 
--- Yank
-map('n', 'y', '"+y', 'Yank to system clipboard (combine with motion)')
-map('n', 'Y', '"+Y', 'Yank whole line to system clipboard')
-map('v', 'y', '"+y', 'Yank selected text to system clipboard')
+map('n', 'YY', "m'0_yg_``", 'Yank line content (no indent, no trailing spaces, no newline)')
 
--- Paste
-map('n', 'p', '"+P', 'Paste from system clipboard')
-map('v', 'p', '"_d"+P', 'Replace selected text with system clipboard')
+map({'n', 'x'}, 'd', '"_d', 'Delete motion  (preserve clipboard)')
+map({'n', 'x'}, 'D', '"_D', 'Delete to end of line (preserve clipboard)')
 
--- Delete
-map('n', 'd', '"_d', 'Delete without register change (combine with motion)')
-map('n', 'D', '"_D', 'Delete to end of line without changing clipboard')
-map('v', 'd', '"_d', 'Delete selected text without changing clipboard')
+map({'n', 'x'}, '<leader>d', '"+d', 'Delete motion and copy to system clipboard')
+map({'n', 'x'}, '<leader>D', '"+D', 'Delete to end of line and copy to system clipboard')
 
-map('n', '<leader>d', '"+d', 'Delete and yank to system clipboard (combine with motion)')
-map('n', '<leader>D', '"+D', 'Delete to end of line and yank to system clipboard')
-map('v', '<leader>d', '"+d', 'Delete selected text and yank to system clipboard')
-map('v', '<leader>D', '"+D', 'Delete whole line and yank to system clipboard')
+map('n', 'x', '"_x', 'Delete single char (preserve clipboard)')
 
-map('n', 'x', '"_x', 'Cut character without changing clipboard')
-map('v', 'x', '"_x', 'Cut character without changing clipboard')
-
--- Change
-map('n', 'c', '"_c', 'Change without register change (combine with motion)')
-map('n', 'C', '"_C', 'Change to end of line without changing clipboard')
-map('v', 'c', '"_c', 'Change selected text without changing clipboard')
-map('v', 'C', '"_C', 'Change selected text without changing clipboard')
-
--- stylua: ignore end
+map({'n', 'x'}, 'c', '"_c', 'Changewithout register change (combine with motion)')
+map({'n', 'x'}, 'C', '"_C', 'Change selected text (preserve clipboard)')

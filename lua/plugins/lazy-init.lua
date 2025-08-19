@@ -1,9 +1,14 @@
 return {
-    { 'numToStr/Comment.nvim', opts = {} },
     {
         'windwp/nvim-autopairs',
         event = 'InsertEnter',
         config = function() require('nvim-autopairs').setup({}) end,
+    },
+    {
+        'norcalli/nvim-colorizer.lua',
+        event = 'InsertEnter',
+        cond = false,
+        config = function() require('colorizer').setup() end,
     },
     {
         'mbbill/undotree',

@@ -2,4 +2,6 @@
 
 require('core')
 
+require('core.colorscheme')
+
 require('core.toggles').toggle_transparency()

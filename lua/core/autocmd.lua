@@ -1,7 +1,7 @@
-vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
-    pattern = '.aliasrc',
-    callback = function() vim.cmd('set filetype=zsh') end,
-})
+-- vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+--     pattern = '.aliasrc',
+--     callback = function() vim.cmd('set filetype=zsh') end,
+-- })
 
 vim.api.nvim_create_autocmd('BufEnter', {
     desc = 'Disable New Line Comment',
