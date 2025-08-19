@@ -1,12 +1,21 @@
 return {
-
     'saghen/blink.cmp',
     version = '1.*',
     event = { 'InsertEnter', 'CmdLineEnter' },
     dependencies = {
-        'folke/lazydev.nvim',
-        ft = 'lua',
-        opts = { library = { { path = '${3rd}/luv/library', words = { 'vim%.uv' } } } },
+        {
+            'folke/lazydev.nvim',
+            ft = 'lua',
+            opts = { library = { { path = '${3rd}/luv/library', words = { 'vim%.uv' } } } },
+        },
+        {
+            'zbirenbaum/copilot.lua',
+            cmd = 'Copilot',
+            event = 'InsertEnter',
+            dependencies = { 'fang2hou/blink-copilot' },
+
+            config = function() require('copilot').setup({}) end,
+        },
     },
     opts = {
         keymap = {
@@ -19,6 +28,7 @@ return {
             ['<C-d>'] = { 'scroll_documentation_down' },
 
             ['<C-e>'] = { 'hide' },
+            ['<C-space>'] = { 'show' },
 
             ['<Tab>'] = { 'snippet_forward', 'fallback' },
             ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
@@ -39,7 +49,38 @@ return {
             },
         },
 
-        appearance = { nerd_font_variant = 'mono' },
+        -- appearance = { nerd_font_variant = 'mono' },
+        appearance = {
+            kind_icons = {
+                Copilot = '',
+                Text = '󰉿',
+                Method = '󰊕',
+                Function = '󰊕',
+                Constructor = '󰒓',
+
+                Field = '󰜢',
+                Variable = '󰆦',
+                Property = '󰖷',
+                Class = '󱡠',
+                Interface = '󱡠',
+                Struct = '󱡠',
+                Module = '󰅩',
+                Unit = '󰪚',
+                Value = '󰦨',
+                Enum = '󰦨',
+                EnumMember = '󰦨',
+                Keyword = '󰻾',
+                Constant = '󰏿',
+                Snippet = '󱄽',
+                Color = '󰏘',
+                File = '󰈔',
+                Reference = '󰬲',
+                Folder = '󰉋',
+                Event = '󱐋',
+                Operator = '󰪚',
+                TypeParameter = '󰬛',
+            },
+        },
 
         completion = {
             menu = { draw = { padding = { 1, 1 } } },
@@ -62,13 +103,20 @@ return {
         },
 
         sources = {
-            default = { 'lazydev', 'lsp', 'buffer', 'snippets', 'path', 'omni', 'cmdline' },
+            default = { 'path', 'lsp', 'buffer', 'copilot', 'lazydev', 'snippets', 'omni', 'cmdline' },
 
             providers = {
                 lazydev = {
                     name = 'LazyDev',
                     module = 'lazydev.integrations.blink',
-                    score_offset = 100,
+                },
+                copilot = {
+                    name = 'copilot',
+                    module = 'blink-copilot',
+                    async = true,
+                    opts = {
+                        max_completions = 3,
+                    },
                 },
             },
         },

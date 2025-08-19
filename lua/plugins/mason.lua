@@ -25,6 +25,7 @@ return {
                 'python-lsp-server',
                 'bash-language-server',
                 'pyright',
+                'rust-analyzer',
 
                 -- Formatters
                 'prettierd',

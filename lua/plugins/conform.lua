@@ -21,9 +21,9 @@ return {
 
                 python = { 'black' },
 
+                sh = { 'shfmt' },
                 bash = { 'shfmt' },
                 mksh = { 'shfmt' },
-                shell = { 'shfmt' },
             },
 
             format_on_save = {

@@ -1,12 +1,23 @@
 return {
     'mfussenegger/nvim-lint',
-    event = {
-        'BufReadPre',
-        'BufNewFile',
-    },
+    event = { 'BufReadPre', 'BufNewFile' },
 
     config = function()
         local lint = require('lint')
+
+        lint.linters.zsh_parse = {
+            cmd = 'zsh',
+            stdin = false,
+            append_fname = true,
+            args = { '--no-exec', '--no-rcs', '--no-globalrcs' },
+            stream = 'stderr',
+            ignore_exitcode = true,
+            -- parser = require('lint.parser').from_errorformat('%s:%l:%m', {
+            parser = require('lint.parser').from_errorformat('%f:%l:%m', {
+                source = 'zsh',
+                severity = vim.diagnostic.severity.ERROR,
+            }),
+        }
 
         lint.linters_by_ft = {
             lua = { 'selene' },
@@ -16,6 +27,9 @@ return {
             typescriptreact = { 'eslint_d' },
             python = { 'flake8' },
             bash = { 'shellcheck' },
+            sh = { 'shellcheck' },
+
+            zsh = { 'zsh_parse' },
             css = { 'stylelint' },
             sass = { 'stylelint' },
             scss = { 'stylelint' },
@@ -37,7 +51,6 @@ return {
         lint.linters.selene.args = { '--display-style', 'json', '-', '--config', getSeleneConfig() }
 
         lint.linters.eslint_d.args = {
-            -- '--no-warn-ignored',
             '--format',
             'json',
             '--stdin',
@@ -52,6 +65,12 @@ return {
                 vim.fn.system('eslint_d restart')
                 require('core.toggles').notify('eslint_d restarted due to config change')
             end,
+        })
+
+        vim.api.nvim_create_autocmd({ 'BufWritePost', 'InsertLeave', 'BufEnter' }, {
+            group = vim.api.nvim_create_augroup('LintZsh', { clear = true }),
+            pattern = { '*.zsh', '.zshrc', '.zshenv', '.zprofile' },
+            callback = function() require('lint').try_lint() end,
         })
 
         vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
