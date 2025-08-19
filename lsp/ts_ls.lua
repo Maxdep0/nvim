@@ -20,7 +20,9 @@ return {
         disableAutomaticTypingAcquisition = true,
         preferences = {
             quotePreference = 'single',
-            importModuleSpecifierPreference = 'relative',
+            importModuleSpecifier = 'non-relative',
+            importModuleSpecifierPreference = 'non-relative',
+            iiimportModuleSpecifierEnding = 'auto',
             organizeImportsIgnoreCase = false,
             includeInlayParameterNameHints = 'all',
             includeInlayParameterNameHintsWhenArgumentMatchesName = true,

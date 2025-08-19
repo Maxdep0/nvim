@@ -1,7 +1,7 @@
 return {
     cmd = { 'vscode-html-language-server', '--stdio' },
     filetypes = { 'html', 'templ' },
-    root_markets = { 'package.json', '.git' },
+    root_markers = { 'package.json', '.git' },
     init_options = {
         configurationSection = { 'html', 'css', 'javascript' },
         embeddedLanguages = {

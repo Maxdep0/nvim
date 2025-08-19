@@ -8,6 +8,7 @@ vim.lsp.enable({
     'pyright',
     'lua_ls',
     'ts_ls',
+    'rust-analyzer',
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -44,7 +45,8 @@ vim.diagnostic.config({
         prefix = '',
     },
     float = {
-        focusable = false,
+        -- focusable = false,
+        focusable = true,
         style = 'minimal',
         border = 'rounded',
         source = true,

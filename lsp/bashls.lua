@@ -1,10 +1,11 @@
 -- https://github.com/bash-lsp/bash-language-server
 return {
+    -- on_attach = function(client, bufnr) client.server_capabilities.documentFormattingProvider = false end,
     cmd = { 'bash-language-server', 'start' },
-    setting = {
+    settings = {
         bashIde = {
             globPattern = '*@(.sh|.inc|.bash|.command)',
         },
     },
-    filetypes = { 'sh', 'zsh', 'bash' },
+    filetypes = { 'sh', 'bash' },
 }

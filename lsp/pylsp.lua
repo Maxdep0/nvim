@@ -7,7 +7,7 @@ return {
                 pycodestyle = { enabled = false },
                 pyflakes = { enabled = false },
                 mccabe = { enabled = false },
-                yaplf = { enabled = false },
+                yapf = { enabled = false },
             },
         },
     },
