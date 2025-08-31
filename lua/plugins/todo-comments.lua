@@ -5,16 +5,27 @@ return {
         signs = false,
         sign_priority = 8,
         keywords = {
-            BUG = { color = '#DC143C', alt = { 'BUG', 'ISSUE', 'FIXIT' } },
-            TODO = { color = '#FF4500', alt = { 'TODO' } },
-            DONE = { color = '#32CD32', alt = { 'DONE' } },
-            CRIT = { color = '#B22222' },
-            WARN = { color = '#FFA500' },
-            PERF = { color = '#1E90FF', alt = { 'OPTIMIZE', 'PERFORMANCE' } },
-            NOTE = { color = '#FFD700', alt = { 'INFO', 'IDEA' } },
-            TEST = { color = '#FF69B4' },
-            REFACTOR = { color = '#FFD700', alt = { 'CLEANUP', 'IMPROVE' } },
-            DEBUG = { color = '#A020F0', alt = { 'LOG', 'TRACE' } },
+
+            TODO = { color = '#FF8C00', alt = { 'TODO', 'TASK' } },
+            PROGRESS = { color = '#00CED1', alt = { 'WORKING', 'WIP' } },
+            DONE = { color = '#00FF00', alt = { 'DONE' } },
+
+            INFO = { color = '#87CEEB', alt = { 'INFO', 'NOTE', 'IDEA' } },
+            WARN = { color = '#FFD700', alt = { 'WARN', 'WARNING' } },
+            ERROR = { color = '#FF0000', alt = { 'ERR', 'ERROR' } },
+            BUG = { color = '#FF6347', alt = { 'BUG', 'FIXIT', 'FIXME' } },
+            CRIT = { color = '#8B0000', alt = { 'CRIT', 'CRITICAL' } },
+
+            TEST = { color = '#FF69B4', alt = { 'TEST', 'TESTING', 'PASSED', 'FAILED' } },
+            REFACTOR = { color = '#9370DB', alt = { 'REFACTOR', 'CLEANUP', 'IMPROVE' } },
+            PERFORMANCE = { color = '#1E90FF', alt = { 'PERF', 'OPTIMIZE', 'PERFORMANCE' } },
+            QUESTION = { color = '#FF1493', alt = { 'QUESTION', 'REVIEW', 'CHECK', 'WHAT' } },
+
+            HACK = { color = '#FFA500', alt = { 'HACK', 'XXX', 'TEMP', 'WORKAROUND' } },
+            DEPRECATED = { color = '#808080', alt = { 'DEPRECATED', 'OBSOLETE', 'OLD' } },
+            DOCS = { color = '#4682B4', alt = { 'DOCS', 'DOCUMENTATION', 'README' } },
+
+            RG = { color = '#808080', alt = { 'RG' } },
         },
 
         gui_style = { fg = 'NONE', bg = 'BOLD' },
