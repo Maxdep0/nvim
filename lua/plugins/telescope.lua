@@ -52,7 +52,7 @@ return {
         require('telescope').setup({
             defaults = {
 
-                file_ignore_patters = { '.git', 'node_modules', 'dist', 'build', 'target', '__pucache', 'venv' },
+                file_ignore_patterns = { '.git', 'node_modules', 'dist', 'build', 'target', '__pucache', 'venv' },
 
                 mappings = {
                     i = {
