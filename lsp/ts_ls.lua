@@ -1,5 +1,11 @@
 return {
-    on_attach = function(client, bufnr) client.server_capabilities.documentFormattingProvider = false end,
+    on_attach = function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false
+        if vim.api.nvim_buf_get_name(bufnr) == '' then
+            vim.bo[bufnr].buftype = 'nowrite'
+            vim.bo[bufnr].bufhidden = 'wipe'
+        end
+    end,
     cmd = { 'typescript-language-server', '--stdio' },
     filetypes = {
         'javascript',
