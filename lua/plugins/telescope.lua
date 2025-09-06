@@ -31,6 +31,7 @@ return {
     event = 'VimEnter',
     branch = '0.1.x',
     dependencies = {
+        'lewis6991/gitsigns.nvim',
         'nvim-lua/plenary.nvim',
         {
             'nvim-telescope/telescope-fzf-native.nvim',

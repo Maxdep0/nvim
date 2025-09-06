@@ -24,4 +24,12 @@ return {
         cond = false,
         build = function() vim.fn['mkdp#util#install']() end,
     },
+    {
+        dir = vim.fn.stdpath('config') .. '/lua',
+        name = 'custom-statusline',
+        dependencies = {
+            'lewis6991/gitsigns.nvim',
+        },
+        config = function() require('custom_statusline').setup() end,
+    },
 }
