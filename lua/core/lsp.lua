@@ -34,7 +34,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
             if client:supports_method(method) then map(unpack(keymap)) end
         end
 
-        -- check('inlayHintProvider', { 'n', '<F3>', toggles.toggle_inlay_hint, 'Toggle inlay hints' })
+        if client:supports_method('textDocument/onTypeFormatting') then
+            vim.lsp.on_type_formatting.enable(true, { client_id = client.id })
+        end
+
         check('textDocument/inlayHint', { 'n', '<F3>', toggles.toggle_inlay_hint, 'Toggle inlay hints' })
     end,
 })
