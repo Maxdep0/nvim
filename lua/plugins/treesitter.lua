@@ -14,6 +14,21 @@ return {
             vim.wo.foldlevel = 99
         end
 
+        ts.install({
+            'javascript',
+            'typescript',
+            'rust',
+            'python',
+            'bash',
+            'markdown',
+            'markdown_inline',
+            'json',
+            'diff',
+            'lua',
+            'vimdoc',
+            'sql',
+        })
+
         vim.api.nvim_create_autocmd('FileType', {
             pattern = '*',
             callback = function(e)

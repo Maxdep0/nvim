@@ -1,4 +1,4 @@
-local o = vim.o
+local o, g = vim.o, vim.g
 
 o.mouse = 'a'
 o.clipboard = 'unnamedplus'
@@ -49,8 +49,6 @@ o.backup = false
 o.undofile = true
 
 o.shortmess = 'sI'
-
-local g = vim.g
 
 g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
