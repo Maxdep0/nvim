@@ -1,16 +1,5 @@
 local M = {}
 
--- Toggle wezterm tab bar to get full transparent mode. Works only on specific linux_env_user name.
-local function toggle_wezterm_tab_bar(value)
-    if os.getenv('USER') == 'maxdep' then
-        local cmd = string.format(
-            "sed -i 's/^[[:space:]]*use_fancy_tab_bar[[:space:]]*=.*/use_fancy_tab_bar = %s,/' ~/dotfiles/wezterm/.config/wezterm/wezterm.lua",
-            value
-        )
-        os.execute(cmd)
-    end
-end
-
 function M.toggle_windows_layout()
     local total_wins = vim.fn.winnr('$')
     if total_wins == 1 then return end
@@ -27,7 +16,7 @@ function M.toggle_transparency()
     if not ok or not transparent then
         M.notify('Enabled Transparent Background')
 
-        toggle_wezterm_tab_bar('false')
+        vim.fn.system({ 'bash', vim.fn.stdpath('config') .. '/scripts/toggle_wezterm_tab.sh', 'false' })
 
         for _, hl in ipairs({ 'Normal', 'NormalNC', 'NormalFloat', 'CursorLine', 'StatusLine' }) do
             vim.api.nvim_set_hl(0, hl, { bg = 'none' })
@@ -38,9 +27,9 @@ function M.toggle_transparency()
     elseif transparent then
         M.notify('Disabled Transparent Background')
 
-        toggle_wezterm_tab_bar('true')
+        vim.fn.system({ 'bash', vim.fn.stdpath('config') .. '/scripts/toggle_wezterm_tab.sh', 'true' })
 
-        vim.cmd('MaxoTheme')
+        vim.cmd('colorscheme maxo')
         vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#000000', bg = 'none' })
         vim.api.nvim_set_var('isTransparent', false)
     end
@@ -103,8 +92,13 @@ function M.toggle_float_hover()
 end
 
 function M.notify(msg, hl)
+    -- local buf = vim.api.nvim_create_buf(false, true)
+    -- vim.api.nvim_buf_set_lines(buf, 0, -1, false, { msg })
+
     local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_set_option_value('bufhidden', 'wipe', { buf = buf })
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, { msg })
+    vim.api.nvim_set_option_value('modifiable', false, { buf = buf })
 
     local width = #msg
     local height = 1
