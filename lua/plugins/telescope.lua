@@ -29,7 +29,7 @@ local cmds = {
 return {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
-    branch = '0.1.x',
+    branch = 'master',
     dependencies = {
         'lewis6991/gitsigns.nvim',
         'nvim-lua/plenary.nvim',
@@ -53,7 +53,7 @@ return {
         require('telescope').setup({
             defaults = {
 
-                file_ignore_patterns = { '.git', 'node_modules', 'dist', 'build', 'target', '__pucache', 'venv' },
+                file_ignore_patterns = { '.git', 'node_modules', 'dist', 'build', 'target', '__pycache', 'venv' },
 
                 mappings = {
                     i = {
@@ -63,8 +63,7 @@ return {
                         ['<C-k>'] = actions.move_selection_previous,
                         ['<C-l>'] = actions.select_default,
                         ['<C-_>'] = actions.which_key,
-                        ['<C-p>'] = action_layout.toggle_preview,
-                        ['<A-p>'] = action_layout.toggle_preview,
+                        ['<C-/>'] = action_layout.toggle_preview,
                     },
                 },
             },
