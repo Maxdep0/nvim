@@ -1,44 +1,41 @@
 return {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
+    lazy = false,
     build = ':TSUpdate',
 
     config = function()
-        require('nvim-treesitter.install').prefer_git = true
+        local ts = require('nvim-treesitter')
 
-        require('nvim-treesitter.configs').setup({
-            auto_install = true,
-            indent = { enable = false },
-            autotag = { enable = true },
-            rainbow = { enable = false },
-            textobject = { enable = false },
-            playground = { enable = false },
-            highlight = {
-                enable = true,
-                disable = function(_, buf)
-                    local max_filesize = 100 * 1024 -- 100 KB
-                    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-                    if ok and stats and stats.size > max_filesize then return true end
-                end,
-                additional_vim_regex_highlighting = false,
-            },
-            ensure_installed = {
-                'css',
-                'scss',
-                'html',
-                'json',
-                'lua',
-                'luadoc',
-                'vim',
-                'vimdoc',
-                'javascript',
-                'typescript',
-                'markdown',
-                'gitignore',
-                'python',
-                'toml',
-                'markdown',
-                'bash',
-            },
+        local function start(b, p)
+            vim.treesitter.start(b, p)
+            vim.wo.foldmethod = 'expr'
+            vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+            vim.wo.foldlevel = 99
+        end
+
+        vim.api.nvim_create_autocmd('FileType', {
+            pattern = '*',
+            callback = function(e)
+                local ft, buf = e.match, e.buf
+                if ft == '' then return end
+
+                local parser = vim.treesitter.language.get_lang(ft) or ft
+                if not parser then return end
+
+                if not vim.tbl_contains(ts.get_available(), parser) then return end
+
+                local installed = ts.get_installed()
+                if not vim.tbl_contains(installed, parser) then
+                    ts.install({ parser }):await(function() start(buf, parser) end)
+                    return
+                end
+
+                start(buf, parser)
+            end,
         })
+
+        vim.o.foldtext = ''
+        vim.o.foldlevelstart = 99
     end,
 }
