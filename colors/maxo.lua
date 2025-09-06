@@ -150,55 +150,6 @@ hl(0, 'DiffChange', { bg = lighten(theme.yellow, 65) })
 hl(0, 'DiffDelete', { bg = lighten(theme.red, 60) })
 hl(0, 'DiffText', { bg = lighten(theme.blue, 55) })
 
--- Treesitter
--- hl(0, '@function', { fg = theme.cyan })
--- hl(0, '@string', { fg = theme.green })
--- hl(0, '@comment', { fg = darken(theme.fg_dim, 20) })
--- hl(0, '@type', { fg = theme.blue })
--- hl(0, '@operator', { fg = theme.red })
--- hl(0, '@punctuation', { fg = theme.fg })
--- hl(0, '@tag', { fg = theme.red })
--- hl(0, '@attribute', { fg = theme.yellow })
--- hl(0, '@number', { fg = theme.purple })
--- hl(0, '@boolean', { fg = theme.orange })
--- hl(0, '@constant', { fg = theme.purple })
--- hl(0, '@variable', { fg = theme.fg })
--- hl(0, '@property', { fg = theme.cyan })
--- hl(0, '@keyword', { fg = theme.fg_dim })
-
--- Functions & identifiers
--- hl(0, '@function', { fg = theme.cyan })
--- hl(0, '@variable', { fg = theme.fg })
--- hl(0, '@property', { fg = theme.cyan })
--- hl(0, '@string', { fg = theme.green })
--- hl(0, '@number', { fg = theme.purple })
--- hl(0, '@boolean', { fg = theme.orange })
--- hl(0, '@constant', { fg = theme.purple })
--- hl(0, '@type', { fg = theme.blue })
--- hl(0, '@tag', { fg = theme.red })
--- hl(0, '@attribute', { fg = theme.yellow })
--- hl(0, '@keyword', { fg = theme.fg_dim })
--- hl(0, '@operator', { fg = theme.red })
--- hl(0, '@punctuation', { fg = theme.fg })
--- hl(0, '@comment', { fg = darken(theme.fg_dim, 20) })
-
--- Functions & identifiers
--- hl(0, '@function', { fg = theme.cyan })
--- hl(0, '@variable', { fg = theme.fg })
--- hl(0, '@property', { fg = theme.cyan })
--- hl(0, '@string', { fg = theme.green })
--- hl(0, '@number', { fg = theme.purple })
--- hl(0, '@boolean', { fg = theme.orange })
--- hl(0, '@constant', { fg = theme.purple })
--- hl(0, '@type', { fg = theme.blue })
--- hl(0, '@tag', { fg = theme.red })
--- hl(0, '@attribute', { fg = theme.yellow })
--- hl(0, '@keyword', { fg = theme.red, bold = true })
--- hl(0, '@operator', { fg = theme.fg_dim })
--- hl(0, '@punctuation', { fg = theme.fg })
--- hl(0, '@comment', { fg = darken(theme.fg_dim, 20) })
-
--- identifiers
 hl(0, '@keyword', { fg = theme.yellow, bold = true }) -- generic // debugging
 -- hl(0, '@keyword', { fg = theme.fg_dim, bold = true }) -- generic
 hl(0, '@keyword.conditional', { fg = theme.red, bold = true }) -- if, else

@@ -118,40 +118,4 @@ function M.notify(msg, hl)
     vim.defer_fn(function() pcall(vim.api.nvim_win_close, win, true) end, 2000)
 end
 
-local state = {
-    terminal = { buf = -1, win = -1 },
-}
-
-function M.toggle_terminal()
-    local function create_floating_window()
-        local width = math.floor(vim.o.columns * 0.5)
-        local height = math.floor(vim.o.lines * 0.5)
-
-        local buf = vim.api.nvim_create_buf(false, true)
-
-        local win_config = {
-            relative = 'editor',
-            width = width,
-            height = height,
-            row = math.floor((vim.o.lines - height) / 2),
-            col = math.floor((vim.o.columns - width) / 2),
-            style = 'minimal',
-            border = 'rounded',
-        }
-
-        local win = vim.api.nvim_open_win(buf, true, win_config)
-
-        return { buf = buf, win = win }
-    end
-
-    if not vim.api.nvim_win_is_valid(state.terminal.win) then
-        state.terminal = create_floating_window()
-        if vim.bo[state.terminal.buf].buftype ~= 'terminal' then vim.cmd.terminal() end
-
-        vim.cmd('normal i')
-    else
-        vim.api.nvim_buf_delete(state.terminal.buf, { force = true })
-    end
-end
-
 return M
