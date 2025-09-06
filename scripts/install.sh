@@ -15,9 +15,9 @@ export XDG_DOWNLOAD_DIR="${XDG_DOWNLOAD_DIR:-$HOME/Downloads}"
 [ -f "$HOME/.config/nvim/lazy-lock.json" ] && sudo rm -f "$HOME/.config/nvim/lazy-lock.json"
 [ -d "$HOME/.local/state/nvim" ] && sudo rm -rf "$HOME/.local/state/nvim"
 
-git clone https://github.com/neovim/neovim "$XDG_DOWNLOAD_DIR/neovim" || exit 1
-make --directory="$XDG_DOWNLOAD_DIR/neovim" CMAKE_BUILD_TYPE=Release || exit 1
-sudo make --directory="$XDG_DOWNLOAD_DIR/neovim" install || exit 1
+git clone --depth 1 --single-branch https://github.com/neovim/neovim "$XDG_DOWNLOAD_DIR/neovim" || exit 1
+make --directory="$XDG_DOWNLOAD_DIR/neovim" -j"$(nproc)" CMAKE_BUILD_TYPE=Release || exit 1
+sudo make --directory="$XDG_DOWNLOAD_DIR/neovim" -j"$(nproc)" install || exit 1
 
 [ -d "$XDG_DOWNLOAD_DIR/neovim" ] && sudo rm -rf "$XDG_DOWNLOAD_DIR/neovim"
 exit 0
