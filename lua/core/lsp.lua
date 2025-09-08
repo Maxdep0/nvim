@@ -39,6 +39,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
 
         check('textDocument/inlayHint', { 'n', '<F3>', toggles.toggle_inlay_hint, 'Toggle inlay hints' })
+        check(
+            'textDocument/documentHighlight',
+            { 'n', '<F2>', toggles.toggle_document_highlight, 'Toggle document highlight' }
+        )
     end,
 })
 

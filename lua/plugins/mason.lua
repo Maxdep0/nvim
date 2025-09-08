@@ -21,7 +21,7 @@ return {
                 'css-lsp',
                 'json-lsp',
                 'lua-language-server',
-                'emmet-ls',
+                -- 'emmet-ls',
                 'python-lsp-server',
                 'bash-language-server',
                 'pyright',

@@ -28,7 +28,7 @@ return {
             quotePreference = 'single',
             importModuleSpecifier = 'non-relative',
             importModuleSpecifierPreference = 'non-relative',
-            iiimportModuleSpecifierEnding = 'auto',
+            importModuleSpecifierEnding = 'auto',
             organizeImportsIgnoreCase = false,
             includeInlayParameterNameHints = 'all',
             includeInlayParameterNameHintsWhenArgumentMatchesName = true,

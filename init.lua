@@ -1,6 +1,6 @@
 -- vim.fn.setenv('ESLINT_USE_FLAT_CONFIG', 'true')
 
-vim.cmd('colorscheme maxo')
+vim.cmd('colorscheme base16-maxik')
 require('core')
 -- require('core.toggles').toggle_transparency()
 

@@ -19,18 +19,15 @@ function M.toggle_transparency()
         vim.fn.system({ 'bash', vim.fn.stdpath('config') .. '/scripts/toggle_wezterm_tab.sh', 'false' })
 
         for _, hl in ipairs({ 'Normal', 'NormalNC', 'NormalFloat', 'CursorLine', 'StatusLine' }) do
-            vim.api.nvim_set_hl(0, hl, { bg = 'none' })
+            vim.api.nvim_set_hl(0, hl, { bg = 'NONE' })
         end
 
-        vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#000000', bg = 'none' })
+        vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#000000', bg = 'NONE' })
         vim.api.nvim_set_var('isTransparent', true)
     elseif transparent then
         M.notify('Disabled Transparent Background')
-
         vim.fn.system({ 'bash', vim.fn.stdpath('config') .. '/scripts/toggle_wezterm_tab.sh', 'true' })
-
-        vim.cmd('colorscheme maxo')
-        vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#000000', bg = 'none' })
+        vim.cmd.colorscheme(vim.g.colors_name)
         vim.api.nvim_set_var('isTransparent', false)
     end
 end
@@ -92,9 +89,6 @@ function M.toggle_float_hover()
 end
 
 function M.notify(msg, hl)
-    -- local buf = vim.api.nvim_create_buf(false, true)
-    -- vim.api.nvim_buf_set_lines(buf, 0, -1, false, { msg })
-
     local buf = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_set_option_value('bufhidden', 'wipe', { buf = buf })
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, { msg })
