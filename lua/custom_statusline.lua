@@ -1,7 +1,15 @@
--- NOTE: Colors used from colorscheme (colors/maxo.lua)
--- TODO: Add default fallback colors if not defined in colorscheme
-
 local api = vim.api
+
+local mode_colors = vim.g.base16_statusline_mode
+    or {
+        red = '#FFB3BA',
+        orange = '#FFDAB3',
+        yellow = '#FFFFBA',
+        green = '#B5EAD7',
+        cyan = '#BAE1FF',
+        blue = '#AEC6CF',
+        purple = '#CBAACB',
+    }
 
 local cache = {
     git = { data = '', time = 0, ttl = 1000 },
@@ -19,29 +27,62 @@ local cache_stats = {
 local now = 0
 
 local mode_map = {
-    n = { name = 'NORMAL', hl = 'Normal' },
-    i = { name = 'INSERT', hl = 'Insert' },
-    v = { name = 'VISUAL', hl = 'Visual' },
-    ['\022'] = { name = 'V-BLOCK', hl = 'VBlock' },
-    V = { name = 'V-LINE', hl = 'VLine' },
-    c = { name = 'COMMAND', hl = 'Command' },
-    no = { name = 'PENDING', hl = 'Pending' },
-    s = { name = 'SELECT', hl = 'Select' },
-    S = { name = 'S-LINE', hl = 'SLine' },
-    ['\019'] = { name = 'S-BLOCK', hl = 'SBlock' },
-    ic = { name = 'INSERT', hl = 'ICompletion' },
-    R = { name = 'REPLACE', hl = 'Replace' },
-    Rv = { name = 'VIRTUAL', hl = 'VReplace' },
-    cv = { name = 'EX', hl = 'CvEx' },
-    ce = { name = 'EX', hl = 'CeEx' },
-    r = { name = 'REPLACE', hl = 'Replace2' },
-    rm = { name = 'MORE', hl = 'More' },
-    ['r?'] = { name = 'CONFIRM', hl = 'Confirm' },
-    ['!'] = { name = 'SHELL', hl = 'Shell' },
-    t = { name = 'TERMINAL', hl = 'Terminal' },
+    n = { name = 'NORMAL', hl = 'Normal', color = 'red' },
+    i = { name = 'INSERT', hl = 'Insert', color = 'green' },
+    v = { name = 'VISUAL', hl = 'Visual', color = 'blue' },
+    ['\022'] = { name = 'V-BLOCK', hl = 'VBlock', color = 'blue' },
+    V = { name = 'V-LINE', hl = 'VLine', color = 'blue' },
+    c = { name = 'COMMAND', hl = 'Command', color = 'purple' },
+    no = { name = 'PENDING', hl = 'Pending', color = 'red' },
+    s = { name = 'SELECT', hl = 'Select', color = 'orange' },
+    S = { name = 'S-LINE', hl = 'SLine', color = 'orange' },
+    ['\019'] = { name = 'S-BLOCK', hl = 'SBlock', color = 'orange' },
+    ic = { name = 'INSERT', hl = 'ICompletion', color = 'yellow' },
+    R = { name = 'REPLACE', hl = 'Replace', color = 'purple' },
+    Rv = { name = 'VIRTUAL', hl = 'VReplace', color = 'purple' },
+    cv = { name = 'EX', hl = 'CvEx', color = 'red' },
+    ce = { name = 'EX', hl = 'CeEx', color = 'red' },
+    r = { name = 'REPLACE', hl = 'Replace2', color = 'cyan' },
+    rm = { name = 'MORE', hl = 'More', color = 'cyan' },
+    ['r?'] = { name = 'CONFIRM', hl = 'Confirm', color = 'cyan' },
+    ['!'] = { name = 'SHELL', hl = 'Shell', color = 'red' },
+    t = { name = 'TERMINAL', hl = 'Terminal', color = 'red' },
 }
 
 local M = {}
+
+local function setup_statusline_highlights()
+    local clr, bg = vim.g.base16_statusline, vim.g.base16_gui00 or '#1a1a1a'
+
+    for _, mode_info in pairs(mode_map) do
+        local hl_name = 'StatuslineMode' .. mode_info.hl
+        local sep_name = hl_name .. 'Sep'
+        local color = mode_colors[mode_info.color]
+
+        if color then
+            api.nvim_set_hl(0, hl_name, { fg = bg, bg = color, bold = true })
+            api.nvim_set_hl(0, sep_name, { fg = color, bg = 'NONE', bold = true })
+        end
+    end
+
+    api.nvim_set_hl(0, 'StatuslineNormal', { fg = clr.buffers.active or '#f0f0f0', bg = 'NONE', bold = true })
+    api.nvim_set_hl(0, 'StatuslineInactive', { fg = clr.buffers.inactive or '#a8a8a8', bg = 'NONE' })
+    api.nvim_set_hl(0, 'StatuslineLSP', { fg = clr.buffers.lsp or '#e0e0e0', bg = 'NONE' })
+
+    api.nvim_set_hl(0, 'StatuslineDiagError', { fg = clr.diag.error or '#FF6B6B', bg = 'NONE' })
+    api.nvim_set_hl(0, 'StatuslineDiagWarn', { fg = clr.diag.warn or '#F4BF75', bg = 'NONE' })
+    api.nvim_set_hl(0, 'StatuslineDiagInfo', { fg = clr.diag.info or '#46D9FF', bg = 'NONE' })
+    api.nvim_set_hl(0, 'StatuslineDiagHint', { fg = clr.diag.hint or '#A6E22E', bg = 'NONE' })
+
+    api.nvim_set_hl(0, 'StatuslineGit', { fg = clr.git.branch or '#F0C674', bg = 'NONE', bold = true })
+    api.nvim_set_hl(0, 'GitSignsAdd', { fg = clr.git.added or '#98c379', bg = 'NONE', bold = true })
+    api.nvim_set_hl(0, 'GitSignsChange', { fg = clr.git.changed or '#DE935F', bg = 'NONE', bold = true })
+    api.nvim_set_hl(0, 'GitSignsDelete', { fg = clr.git.deleted or '#CC6666', bg = 'NONE', bold = true })
+
+    api.nvim_set_hl(0, 'StatusLineDiffAdd', { fg = clr.diff.added or '#98c379', bg = 'NONE', bold = true })
+    api.nvim_set_hl(0, 'StatuslineDiffMod', { fg = clr.diff.modified or '#DE935F', bg = 'NONE', bold = true })
+    api.nvim_set_hl(0, 'StatuslineDiffDel', { fg = clr.diff.deleted or '#CC6666', bg = 'NONE', bold = true })
+end
 
 local function get_debug_info()
     local total_hits, total_misses = 0, 0
@@ -211,6 +252,8 @@ end
 function M.inactive() return '%#StatuslineInactive# %f %=' end
 
 function M.setup()
+    setup_statusline_highlights()
+
     vim.opt.laststatus = 3
     vim.opt.statusline = "%!v:lua.require('custom_statusline').active()"
 
@@ -224,6 +267,14 @@ function M.setup()
     api.nvim_create_autocmd('DiagnosticChanged', {
         group = aug,
         callback = function() cache.diag.time = 0 end,
+    })
+
+    api.nvim_create_autocmd('ColorScheme', {
+        group = aug,
+        callback = function()
+            mode_colors = vim.g.base16_statusline_mode or mode_colors
+            setup_statusline_highlights()
+        end,
     })
 
     vim.api.nvim_create_user_command('Statusline', function(opts)
