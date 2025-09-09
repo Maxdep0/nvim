@@ -21,7 +21,7 @@ map('n', 'gQ', '<Nop>', 'Disabled')
 --                     Basic Operations               --
 --------------------------------------------------------
 
-map('n', '<Esc>', ':nohlsearch<CR>', 'Toggle off hlsearch')
+map('n', '<Esc>', ':nohlsearch<CR>:lua vim.snippet.stop()<CR>', 'Toggle off highlights')
 map('n', '<C-a>', 'gg<S-v>G', 'Select the entire file')
 map('n', 'j', 'gj', 'Navigate through wrapped lines')
 map('n', 'k', 'gk', 'Navigate through wrapped lines')
@@ -41,7 +41,7 @@ map('n', '<F4>', toggles.toggle_transparency, 'Toggle transparent background')
 --                     Editing                        --
 --------------------------------------------------------
 
-map({ 'n', 'v' }, '<C-s>', '<Esc>:w<CR>', 'Save file')
+map({ 'n', 'x' }, '<C-s>', '<Esc>:w<CR>', 'Save file')
 
 map('n', '<A-u>', ':undo<CR>', 'Undo')
 map('n', '<A-r>', ':redo<CR>', 'Redo')

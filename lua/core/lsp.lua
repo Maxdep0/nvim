@@ -83,7 +83,6 @@ vim.diagnostic.config({
         end,
     },
     float = {
-        -- focusable = false,
         focusable = true,
         style = 'minimal',
         border = 'rounded',

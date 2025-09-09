@@ -18,11 +18,10 @@ function M.toggle_transparency()
 
         vim.fn.system({ 'bash', vim.fn.stdpath('config') .. '/scripts/toggle_wezterm_tab.sh', 'false' })
 
-        for _, hl in ipairs({ 'Normal', 'NormalNC', 'NormalFloat', 'CursorLine', 'StatusLine' }) do
+        for _, hl in ipairs({ 'LineNr', 'CursorLine', 'SignColumn', 'Normal', 'StatusLine', 'CursorLineNr' }) do
             vim.api.nvim_set_hl(0, hl, { bg = 'NONE' })
         end
 
-        vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#000000', bg = 'NONE' })
         vim.api.nvim_set_var('isTransparent', true)
     elseif transparent then
         M.notify('Disabled Transparent Background')

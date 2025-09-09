@@ -28,7 +28,7 @@ return {
             ['<C-d>'] = { 'scroll_documentation_down' },
 
             ['<C-e>'] = { 'hide' },
-            ['<C-space>'] = { 'show' },
+            ['<C-space>'] = { 'show', 'hide' },
 
             ['<Tab>'] = { 'snippet_forward', 'fallback' },
             ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
@@ -128,7 +128,7 @@ return {
                 max_width = 100,
                 max_height = 10,
                 border = 'single',
-                winblend = 100,
+                winblend = 0,
             },
         },
 

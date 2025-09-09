@@ -22,6 +22,7 @@ return {
             'bash',
             'markdown',
             'markdown_inline',
+            'comment',
             'json',
             'diff',
             'lua',

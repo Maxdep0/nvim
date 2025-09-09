@@ -1,6 +1,6 @@
 local api = vim.api
 
-local mode_colors = vim.g.base16_statusline_mode
+local mode_colors = vim.g.base16_statusline.mode
     or {
         red = '#FFB3BA',
         orange = '#FFDAB3',
@@ -52,7 +52,7 @@ local mode_map = {
 local M = {}
 
 local function setup_statusline_highlights()
-    local clr, bg = vim.g.base16_statusline, vim.g.base16_gui00 or '#1a1a1a'
+    local bg = vim.g.base00 or '#1a1a1a'
 
     for _, mode_info in pairs(mode_map) do
         local hl_name = 'StatuslineMode' .. mode_info.hl
@@ -65,23 +65,23 @@ local function setup_statusline_highlights()
         end
     end
 
-    api.nvim_set_hl(0, 'StatuslineNormal', { fg = clr.buffers.active or '#f0f0f0', bg = 'NONE', bold = true })
-    api.nvim_set_hl(0, 'StatuslineInactive', { fg = clr.buffers.inactive or '#a8a8a8', bg = 'NONE' })
-    api.nvim_set_hl(0, 'StatuslineLSP', { fg = clr.buffers.lsp or '#e0e0e0', bg = 'NONE' })
+    api.nvim_set_hl(0, 'StatusLineNormal', { fg = vim.g.base07 or '#F8F8F8', bg = 'NONE', bold = true })
+    api.nvim_set_hl(0, 'StatusLineInactive', { fg = vim.g.base04 or '#B8B8B8', bg = 'NONE' })
+    api.nvim_set_hl(0, 'StatusLineLSP', { fg = vim.g.base07 or '#E8E8E8', bg = 'NONE' })
 
-    api.nvim_set_hl(0, 'StatuslineDiagError', { fg = clr.diag.error or '#FF6B6B', bg = 'NONE' })
-    api.nvim_set_hl(0, 'StatuslineDiagWarn', { fg = clr.diag.warn or '#F4BF75', bg = 'NONE' })
-    api.nvim_set_hl(0, 'StatuslineDiagInfo', { fg = clr.diag.info or '#46D9FF', bg = 'NONE' })
-    api.nvim_set_hl(0, 'StatuslineDiagHint', { fg = clr.diag.hint or '#A6E22E', bg = 'NONE' })
+    api.nvim_set_hl(0, 'StatusLineDiagError', { fg = vim.g.base08 or '#FF6B6B', bg = 'NONE' })
+    api.nvim_set_hl(0, 'StatusLineDiagWarn', { fg = vim.g.base0A or '#F4BF75', bg = 'NONE' })
+    api.nvim_set_hl(0, 'StatusLineDiagInfo', { fg = vim.g.base0B or '#46D9FF', bg = 'NONE' })
+    api.nvim_set_hl(0, 'StatusLineDiagHint', { fg = vim.g.base0C or '#A6E22E', bg = 'NONE' })
 
-    api.nvim_set_hl(0, 'StatuslineGit', { fg = clr.git.branch or '#F0C674', bg = 'NONE', bold = true })
-    api.nvim_set_hl(0, 'GitSignsAdd', { fg = clr.git.added or '#98c379', bg = 'NONE', bold = true })
-    api.nvim_set_hl(0, 'GitSignsChange', { fg = clr.git.changed or '#DE935F', bg = 'NONE', bold = true })
-    api.nvim_set_hl(0, 'GitSignsDelete', { fg = clr.git.deleted or '#CC6666', bg = 'NONE', bold = true })
+    api.nvim_set_hl(0, 'StatusLineGit', { fg = vim.g.base0D or '#81A2BE', bg = 'NONE', bold = true })
+    api.nvim_set_hl(0, 'StatusLineGitAdd', { fg = vim.g.base0B or '#A8C379', bg = 'NONE' })
+    api.nvim_set_hl(0, 'StatusLineGitChange', { fg = vim.g.base0A or '#F4C674', bg = 'NONE' })
+    api.nvim_set_hl(0, 'StatusLineGitDelete', { fg = vim.g.base08 or '#E06B75', bg = 'NONE' })
 
-    api.nvim_set_hl(0, 'StatusLineDiffAdd', { fg = clr.diff.added or '#98c379', bg = 'NONE', bold = true })
-    api.nvim_set_hl(0, 'StatuslineDiffMod', { fg = clr.diff.modified or '#DE935F', bg = 'NONE', bold = true })
-    api.nvim_set_hl(0, 'StatuslineDiffDel', { fg = clr.diff.deleted or '#CC6666', bg = 'NONE', bold = true })
+    api.nvim_set_hl(0, 'StatusLineDiffAdd', { fg = vim.g.base0A or '#98c379', bg = 'NONE', bold = true })
+    api.nvim_set_hl(0, 'StatuslineDiffMod', { fg = vim.g.base09 or '#DE935F', bg = 'NONE', bold = true })
+    api.nvim_set_hl(0, 'StatusLineDiffDel', { fg = vim.g.base08 or '#CC6666', bg = 'NONE', bold = true })
 end
 
 local function get_debug_info()
@@ -127,12 +127,12 @@ local function get_git_info()
         return ''
     end
 
-    local s = '%#StatuslineGit# ' .. branch
+    local s = '%#StatusLineGit# ' .. branch
     local gs = vim.b.gitsigns_status_dict
     if gs then
-        if (gs.added or 0) > 0 then s = s .. ' %#GitSignsAdd#' .. gs.added end
-        if (gs.changed or 0) > 0 then s = s .. ' %#GitSignsChange#' .. gs.changed end
-        if (gs.removed or 0) > 0 then s = s .. ' %#GitSignsDelete#' .. gs.removed end
+        if (gs.added or 0) > 0 then s = s .. ' %#StatusLineGitAdd#' .. gs.added end
+        if (gs.changed or 0) > 0 then s = s .. ' %#StatusLineGitChange#' .. gs.changed end
+        if (gs.removed or 0) > 0 then s = s .. ' %#StatusLineGitDelete#' .. gs.removed end
     end
 
     cache.git.data = s .. ' '
